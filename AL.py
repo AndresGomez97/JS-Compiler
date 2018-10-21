@@ -110,4 +110,12 @@ def t_error(t):
     ################
 lexer = lex.lex()
 
-lexer.input("")
+lexer.input("3 + 6")
+
+# Tokenize
+while True:
+    tok = lexer.token()
+    if not tok: 
+        break      # No more input
+    print(tok)
+
