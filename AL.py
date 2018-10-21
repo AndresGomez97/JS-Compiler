@@ -38,7 +38,7 @@ tokens = tokens + list(reserved.values())
 
 t_ASIG = r'\='
 t_SUM = r'\+'
-#t_RES = r'\-'
+t_MENORQUE = r'\<'
 t_NEG = r'\!'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
@@ -66,27 +66,25 @@ def t_ENTERO(t):
     t.value = int(t.value)
     if t.value <= 32767 and t.value >= -32767:
         return t
-    print("Entero mayor que 32767 o menor que -32767 no pueden ser contemplados")
+    print("Entero mayor que 32767 o menor que -32767 no son contemplados")
     t.lexer.skip(1)
 
 
 
 def t_ID(t):
     r'[a-zA-Z][a-zA-Z0-9_]*'
-    t.value = str(t.value)
-    for w in reserved.keys():
-        if w != t.value:
-            return t
-
-    print(t.value+"es una palabra reservada")
-    t.lexer.skip(1)    
+    t.value = str(t.value)               
+    t.type = reserved.get(t.value,'ID') #Busca si es una palabra reservada antes de generar token tipo ID
+    return t
+    
+    
         
 
 #T_IGNORE
 
-t_ignore = ' \t' #TABULADOR
-t_ignore = '\r'  #RETORNO DE CARRO
-t_ignore = ''    #COMENTARIOS
+t_ignore_TAB = r'\t' #TABULADOR
+t_ignore_RT = r'\r'  #RETORNO DE CARRO
+t_ignore_COMENTARIO = r''    #COMENTARIOS
 
 #T_ERROR
 
@@ -94,11 +92,10 @@ def t_error(t):
     t.lexer.skip(1)
 
 
-
-
-
     
     ################
     #  EJECUCIÓN   #
     ################
 lexer = lex.lex()
+
+lexer.input("")
