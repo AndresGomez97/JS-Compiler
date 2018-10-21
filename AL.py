@@ -9,7 +9,9 @@ tokens = [
     'ID',
     'ASIG',
     'SUM',
-    'RES',
+    'MENORQUE',
+    'MMENOS',
+    'COMA',
     'NEG',
     'LPAREN',
     'RPAREN',
@@ -38,7 +40,7 @@ reserved = {
     
 }
 
-#Añadimos palabras reservadas a la lista de tokens
+#Anadimos palabras reservadas a la lista de tokens
 
 tokens = tokens + list(reserved.values())
 
@@ -49,17 +51,17 @@ tokens = tokens + list(reserved.values())
 t_ASIG = r'\='
 t_SUM = r'\+'
 t_MENORQUE = r'\<'
-t_MMENOS = r'\=='
+t_MMENOS = r'\--'
 t_NEG = r'\!'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_PYC = r'\;'
 t_COMA = r'\,'
 t_PUNTO = r'\.'
-t_LLLAVE = r'\}'
-t_RLLAVE = r'\{'
-t_LCORCH = r'\]'
-t_RCORCH = r'\['
+t_LLLAVE = r'\{'
+t_RLLAVE = r'\}'
+t_LCORCH = r'\['
+t_RCORCH = r'\]'
 
 
 
@@ -74,7 +76,7 @@ def t_CADENA(t):
 
 
 def t_ENTERO(t):    
-    r'[1-9][0-9]*'
+    r'[0-9][0-9]*'
     t.value = int(t.value)
     if t.value <= 32767 and t.value >= -32767:
         return t
@@ -96,17 +98,15 @@ def t_ID(t):
 
 t_ignore_TAB = r'\t' #TABULADOR
 t_ignore_RT = r'\r'  #RETORNO DE CARRO
-t_ignore_COMENTARIO = r''    #COMENTARIOS
+t_ignore_COMENTARIO = r'/\*.*?\*/'    #COMENTARIOS(/**/)
 
 #T_ERROR
 
 def t_error(t):
     t.lexer.skip(1)
-
-
     
     ################
-    #  EJECUCIÓN   #
+    #  EJECUCION   #
     ################
 lexer = lex.lex()
 
