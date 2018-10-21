@@ -24,8 +24,18 @@ tokens = [
 #Diccionario de PRs
 
 reserved = {
-    'do' : 'DO'
-    'while' : 'WHILE'
+    'do' : 'DO',
+    'while' : 'WHILE',
+    'var' : 'VAR',
+    'print' : 'PRINT',
+    'prompt' : 'PROMPT',
+    'function' : 'FUNCTION',
+    'return' : 'RETURN',
+    'int' : 'INT',
+    'string' : 'STRING',
+    'bool' : 'BOOLEAN',
+    'if' : 'IF'
+    
 }
 
 #Añadimos palabras reservadas a la lista de tokens
@@ -39,10 +49,12 @@ tokens = tokens + list(reserved.values())
 t_ASIG = r'\='
 t_SUM = r'\+'
 t_MENORQUE = r'\<'
+t_MMENOS = r'\=='
 t_NEG = r'\!'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_PYC = r'\;'
+t_COMA = r'\,'
 t_PUNTO = r'\.'
 t_LLLAVE = r'\}'
 t_RLLAVE = r'\{'
@@ -74,7 +86,7 @@ def t_ENTERO(t):
 def t_ID(t):
     r'[a-zA-Z][a-zA-Z0-9_]*'
     t.value = str(t.value)               
-    t.type = reserved.get(t.value,'ID') #Busca si es una palabra reservada antes de generar token tipo ID
+    t.type = reserved.get(t.value,'ID') #Busca si es una palabra reservada antes de generar token tipo ID, si no lo es genera token tipo ID
     return t
     
     
