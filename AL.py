@@ -55,7 +55,7 @@ t_RCORCH = r'\['
 #Regular expression rules(NOT SIMPLE)
 
 def t_CADENA(t):
-    r'[\'][a-zA-Z]*[\']'
+    r'\'[a-zA-Z]*\''
     t.value = str(t.value)
     return t
 
@@ -74,8 +74,8 @@ def t_ENTERO(t):
 def t_ID(t):
     r'[a-zA-Z][a-zA-Z0-9_]*'
     t.value = str(t.value)
-    for res in reserved:
-        if res.keyword() != t.value:
+    for w in reserved.keys():
+        if w != t.value:
             return t
 
     print(t.value+"es una palabra reservada")
@@ -92,6 +92,9 @@ t_ignore = ''    #COMENTARIOS
 
 def t_error(t):
     t.lexer.skip(1)
+
+
+
 
 
     
