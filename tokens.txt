@@ -1,0 +1,3 @@
+<ENTERO,3>
+<SUM,+>
+<ENTERO,6>

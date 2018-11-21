@@ -91,7 +91,9 @@ def t_ID(t):
     t.type = reserved.get(t.value,'ID') #Busca si es una palabra reservada antes de generar token tipo ID, si no lo es genera token tipo ID
     return t
     
-    
+def parser(t):
+    s = "<{},{}>".format(t.type, t.value)
+    return s 
         
 
 #T_IGNORE
@@ -109,6 +111,7 @@ def t_error(t):
     #  EJECUCION   #
     ################
 lexer = lex.lex()
+f = open("tokens.txt","w+")
 
 lexer.input("3 + 6")
 
@@ -117,5 +120,4 @@ while True:
     tok = lexer.token()
     if not tok: 
         break      # No more input
-    print(tok)
-
+    f.write(parser(tok)+"\n")
