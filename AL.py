@@ -80,7 +80,7 @@ def t_ENTERO(t):
     t.value = int(t.value)
     if t.value <= 32767 and t.value >= -32767:
         return t
-    print("Entero mayor que 32767 o menor que -32767 no son contemplados")
+    print("ERROR 40: Entero mayor que 32767 o menor que -32767 no son contemplados")
     t.lexer.skip(1)
 
 
@@ -98,10 +98,9 @@ def t_ID(t):
 
 t_ignore_TAB = r'\t' #TABULADOR
 t_ignore_RT = r'\r'  #RETORNO DE CARRO
-t_ignore_COMENTARIO = r'/\*.*?\*/'    #COMENTARIOS(/**/)
+t_ignore_COMENTARIO = r'/\*.*?\*/'    #COMENTARIOS(/*comentario*/)
 
 #T_ERROR
-
 def t_error(t):
     t.lexer.skip(1)
     
@@ -110,7 +109,7 @@ def t_error(t):
     ################
 lexer = lex.lex()
 
-lexer.input("3 + 6")
+lexer.input("var STRING casa,53 = 'casa'if{} 32769 rojo94 '_rojo67' function_n")
 
 # Tokenize
 while True:
