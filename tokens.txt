@@ -1,3 +1,13 @@
-<ENTERO,3>
-<SUM,+>
-<ENTERO,6>
+<VAR,var>
+<ID,STRING>
+<ID,casa>
+<COMA,,>
+<ENTERO,53>
+<ASIG,=>
+<CADENA,'casa'>
+<IF,if>
+<LLLAVE,{>
+<RLLAVE,}>
+<ID,rojo94>
+<ID,rojo67>
+<ID,function_n>

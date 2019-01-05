@@ -1,0 +1,205 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    CADENA
+    STRING
+    RLLAVE
+    COMA
+    MMENOS
+    FUNCTION
+    PUNTO
+    ID
+    LCORCH
+    INT
+    BOOLEAN
+    IF
+    PROMPT
+    ASIG
+    LPAREN
+    PYC
+    LLLAVE
+    WHILE
+    RCORCH
+    PRINT
+    RPAREN
+    DO
+    RETURN
+    VAR
+
+Grammar
+
+Rule 0     S' -> eee
+Rule 1     eee -> NEG erre
+Rule 2     eee -> erre
+Rule 3     erre -> erre MENORQUE expression
+Rule 4     erre -> expression
+Rule 5     expression -> term SUM expression
+Rule 6     expression -> term
+Rule 7     term -> ENTERO
+
+Terminals, with rules where they appear
+
+ASIG                 : 
+BOOLEAN              : 
+CADENA               : 
+COMA                 : 
+DO                   : 
+ENTERO               : 7
+FUNCTION             : 
+ID                   : 
+IF                   : 
+INT                  : 
+LCORCH               : 
+LLLAVE               : 
+LPAREN               : 
+MENORQUE             : 3
+MMENOS               : 
+NEG                  : 1
+PRINT                : 
+PROMPT               : 
+PUNTO                : 
+PYC                  : 
+RCORCH               : 
+RETURN               : 
+RLLAVE               : 
+RPAREN               : 
+STRING               : 
+SUM                  : 5
+VAR                  : 
+WHILE                : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+eee                  : 0
+erre                 : 1 2 3
+expression           : 3 4 5
+term                 : 5 6
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . eee
+    (1) eee -> . NEG erre
+    (2) eee -> . erre
+    (3) erre -> . erre MENORQUE expression
+    (4) erre -> . expression
+    (5) expression -> . term SUM expression
+    (6) expression -> . term
+    (7) term -> . ENTERO
+
+    NEG             shift and go to state 6
+    ENTERO          shift and go to state 1
+
+    erre                           shift and go to state 2
+    eee                            shift and go to state 5
+    term                           shift and go to state 4
+    expression                     shift and go to state 3
+
+state 1
+
+    (7) term -> ENTERO .
+
+    SUM             reduce using rule 7 (term -> ENTERO .)
+    MENORQUE        reduce using rule 7 (term -> ENTERO .)
+    $end            reduce using rule 7 (term -> ENTERO .)
+
+
+state 2
+
+    (2) eee -> erre .
+    (3) erre -> erre . MENORQUE expression
+
+    $end            reduce using rule 2 (eee -> erre .)
+    MENORQUE        shift and go to state 7
+
+
+state 3
+
+    (4) erre -> expression .
+
+    MENORQUE        reduce using rule 4 (erre -> expression .)
+    $end            reduce using rule 4 (erre -> expression .)
+
+
+state 4
+
+    (5) expression -> term . SUM expression
+    (6) expression -> term .
+
+    SUM             shift and go to state 8
+    MENORQUE        reduce using rule 6 (expression -> term .)
+    $end            reduce using rule 6 (expression -> term .)
+
+
+state 5
+
+    (0) S' -> eee .
+
+
+
+state 6
+
+    (1) eee -> NEG . erre
+    (3) erre -> . erre MENORQUE expression
+    (4) erre -> . expression
+    (5) expression -> . term SUM expression
+    (6) expression -> . term
+    (7) term -> . ENTERO
+
+    ENTERO          shift and go to state 1
+
+    erre                           shift and go to state 9
+    term                           shift and go to state 4
+    expression                     shift and go to state 3
+
+state 7
+
+    (3) erre -> erre MENORQUE . expression
+    (5) expression -> . term SUM expression
+    (6) expression -> . term
+    (7) term -> . ENTERO
+
+    ENTERO          shift and go to state 1
+
+    term                           shift and go to state 4
+    expression                     shift and go to state 10
+
+state 8
+
+    (5) expression -> term SUM . expression
+    (5) expression -> . term SUM expression
+    (6) expression -> . term
+    (7) term -> . ENTERO
+
+    ENTERO          shift and go to state 1
+
+    term                           shift and go to state 4
+    expression                     shift and go to state 11
+
+state 9
+
+    (1) eee -> NEG erre .
+    (3) erre -> erre . MENORQUE expression
+
+    $end            reduce using rule 1 (eee -> NEG erre .)
+    MENORQUE        shift and go to state 7
+
+
+state 10
+
+    (3) erre -> erre MENORQUE expression .
+
+    MENORQUE        reduce using rule 3 (erre -> erre MENORQUE expression .)
+    $end            reduce using rule 3 (erre -> erre MENORQUE expression .)
+
+
+state 11
+
+    (5) expression -> term SUM expression .
+
+    MENORQUE        reduce using rule 5 (expression -> term SUM expression .)
+    $end            reduce using rule 5 (expression -> term SUM expression .)
+
