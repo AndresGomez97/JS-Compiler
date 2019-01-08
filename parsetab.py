@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'ASIG BOOLEAN CADENA COMA DO ENTERO FUNCTION ID IF INT LCORCH LLLAVE LPAREN MENORQUE MMENOS NEG PRINT PROMPT PUNTO PYC RCORCH RETURN RLLAVE RPAREN STRING SUM VAR WHILEeee : NEG erreeee : erreerre : erre MENORQUE expressionerre : expressionexpression : term SUM expressionexpression : termterm : ENTERO'
+_lr_signature = 'ASIG BOOLEAN CADENA COMA DO ENTERO FUNCTION ID IF INT LCORCH LLLAVE LPAREN MENORQUE MMENOS NEG PRINT PROMPT PUNTO PYC RCORCH RETURN RLLAVE RPAREN STRING SUM VAR WHILEe : NEG re : rr : r MENORQUE ur : uu : v SUM uu : vv : ENTERO'
     
-_lr_action_items = {'ENTERO':([0,6,7,8,],[1,1,1,1,]),'SUM':([1,4,],[-7,8,]),'$end':([1,2,3,4,5,9,10,11,],[-7,-2,-4,-6,0,-1,-3,-5,]),'NEG':([0,],[6,]),'MENORQUE':([1,2,3,4,9,10,11,],[-7,7,-4,-6,7,-3,-5,]),}
+_lr_action_items = {'ENTERO':([0,4,8,9,],[1,1,1,1,]),'SUM':([1,5,],[-7,8,]),'MENORQUE':([1,2,5,6,7,10,11,],[-7,-4,-6,9,9,-5,-3,]),'NEG':([0,],[4,]),'$end':([1,2,3,5,6,7,10,11,],[-7,-4,0,-6,-2,-1,-5,-3,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'erre':([0,6,],[2,9,]),'eee':([0,],[5,]),'term':([0,6,7,8,],[4,4,4,4,]),'expression':([0,6,7,8,],[3,3,10,11,]),}
+_lr_goto_items = {'u':([0,4,8,9,],[2,2,10,11,]),'e':([0,],[3,]),'v':([0,4,8,9,],[5,5,5,5,]),'r':([0,4,],[6,7,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,12 +26,12 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> eee","S'",1,None,None,None),
-  ('eee -> NEG erre','eee',2,'p_not_erre','parse.py',7),
-  ('eee -> erre','eee',1,'p_eee_erre','parse.py',11),
-  ('erre -> erre MENORQUE expression','erre',3,'p_erre_expression_minusthan','parse.py',15),
-  ('erre -> expression','erre',1,'p_erre_expression','parse.py',20),
-  ('expression -> term SUM expression','expression',3,'p_expression_plus','parse.py',24),
-  ('expression -> term','expression',1,'p_expression_term','parse.py',28),
-  ('term -> ENTERO','term',1,'p_term_number','parse.py',32),
+  ("S' -> e","S'",1,None,None,None),
+  ('e -> NEG r','e',2,'p_not_erre','parse.py',7),
+  ('e -> r','e',1,'p_eee_erre','parse.py',11),
+  ('r -> r MENORQUE u','r',3,'p_erre_expression_minusthan','parse.py',15),
+  ('r -> u','r',1,'p_erre_expression','parse.py',20),
+  ('u -> v SUM u','u',3,'p_expression_plus','parse.py',24),
+  ('u -> v','u',1,'p_expression_term','parse.py',28),
+  ('v -> ENTERO','v',1,'p_term_number','parse.py',32),
 ]
