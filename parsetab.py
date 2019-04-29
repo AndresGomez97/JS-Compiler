@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'ASIG BOOLEAN CADENA COMA DO ENTERO FUNCTION ID IF INT LCORCH LLLAVE LPAREN MENORQUE MMENOS NEG PRINT PROMPT PUNTO PYC RCORCH RETURN RLLAVE RPAREN STRING SUM VAR WHILEe : NEG re : rr : r MENORQUE ur : uu : v SUM uu : vv : ENTERO'
+_lr_signature = 'left+-left*/rightUMINUSNAME NUMBERstatement : NAME "=" expressionstatement : expressionexpression : expression \'+\' expression\n                  | expression \'-\' expression\n                  | expression \'*\' expression\n                  | expression \'/\' expressionexpression : \'-\' expression %prec UMINUSexpression : \'(\' expression \')\'expression : NUMBERexpression : NAME'
     
-_lr_action_items = {'ENTERO':([0,4,8,9,],[1,1,1,1,]),'SUM':([1,5,],[-7,8,]),'MENORQUE':([1,2,5,6,7,10,11,],[-7,-4,-6,9,9,-5,-3,]),'NEG':([0,],[4,]),'$end':([1,2,3,5,6,7,10,11,],[-7,-4,0,-6,-2,-1,-5,-3,]),}
+_lr_action_items = {')':([2,8,9,10,16,17,18,19,20,],[-9,-10,16,-7,-8,-3,-4,-5,-6,]),'NAME':([0,3,5,7,11,12,13,14,],[1,8,8,8,8,8,8,8,]),'$end':([1,2,4,6,8,10,15,16,17,18,19,20,],[-10,-9,0,-2,-10,-7,-1,-8,-3,-4,-5,-6,]),'+':([1,2,6,8,9,10,15,16,17,18,19,20,],[-10,-9,11,-10,11,-7,11,-8,-3,-4,-5,-6,]),'=':([1,],[7,]),'(':([0,3,5,7,11,12,13,14,],[3,3,3,3,3,3,3,3,]),'NUMBER':([0,3,5,7,11,12,13,14,],[2,2,2,2,2,2,2,2,]),'-':([0,1,2,3,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,],[5,-10,-9,5,5,12,5,-10,12,-7,5,5,5,5,12,-8,-3,-4,-5,-6,]),'*':([1,2,6,8,9,10,15,16,17,18,19,20,],[-10,-9,13,-10,13,-7,13,-8,13,13,-5,-6,]),'/':([1,2,6,8,9,10,15,16,17,18,19,20,],[-10,-9,14,-10,14,-7,14,-8,14,14,-5,-6,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'u':([0,4,8,9,],[2,2,10,11,]),'e':([0,],[3,]),'v':([0,4,8,9,],[5,5,5,5,]),'r':([0,4,],[6,7,]),}
+_lr_goto_items = {'statement':([0,],[4,]),'expression':([0,3,5,7,11,12,13,14,],[6,9,10,15,17,18,19,20,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,12 +26,15 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> e","S'",1,None,None,None),
-  ('e -> NEG r','e',2,'p_not_erre','parse.py',7),
-  ('e -> r','e',1,'p_eee_erre','parse.py',11),
-  ('r -> r MENORQUE u','r',3,'p_erre_expression_minusthan','parse.py',15),
-  ('r -> u','r',1,'p_erre_expression','parse.py',20),
-  ('u -> v SUM u','u',3,'p_expression_plus','parse.py',24),
-  ('u -> v','u',1,'p_expression_term','parse.py',28),
-  ('v -> ENTERO','v',1,'p_term_number','parse.py',32),
+  ("S' -> statement","S'",1,None,None,None),
+  ('statement -> NAME = expression','statement',3,'p_statement_assign','pruebas_yacc.py',59),
+  ('statement -> expression','statement',1,'p_statement_expr','pruebas_yacc.py',64),
+  ('expression -> expression + expression','expression',3,'p_expression_binop','pruebas_yacc.py',69),
+  ('expression -> expression - expression','expression',3,'p_expression_binop','pruebas_yacc.py',70),
+  ('expression -> expression * expression','expression',3,'p_expression_binop','pruebas_yacc.py',71),
+  ('expression -> expression / expression','expression',3,'p_expression_binop','pruebas_yacc.py',72),
+  ('expression -> - expression','expression',2,'p_expression_uminus','pruebas_yacc.py',84),
+  ('expression -> ( expression )','expression',3,'p_expression_group','pruebas_yacc.py',89),
+  ('expression -> NUMBER','expression',1,'p_expression_number','pruebas_yacc.py',94),
+  ('expression -> NAME','expression',1,'p_expression_name','pruebas_yacc.py',99),
 ]

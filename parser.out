@@ -2,204 +2,101 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
 Unused terminals:
 
-    LPAREN
-    PUNTO
-    INT
-    LLLAVE
-    RETURN
-    RCORCH
-    BOOLEAN
-    ID
-    DO
-    WHILE
-    MMENOS
     CADENA
+    MMENOS
     PRINT
-    VAR
-    RPAREN
-    RLLAVE
-    COMA
-    STRING
-    IF
-    ASIG
-    PROMPT
-    PYC
     LCORCH
+    PROMPT
     FUNCTION
+    RCORCH
+    PUNTO
+    IF
 
 Grammar
 
-Rule 0     S' -> e
-Rule 1     e -> NEG r
-Rule 2     e -> r
-Rule 3     r -> r MENORQUE u
-Rule 4     r -> u
-Rule 5     u -> v SUM u
-Rule 6     u -> v
-Rule 7     v -> ENTERO
+Rule 0     S' -> p1
+Rule 1     p1 -> p
+Rule 2     p -> b
+Rule 3     p -> f
+Rule 4     b -> VAR t ID PYC
+Rule 5     b -> DO LLLAVE c RLLAVE WHILE LPAREN e RPAREN PYC
+Rule 6     b -> s
+Rule 7     s -> ID ASIG e PYC
+Rule 8     s -> RETURN x PYC
+Rule 9     s -> ID LPAREN l RPAREN PYC
+Rule 10    t -> INT
+Rule 11    t -> BOOLEAN
+Rule 12    t -> STRING
+Rule 13    functiona -> t ID LPAREN ArgListOpt RPAREN CompoundStmt
+Rule 14    ArgListOpt -> ArgList
+Rule 15    ArgList -> ArgList COMA Arg
+Rule 16    ArgList -> Arg
+Rule 17    Arg -> t ID
+Rule 18    CompoundStmt -> LLLAVE StmtList RLLAVE
+Rule 19    StmtList -> StmtList Stmt
+Rule 20    Stmt -> s
+Rule 21    e -> NEG r
+Rule 22    e -> r
+Rule 23    r -> r MENORQUE u
+Rule 24    r -> u
+Rule 25    u -> v SUM u
+Rule 26    u -> v
+Rule 27    v -> ENTERO
+Rule 28    empty -> <empty>
 
 Terminals, with rules where they appear
 
-ASIG                 : 
-BOOLEAN              : 
+ASIG                 : 7
+BOOLEAN              : 11
 CADENA               : 
-COMA                 : 
-DO                   : 
-ENTERO               : 7
+COMA                 : 15
+DO                   : 5
+ENTERO               : 27
 FUNCTION             : 
-ID                   : 
+ID                   : 4 7 9 13 17
 IF                   : 
-INT                  : 
+INT                  : 10
 LCORCH               : 
-LLLAVE               : 
-LPAREN               : 
-MENORQUE             : 3
+LLLAVE               : 5 18
+LPAREN               : 5 9 13
+MENORQUE             : 23
 MMENOS               : 
-NEG                  : 1
+NEG                  : 21
 PRINT                : 
 PROMPT               : 
 PUNTO                : 
-PYC                  : 
+PYC                  : 4 5 7 8 9
 RCORCH               : 
-RETURN               : 
-RLLAVE               : 
-RPAREN               : 
-STRING               : 
-SUM                  : 5
-VAR                  : 
-WHILE                : 
+RETURN               : 8
+RLLAVE               : 5 18
+RPAREN               : 5 9 13
+STRING               : 12
+SUM                  : 25
+VAR                  : 4
+WHILE                : 5
 error                : 
 
 Nonterminals, with rules where they appear
 
-e                    : 0
-r                    : 1 2 3
-u                    : 3 4 5
-v                    : 5 6
-
-Parsing method: LALR
-
-state 0
-
-    (0) S' -> . e
-    (1) e -> . NEG r
-    (2) e -> . r
-    (3) r -> . r MENORQUE u
-    (4) r -> . u
-    (5) u -> . v SUM u
-    (6) u -> . v
-    (7) v -> . ENTERO
-
-    NEG             shift and go to state 4
-    ENTERO          shift and go to state 1
-
-    u                              shift and go to state 2
-    e                              shift and go to state 3
-    v                              shift and go to state 5
-    r                              shift and go to state 6
-
-state 1
-
-    (7) v -> ENTERO .
-
-    SUM             reduce using rule 7 (v -> ENTERO .)
-    MENORQUE        reduce using rule 7 (v -> ENTERO .)
-    $end            reduce using rule 7 (v -> ENTERO .)
-
-
-state 2
-
-    (4) r -> u .
-
-    MENORQUE        reduce using rule 4 (r -> u .)
-    $end            reduce using rule 4 (r -> u .)
-
-
-state 3
-
-    (0) S' -> e .
-
-
-
-state 4
-
-    (1) e -> NEG . r
-    (3) r -> . r MENORQUE u
-    (4) r -> . u
-    (5) u -> . v SUM u
-    (6) u -> . v
-    (7) v -> . ENTERO
-
-    ENTERO          shift and go to state 1
-
-    u                              shift and go to state 2
-    v                              shift and go to state 5
-    r                              shift and go to state 7
-
-state 5
-
-    (5) u -> v . SUM u
-    (6) u -> v .
-
-    SUM             shift and go to state 8
-    MENORQUE        reduce using rule 6 (u -> v .)
-    $end            reduce using rule 6 (u -> v .)
-
-
-state 6
-
-    (2) e -> r .
-    (3) r -> r . MENORQUE u
-
-    $end            reduce using rule 2 (e -> r .)
-    MENORQUE        shift and go to state 9
-
-
-state 7
-
-    (1) e -> NEG r .
-    (3) r -> r . MENORQUE u
-
-    $end            reduce using rule 1 (e -> NEG r .)
-    MENORQUE        shift and go to state 9
-
-
-state 8
-
-    (5) u -> v SUM . u
-    (5) u -> . v SUM u
-    (6) u -> . v
-    (7) v -> . ENTERO
-
-    ENTERO          shift and go to state 1
-
-    u                              shift and go to state 10
-    v                              shift and go to state 5
-
-state 9
-
-    (3) r -> r MENORQUE . u
-    (5) u -> . v SUM u
-    (6) u -> . v
-    (7) v -> . ENTERO
-
-    ENTERO          shift and go to state 1
-
-    u                              shift and go to state 11
-    v                              shift and go to state 5
-
-state 10
-
-    (5) u -> v SUM u .
-
-    MENORQUE        reduce using rule 5 (u -> v SUM u .)
-    $end            reduce using rule 5 (u -> v SUM u .)
-
-
-state 11
-
-    (3) r -> r MENORQUE u .
-
-    MENORQUE        reduce using rule 3 (r -> r MENORQUE u .)
-    $end            reduce using rule 3 (r -> r MENORQUE u .)
+Arg                  : 15 16
+ArgList              : 14 15
+ArgListOpt           : 13
+CompoundStmt         : 13
+Stmt                 : 19
+StmtList             : 18 19
+b                    : 2
+c                    : 5
+e                    : 5 7
+empty                : 
+f                    : 3
+functiona            : 
+l                    : 9
+p                    : 1
+p1                   : 0
+r                    : 21 22 23
+s                    : 6 20
+t                    : 4 13 17
+u                    : 23 24 25
+v                    : 25 26
+x                    : 8
 

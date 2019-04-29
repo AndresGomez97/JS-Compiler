@@ -8,6 +8,7 @@
 <IF,if>
 <LLLAVE,{>
 <RLLAVE,}>
+<ENTERO,32760>
 <ID,rojo94>
 <ID,rojo67>
 <ID,function_n>

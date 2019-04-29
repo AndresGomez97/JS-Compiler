@@ -1,7 +1,6 @@
 import ply.yacc as yacc
 
- # Get the token map from the lexer.  This is required.
-from AL import tokens
+import ply.lex as lex
 
 #COMIENZO
 start = 'p1'
@@ -22,11 +21,6 @@ def p_fp(p):
 #########################################
 
 
-
-
-
-
-
 #############
 #DECLARACIÓN#
 #############
@@ -38,9 +32,7 @@ def p_var_t_id(p):
         p[0] = bool(p[3])
     elif p[2] == 'STRING':
         p[0] = p[3]
-
-
-        
+                
 ##########
 #DO_WHILE#
 ##########
@@ -95,7 +87,7 @@ def p_function(p):
     'functiona : t ID LPAREN ArgListOpt RPAREN CompoundStmt'
 
 def p_ArgListOpt_ArgList(p):
-    'ArgListOpt: ArgList'
+    'ArgListOpt : ArgList'
 
 def p_ArgList_Arg(p):
     '''ArgList :  ArgList COMA Arg

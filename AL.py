@@ -112,7 +112,7 @@ def t_error(t):
 lexer = lex.lex()
 f = open("tokens.txt","w+")
 
-lexer.input("var STRING casa,53 = 'casa'if{} 32769 rojo94 '_rojo67' function_n")
+lexer.input("var STRING casa,53 = 'casa'if{} 32760 rojo94 '_rojo67' function_n")
 
 # Tokenize
 while True:
