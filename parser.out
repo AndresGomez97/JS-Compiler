@@ -2,101 +2,390 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
 Unused terminals:
 
-    CADENA
-    MMENOS
-    PRINT
+    RETURN
     LCORCH
-    PROMPT
     FUNCTION
-    RCORCH
-    PUNTO
+    CADENA
+    PRINT
+    PROMPT
     IF
+    COMA
+    LLLAVE
+    RLLAVE
+    MMENOS
+    RCORCH
+    DO
+    WHILE
+    PUNTO
 
 Grammar
 
-Rule 0     S' -> p1
-Rule 1     p1 -> p
-Rule 2     p -> b
-Rule 3     p -> f
-Rule 4     b -> VAR t ID PYC
-Rule 5     b -> DO LLLAVE c RLLAVE WHILE LPAREN e RPAREN PYC
-Rule 6     b -> s
-Rule 7     s -> ID ASIG e PYC
-Rule 8     s -> RETURN x PYC
-Rule 9     s -> ID LPAREN l RPAREN PYC
-Rule 10    t -> INT
-Rule 11    t -> BOOLEAN
-Rule 12    t -> STRING
-Rule 13    functiona -> t ID LPAREN ArgListOpt RPAREN CompoundStmt
-Rule 14    ArgListOpt -> ArgList
-Rule 15    ArgList -> ArgList COMA Arg
-Rule 16    ArgList -> Arg
-Rule 17    Arg -> t ID
-Rule 18    CompoundStmt -> LLLAVE StmtList RLLAVE
-Rule 19    StmtList -> StmtList Stmt
-Rule 20    Stmt -> s
-Rule 21    e -> NEG r
-Rule 22    e -> r
-Rule 23    r -> r MENORQUE u
-Rule 24    r -> u
-Rule 25    u -> v SUM u
-Rule 26    u -> v
-Rule 27    v -> ENTERO
-Rule 28    empty -> <empty>
+Rule 0     S' -> B
+Rule 1     B -> VAR BOOLEAN ID PYC
+Rule 2     B -> VAR INT ID PYC
+Rule 3     B -> VAR STRING ID PYC
+Rule 4     B -> S
+Rule 5     S -> ID ASIG E PYC
+Rule 6     E -> NEG R
+Rule 7     E -> R
+Rule 8     R -> U MENORQUE U
+Rule 9     R -> U
+Rule 10    U -> V SUM U
+Rule 11    U -> V
+Rule 12    V -> ENTERO
+Rule 13    V -> ID
+Rule 14    V -> LPAREN E RPAREN
 
 Terminals, with rules where they appear
 
-ASIG                 : 7
-BOOLEAN              : 11
+ASIG                 : 5
+BOOLEAN              : 1
 CADENA               : 
-COMA                 : 15
-DO                   : 5
-ENTERO               : 27
+COMA                 : 
+DO                   : 
+ENTERO               : 12
 FUNCTION             : 
-ID                   : 4 7 9 13 17
+ID                   : 1 2 3 5 13
 IF                   : 
-INT                  : 10
+INT                  : 2
 LCORCH               : 
-LLLAVE               : 5 18
-LPAREN               : 5 9 13
-MENORQUE             : 23
+LLLAVE               : 
+LPAREN               : 14
+MENORQUE             : 8
 MMENOS               : 
-NEG                  : 21
+NEG                  : 6
 PRINT                : 
 PROMPT               : 
 PUNTO                : 
-PYC                  : 4 5 7 8 9
+PYC                  : 1 2 3 5
 RCORCH               : 
-RETURN               : 8
-RLLAVE               : 5 18
-RPAREN               : 5 9 13
-STRING               : 12
-SUM                  : 25
-VAR                  : 4
-WHILE                : 5
+RETURN               : 
+RLLAVE               : 
+RPAREN               : 14
+STRING               : 3
+SUM                  : 10
+VAR                  : 1 2 3
+WHILE                : 
 error                : 
 
 Nonterminals, with rules where they appear
 
-Arg                  : 15 16
-ArgList              : 14 15
-ArgListOpt           : 13
-CompoundStmt         : 13
-Stmt                 : 19
-StmtList             : 18 19
-b                    : 2
-c                    : 5
-e                    : 5 7
-empty                : 
-f                    : 3
-functiona            : 
-l                    : 9
-p                    : 1
-p1                   : 0
-r                    : 21 22 23
-s                    : 6 20
-t                    : 4 13 17
-u                    : 23 24 25
-v                    : 25 26
-x                    : 8
+B                    : 0
+E                    : 5 14
+R                    : 6 7
+S                    : 4
+U                    : 8 8 9 10
+V                    : 10 11
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . B
+    (1) B -> . VAR BOOLEAN ID PYC
+    (2) B -> . VAR INT ID PYC
+    (3) B -> . VAR STRING ID PYC
+    (4) B -> . S
+    (5) S -> . ID ASIG E PYC
+
+    VAR             shift and go to state 1
+    ID              shift and go to state 2
+
+    S                              shift and go to state 3
+    B                              shift and go to state 4
+
+state 1
+
+    (1) B -> VAR . BOOLEAN ID PYC
+    (2) B -> VAR . INT ID PYC
+    (3) B -> VAR . STRING ID PYC
+
+    BOOLEAN         shift and go to state 6
+    INT             shift and go to state 7
+    STRING          shift and go to state 5
+
+
+state 2
+
+    (5) S -> ID . ASIG E PYC
+
+    ASIG            shift and go to state 8
+
+
+state 3
+
+    (4) B -> S .
+
+    $end            reduce using rule 4 (B -> S .)
+
+
+state 4
+
+    (0) S' -> B .
+
+
+
+state 5
+
+    (3) B -> VAR STRING . ID PYC
+
+    ID              shift and go to state 9
+
+
+state 6
+
+    (1) B -> VAR BOOLEAN . ID PYC
+
+    ID              shift and go to state 10
+
+
+state 7
+
+    (2) B -> VAR INT . ID PYC
+
+    ID              shift and go to state 11
+
+
+state 8
+
+    (5) S -> ID ASIG . E PYC
+    (6) E -> . NEG R
+    (7) E -> . R
+    (8) R -> . U MENORQUE U
+    (9) R -> . U
+    (10) U -> . V SUM U
+    (11) U -> . V
+    (12) V -> . ENTERO
+    (13) V -> . ID
+    (14) V -> . LPAREN E RPAREN
+
+    NEG             shift and go to state 18
+    ENTERO          shift and go to state 17
+    ID              shift and go to state 16
+    LPAREN          shift and go to state 13
+
+    E                              shift and go to state 12
+    R                              shift and go to state 15
+    U                              shift and go to state 14
+    V                              shift and go to state 19
+
+state 9
+
+    (3) B -> VAR STRING ID . PYC
+
+    PYC             shift and go to state 20
+
+
+state 10
+
+    (1) B -> VAR BOOLEAN ID . PYC
+
+    PYC             shift and go to state 21
+
+
+state 11
+
+    (2) B -> VAR INT ID . PYC
+
+    PYC             shift and go to state 22
+
+
+state 12
+
+    (5) S -> ID ASIG E . PYC
+
+    PYC             shift and go to state 23
+
+
+state 13
+
+    (14) V -> LPAREN . E RPAREN
+    (6) E -> . NEG R
+    (7) E -> . R
+    (8) R -> . U MENORQUE U
+    (9) R -> . U
+    (10) U -> . V SUM U
+    (11) U -> . V
+    (12) V -> . ENTERO
+    (13) V -> . ID
+    (14) V -> . LPAREN E RPAREN
+
+    NEG             shift and go to state 18
+    ENTERO          shift and go to state 17
+    ID              shift and go to state 16
+    LPAREN          shift and go to state 13
+
+    E                              shift and go to state 24
+    R                              shift and go to state 15
+    U                              shift and go to state 14
+    V                              shift and go to state 19
+
+state 14
+
+    (8) R -> U . MENORQUE U
+    (9) R -> U .
+
+    MENORQUE        shift and go to state 25
+    PYC             reduce using rule 9 (R -> U .)
+    RPAREN          reduce using rule 9 (R -> U .)
+
+
+state 15
+
+    (7) E -> R .
+
+    PYC             reduce using rule 7 (E -> R .)
+    RPAREN          reduce using rule 7 (E -> R .)
+
+
+state 16
+
+    (13) V -> ID .
+
+    SUM             reduce using rule 13 (V -> ID .)
+    PYC             reduce using rule 13 (V -> ID .)
+    RPAREN          reduce using rule 13 (V -> ID .)
+    MENORQUE        reduce using rule 13 (V -> ID .)
+
+
+state 17
+
+    (12) V -> ENTERO .
+
+    SUM             reduce using rule 12 (V -> ENTERO .)
+    PYC             reduce using rule 12 (V -> ENTERO .)
+    RPAREN          reduce using rule 12 (V -> ENTERO .)
+    MENORQUE        reduce using rule 12 (V -> ENTERO .)
+
+
+state 18
+
+    (6) E -> NEG . R
+    (8) R -> . U MENORQUE U
+    (9) R -> . U
+    (10) U -> . V SUM U
+    (11) U -> . V
+    (12) V -> . ENTERO
+    (13) V -> . ID
+    (14) V -> . LPAREN E RPAREN
+
+    ENTERO          shift and go to state 17
+    ID              shift and go to state 16
+    LPAREN          shift and go to state 13
+
+    R                              shift and go to state 26
+    U                              shift and go to state 14
+    V                              shift and go to state 19
+
+state 19
+
+    (10) U -> V . SUM U
+    (11) U -> V .
+
+    SUM             shift and go to state 27
+    PYC             reduce using rule 11 (U -> V .)
+    RPAREN          reduce using rule 11 (U -> V .)
+    MENORQUE        reduce using rule 11 (U -> V .)
+
+
+state 20
+
+    (3) B -> VAR STRING ID PYC .
+
+    $end            reduce using rule 3 (B -> VAR STRING ID PYC .)
+
+
+state 21
+
+    (1) B -> VAR BOOLEAN ID PYC .
+
+    $end            reduce using rule 1 (B -> VAR BOOLEAN ID PYC .)
+
+
+state 22
+
+    (2) B -> VAR INT ID PYC .
+
+    $end            reduce using rule 2 (B -> VAR INT ID PYC .)
+
+
+state 23
+
+    (5) S -> ID ASIG E PYC .
+
+    $end            reduce using rule 5 (S -> ID ASIG E PYC .)
+
+
+state 24
+
+    (14) V -> LPAREN E . RPAREN
+
+    RPAREN          shift and go to state 28
+
+
+state 25
+
+    (8) R -> U MENORQUE . U
+    (10) U -> . V SUM U
+    (11) U -> . V
+    (12) V -> . ENTERO
+    (13) V -> . ID
+    (14) V -> . LPAREN E RPAREN
+
+    ENTERO          shift and go to state 17
+    ID              shift and go to state 16
+    LPAREN          shift and go to state 13
+
+    U                              shift and go to state 29
+    V                              shift and go to state 19
+
+state 26
+
+    (6) E -> NEG R .
+
+    PYC             reduce using rule 6 (E -> NEG R .)
+    RPAREN          reduce using rule 6 (E -> NEG R .)
+
+
+state 27
+
+    (10) U -> V SUM . U
+    (10) U -> . V SUM U
+    (11) U -> . V
+    (12) V -> . ENTERO
+    (13) V -> . ID
+    (14) V -> . LPAREN E RPAREN
+
+    ENTERO          shift and go to state 17
+    ID              shift and go to state 16
+    LPAREN          shift and go to state 13
+
+    U                              shift and go to state 30
+    V                              shift and go to state 19
+
+state 28
+
+    (14) V -> LPAREN E RPAREN .
+
+    SUM             reduce using rule 14 (V -> LPAREN E RPAREN .)
+    PYC             reduce using rule 14 (V -> LPAREN E RPAREN .)
+    RPAREN          reduce using rule 14 (V -> LPAREN E RPAREN .)
+    MENORQUE        reduce using rule 14 (V -> LPAREN E RPAREN .)
+
+
+state 29
+
+    (8) R -> U MENORQUE U .
+
+    PYC             reduce using rule 8 (R -> U MENORQUE U .)
+    RPAREN          reduce using rule 8 (R -> U MENORQUE U .)
+
+
+state 30
+
+    (10) U -> V SUM U .
+
+    PYC             reduce using rule 10 (U -> V SUM U .)
+    RPAREN          reduce using rule 10 (U -> V SUM U .)
+    MENORQUE        reduce using rule 10 (U -> V SUM U .)
 
