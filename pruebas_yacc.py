@@ -122,8 +122,15 @@ def var_already_exist(x):
     else:
         return False
 
-#def var_is_cadena(var):
-    
+def var_is_cadena(var):
+    num = 0
+    for n in var:
+        if n == '\'':
+            num = num +1
+    if num==2:
+        return True
+    else:
+        return False   
 
 #####################################
 # Creación y definición de Variable #
@@ -174,8 +181,13 @@ def p_asig(p):
             print('Boolean variable {} not define'.format(p[1]))
 
     elif p[1] in cadenas.keys():
-        if isinstance(p[3],str) :
+        if isinstance(p[3],str) and var_is_cadena(p[3]) :
             cadenas[str(p[1])] = p[3]
+        elif isinstance(p[3],str) and not var_is_cadena(p[3]):
+            if p[3] in cadenas.keys():
+                cadenas[str(p[1])] = cadenas[str(p[3])]
+            else:
+                print('Syntax error')
         else:
             print('String variable {} not define'.format(p[1]))
     else:
