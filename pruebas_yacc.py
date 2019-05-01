@@ -2,6 +2,7 @@ import sys
 import ply.lex as lex
 import ply.yacc as yacc
 
+
 sys.path.insert(0, "../..")
 
 if sys.version_info[0] >= 3:
@@ -121,6 +122,9 @@ def var_already_exist(x):
     else:
         return False
 
+#def var_is_cadena(var):
+    
+
 #####################################
 # Creación y definición de Variable #
 #####################################
@@ -136,6 +140,7 @@ def p_define_var_int(p):
     'B : VAR INT ID PYC'
     if not var_already_exist(p[3]):
         enteros.setdefault(str(p[3]))
+        
     else:
         print('The variable already exist')
 
@@ -149,27 +154,33 @@ def p_b_s(p):
     'B : S'
     p[0]=p[1]
 
+#####ARREGLAR########
 def p_asig(p):
     'S : ID ASIG E PYC'
-    if type(p[3]) is int: 
-        if p[1] in enteros.keys():
+    if p[1] in enteros.keys(): 
+        if isinstance(p[3],int):
             enteros[str(p[1])] = p[3]
+        elif isinstance(p[3],str) and p[3] in enteros.keys():
+            enteros[str(p[1])] = enteros[str(p[3])]
         else:
             print('Integer variable {} not define'.format(p[1]))
-    elif type(p[3]) is bool:
-        if p[1] in booleanos.keys():
+
+    elif p[1] in booleanos.keys():
+        if isinstance(p[3],bool):
             booleanos[str(p[1])] = p[3]
+        elif isinstance(p[3],str) and p[3] in booleanos.keys():
+            booleanos[str(p[1])] = booleanos[str(p[3])]
         else:
             print('Boolean variable {} not define'.format(p[1]))
 
-    elif type(p[3]) is str:
-        if p[1] in cadenas.keys():
+    elif p[1] in cadenas.keys():
+        if isinstance(p[3],str) :
             cadenas[str(p[1])] = p[3]
         else:
             print('String variable {} not define'.format(p[1]))
     else:
-        print('Grammar only accepts integers, booleans and strings')
-
+        print('Variable {} not define'.format(p[1]))
+#####################
 ##############
 # Operadores #
 ##############
@@ -244,6 +255,10 @@ def p_term_number(p):
     p[0] = p[1]
 def p_term_id(p):
     'V : ID'
+    p[0] = p[1]
+
+def p_term_string(p):
+    'V : CADENA'
     p[0] = p[1]
 
 def p_paren(p):
