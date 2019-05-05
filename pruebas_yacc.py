@@ -142,14 +142,16 @@ def var_is_cadena(var):
 # Do While #
 ############
 
-#def p_do_while(p):
-#    'B : DO LCORCH C RCORCH WHILE LPAREN E RPAREN PYC'
+def p_do_while(p):
+    'B : DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC'
+    if type(p[7]) is not bool:
+        print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[7]))
 
-#def p_c_b_c(p):
-#    'C : B C'
+def p_c_b_c(p):
+    'C : B C'
 
-
-
+def p_c_empty(p):
+    'C : empty'
 
 ######################################
 # Creación y asisgnación de Variable #
@@ -249,7 +251,7 @@ def p_tipo_int(p):
 #########
 # Print #
 #########
-#### FALTA SEMANTICO #####
+
 def p_print(p):
     'S : PRINT LPAREN E RPAREN PYC'
     if type(p[3]) is str:
@@ -272,7 +274,7 @@ def p_print(p):
 #########
 # Prompt #
 #########
-##### FALTA SEMANTICO ######
+
 def p_prompt(p):
     'S : PROMPT LPAREN E RPAREN PYC'
     if type(p[3]) is str:
