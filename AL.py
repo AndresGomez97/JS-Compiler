@@ -68,11 +68,12 @@ t_RCORCH = r'\]'
 
 #Regular expression rules(NOT SIMPLE)
 
+##### ESTA MAL ##########
 def t_CADENA(t):
-    r'\'[a-zA-Z0-9_]*\''
+    r'\'[a-zA-Z0-9_ ]*\''
     t.value = str(t.value)
     return t
-
+########################
 
 
 def t_ENTERO(t):    
@@ -112,7 +113,7 @@ def t_error(t):
 lexer = lex.lex()
 f = open("tokens.txt","w+")
 
-lexer.input("var string casa,53 = '34casa if{} 32760 rojo94 '_rojo67' function_n")
+lexer.input("var string casa,53 = 34casa if{} 32760 rojo94 '_rojo 67' function_n")
 
 # Tokenize
 while True:

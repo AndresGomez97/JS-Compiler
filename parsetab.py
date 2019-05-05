@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'ASIG BOOLEAN CADENA COMA DO ENTERO FUNCTION ID IF INT LCORCH LLLAVE LPAREN MENORQUE MMENOS NEG PRINT PROMPT PUNTO PYC RCORCH RETURN RLLAVE RPAREN STRING SUM VAR WHILEB : VAR BOOLEAN ID PYCB : VAR INT ID PYCB : VAR STRING ID PYCB : SS : ID ASIG E PYCE : NEG RE : RR : U MENORQUE UR : UU : V SUM UU : VV : ENTEROV : IDV : CADENAV : LPAREN E RPAREN'
+_lr_signature = 'ASIG BOOLEAN CADENA COMA DO ENTERO FUNCTION ID IF INT LCORCH LLLAVE LPAREN MENORQUE MMENOS NEG PRINT PROMPT PUNTO PYC RCORCH RETURN RLLAVE RPAREN STRING SUM VAR WHILEB : VAR T ID PYCB : SS : ID ASIG E PYCS : RETURN E PYCT : STRINGT : BOOLEANT : INTS : PRINT LPAREN E RPAREN PYCS : PROMPT LPAREN E RPAREN PYCS : MMENOS ID PYCE : NEG RE : RR : U MENORQUE UR : UU : V SUM UU : VV : ENTEROV : IDV : CADENAV : LPAREN E RPARENempty :'
     
-_lr_action_items = {'BOOLEAN':([1,],[5,]),'SUM':([13,15,16,17,31,],[-14,-13,-12,26,-15,]),'VAR':([0,],[1,]),'CADENA':([8,19,20,25,26,],[13,13,13,13,13,]),'LPAREN':([8,19,20,25,26,],[19,19,19,19,19,]),'ENTERO':([8,19,20,25,26,],[16,16,16,16,16,]),'NEG':([8,19,],[20,20,]),'ID':([0,5,6,7,8,19,20,25,26,],[3,9,10,11,15,15,15,15,15,]),'INT':([1,],[6,]),'STRING':([1,],[7,]),'MENORQUE':([13,14,15,16,17,30,31,],[-14,25,-13,-12,-11,-10,-15,]),'$end':([2,4,21,22,23,24,],[0,-4,-1,-2,-3,-5,]),'RPAREN':([13,14,15,16,17,18,27,28,29,30,31,],[-14,-9,-13,-12,-11,-7,31,-6,-8,-10,-15,]),'PYC':([9,10,11,12,13,14,15,16,17,18,28,29,30,31,],[21,22,23,24,-14,-9,-13,-12,-11,-7,-6,-8,-10,-15,]),'ASIG':([3,],[8,]),}
+_lr_action_items = {'ENTERO':([3,9,16,18,24,25,29,31,],[14,14,14,14,14,14,14,14,]),'PYC':([14,15,17,19,20,21,22,23,27,30,35,36,38,39,40,41,],[-17,-19,-16,-14,32,-12,-18,33,37,-11,42,43,-20,-15,-13,44,]),'PROMPT':([0,],[1,]),'CADENA':([3,9,16,18,24,25,29,31,],[15,15,15,15,15,15,15,15,]),'$end':([4,5,32,33,37,42,43,44,],[-2,0,-4,-10,-1,-3,-9,-8,]),'LPAREN':([1,3,7,9,16,18,24,25,29,31,],[9,16,24,16,16,16,16,16,16,16,]),'SUM':([14,15,17,22,38,],[-17,-19,29,-18,-20,]),'BOOLEAN':([2,],[12,]),'NEG':([3,9,16,24,25,],[18,18,18,18,18,]),'RETURN':([0,],[3,]),'MMENOS':([0,],[6,]),'VAR':([0,],[2,]),'INT':([2,],[10,]),'MENORQUE':([14,15,17,19,22,38,39,],[-17,-19,-16,31,-18,-20,-15,]),'PRINT':([0,],[7,]),'ASIG':([8,],[25,]),'RPAREN':([14,15,17,19,21,22,26,28,30,34,38,39,40,],[-17,-19,-16,-14,-12,-18,36,38,-11,41,-20,-15,-13,]),'ID':([0,3,6,9,10,11,12,13,16,18,24,25,29,31,],[8,22,23,22,-7,27,-6,-5,22,22,22,22,22,22,]),'STRING':([2,],[13,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'E':([8,19,],[12,27,]),'S':([0,],[4,]),'U':([8,19,20,25,26,],[14,14,14,29,30,]),'B':([0,],[2,]),'V':([8,19,20,25,26,],[17,17,17,17,17,]),'R':([8,19,20,],[18,18,28,]),}
+_lr_goto_items = {'U':([3,9,16,18,24,25,29,31,],[19,19,19,19,19,19,39,40,]),'T':([2,],[11,]),'E':([3,9,16,24,25,],[20,26,28,34,35,]),'V':([3,9,16,18,24,25,29,31,],[17,17,17,17,17,17,17,17,]),'R':([3,9,16,18,24,25,],[21,21,21,30,21,21,]),'S':([0,],[4,]),'B':([0,],[5,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,19 +27,25 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> B","S'",1,None,None,None),
-  ('B -> VAR BOOLEAN ID PYC','B',4,'p_define_var_bool','pruebas_yacc.py',130),
-  ('B -> VAR INT ID PYC','B',4,'p_define_var_int','pruebas_yacc.py',137),
-  ('B -> VAR STRING ID PYC','B',4,'p_define_var_cads','pruebas_yacc.py',145),
-  ('B -> S','B',1,'p_b_s','pruebas_yacc.py',151),
-  ('S -> ID ASIG E PYC','S',4,'p_asig','pruebas_yacc.py',156),
-  ('E -> NEG R','E',2,'p_e_notr','pruebas_yacc.py',186),
-  ('E -> R','E',1,'p_e_r','pruebas_yacc.py',190),
-  ('R -> U MENORQUE U','R',3,'p_erre_expression_minusthan','pruebas_yacc.py',194),
-  ('R -> U','R',1,'p_erre_expression','pruebas_yacc.py',198),
-  ('U -> V SUM U','U',3,'p_expression_plus','pruebas_yacc.py',202),
-  ('U -> V','U',1,'p_expression_term','pruebas_yacc.py',247),
-  ('V -> ENTERO','V',1,'p_term_number','pruebas_yacc.py',251),
-  ('V -> ID','V',1,'p_term_id','pruebas_yacc.py',254),
-  ('V -> CADENA','V',1,'p_term_string','pruebas_yacc.py',258),
-  ('V -> LPAREN E RPAREN','V',3,'p_paren','pruebas_yacc.py',262),
+  ('B -> VAR T ID PYC','B',4,'p_define_var','pruebas_yacc.py',159),
+  ('B -> S','B',1,'p_b_s','pruebas_yacc.py',174),
+  ('S -> ID ASIG E PYC','S',4,'p_asig','pruebas_yacc.py',179),
+  ('S -> RETURN E PYC','S',3,'p_return','pruebas_yacc.py',216),
+  ('T -> STRING','T',1,'p_tipo_str','pruebas_yacc.py',236),
+  ('T -> BOOLEAN','T',1,'p_tipo_bool','pruebas_yacc.py',240),
+  ('T -> INT','T',1,'p_tipo_int','pruebas_yacc.py',244),
+  ('S -> PRINT LPAREN E RPAREN PYC','S',5,'p_print','pruebas_yacc.py',254),
+  ('S -> PROMPT LPAREN E RPAREN PYC','S',5,'p_prompt','pruebas_yacc.py',277),
+  ('S -> MMENOS ID PYC','S',3,'p_id_mm','pruebas_yacc.py',284),
+  ('E -> NEG R','E',2,'p_e_notr','pruebas_yacc.py',292),
+  ('E -> R','E',1,'p_e_r','pruebas_yacc.py',303),
+  ('R -> U MENORQUE U','R',3,'p_erre_expression_minusthan','pruebas_yacc.py',307),
+  ('R -> U','R',1,'p_erre_expression','pruebas_yacc.py',329),
+  ('U -> V SUM U','U',3,'p_expression_plus','pruebas_yacc.py',333),
+  ('U -> V','U',1,'p_expression_term','pruebas_yacc.py',378),
+  ('V -> ENTERO','V',1,'p_term_number','pruebas_yacc.py',382),
+  ('V -> ID','V',1,'p_term_id','pruebas_yacc.py',385),
+  ('V -> CADENA','V',1,'p_term_string','pruebas_yacc.py',389),
+  ('V -> LPAREN E RPAREN','V',3,'p_paren','pruebas_yacc.py',393),
+  ('empty -> <empty>','empty',0,'p_empty','pruebas_yacc.py',402),
 ]
