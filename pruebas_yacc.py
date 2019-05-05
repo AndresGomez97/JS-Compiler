@@ -279,11 +279,20 @@ def p_prompt(p):
         if not var_is_cadena(p[3]):    
             if var_already_exist(p[3]):
                 if p[3] in enteros.keys():
-                    enteros[p[3]] = input()
+                    try:
+                        enteros[p[3]] = int(input())
+                    except ValueError:
+                        print('Not acceptable value. {} is an integer variable'.format(p[3]))
                 elif p[3] in booleanos.keys():
-                    booleanos[p[3]] = input()
+                    try:
+                        booleanos[p[3]] = bool(input())
+                    except ValueError:
+                        print('Not acceptable value. {} is boolean variable'.format(p[3]))
                 elif p[3] in cadenas.keys():
-                    cadenas[p[3]] = input()
+                    try:
+                        cadenas[p[3]] = '\''+input()+'\''
+                    except ValueError:
+                        print('Not acceptable value. {} is a string variable'.format(p[3]))
             else:
                 print('Syntax error PROMPT. Variable {} is not define'.format(p[3]))
         else:
@@ -297,9 +306,8 @@ def p_prompt(p):
 
 def p_id_mm(p):
     'S : MMENOS ID PYC'
-    if p[2] in enteros.keys() and enteros[p[2]] is not None:
+    if p[2] in enteros.keys():
         enteros[p[2]] = enteros[p[2]] - 1
-        print(enteros)
     else:
         print('Syntax error MMINUS')
 
