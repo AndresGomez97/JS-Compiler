@@ -65,7 +65,6 @@ t_RCORCH = r'\]'
 
 
 
-
 #Regular expression rules(NOT SIMPLE)
 
 ##### ESTA MAL ##########
@@ -113,7 +112,7 @@ def t_error(t):
 lexer = lex.lex()
 f = open("tokens.txt","w+")
 
-lexer.input("var string casa,53 = 34casa if{} 32760 rojo94 '_rojo 67' function_n")
+lexer.input("/*hola*/")
 
 # Tokenize
 while True:

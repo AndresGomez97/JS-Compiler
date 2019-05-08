@@ -138,6 +138,8 @@ def var_is_cadena(var):
 
 
 
+
+
 ############
 # Do While #
 ############
@@ -229,6 +231,9 @@ def p_return(p):
                     return cadenas[p[2]]
             else:
                 print('Syntax error RETURN. Variable {} is not define'.format(p[2]))
+
+def p_return_empty(p):
+    'S : RETURN empty PYC'
     
 #########
 # Tipos #
