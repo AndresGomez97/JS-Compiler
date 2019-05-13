@@ -37,7 +37,6 @@ reserved = {
     'string' : 'STRING',
     'bool' : 'BOOLEAN',
     'if' : 'IF'
-    
 }
 
 #Anadimos palabras reservadas a la lista de tokens
@@ -112,7 +111,7 @@ def t_error(t):
 lexer = lex.lex()
 f = open("tokens.txt","w+")
 
-lexer.input("/*hola*/")
+lexer.input("")
 
 # Tokenize
 while True:

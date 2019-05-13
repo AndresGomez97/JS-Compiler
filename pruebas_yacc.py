@@ -104,13 +104,27 @@ def t_error(t):
 ###############
 lexer = lex.lex()
 
+
+
+
+#################################################################################################################################
+#################################### Sintactico y Semantico #####################################################################
+#################################################################################################################################
+
+
+
+
 #############################
 # Diccionarios de variables #
 #############################
 enteros = {}
 cadenas = {}
 booleanos = {}
-funciones = {}
+
+### ESQUEMA --> {'id': nombre,'tipo': tipo,'params':{},'vars':{}}
+funciones = []
+buffer_params = []
+buffer_returns = []
 
 ########################
 # Funciones auxiliares #
@@ -132,14 +146,280 @@ def var_is_cadena(var):
     else:
         return False   
 
+def delete_buffer():
+    l = len(buffer_params)
+    while l>0:
+        del buffer_params[l-1]
+        l = l-1
 #########
 # START #
 #########
 
+def p_b_p(p):
+    'P : B'
+    
+def p_f_p(p):
+    'P : F'
+
+#def p_eof(p):
+#    'P : empty'
+
+############################################################################################################
+######################################### Function #########################################################
+############################################################################################################
+
+def p_f_function(p):
+    'F : FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVE'
+    encontrado = 0
+    check = {}
+    duplicados = 0
+    duplicado = ''
+    #Comprobamos si el id de la funcion ya existe
+    for fun in funciones:
+        if fun['id'] == p[3]:
+            encontrado = 1
+    
+    #Si no existe
+    if encontrado == 0:
+        #Check de que no haya params duplicados
+        for n in buffer_params:
+            if n[0] not in check.keys():
+                check.setdefault(n[0],n[1])
+            else:
+                duplicado = n[0]
+                duplicados = 1
+        
+        #Si no hay duplicados
+        if duplicados == 0:
+            funciones.append({'id':p[3],'tipo': p[2],'params':check,'vars':{}})
+            
+        #Si hay duplicados
+        else:
+            print('Syntax error FUNCTION. ID {} is already used as param'.format(duplicado))
+
+    #Si existe
+    else:
+        print('Syntax error FUNCTION. ID {} already exists'.format(p[3]))
+    
+    #Limpiamos buffer
+    delete_buffer()
+
+    print(buffer_params)
+    print(funciones)          
+
+##### TIPO A DEVOLVER #####
+def p_h_tipo(p):
+    'H : T'
+    p[0] = p[1]
+
+def p_h_empty(p):
+    'H : empty'
+    p[0] = p[1]
+##########################
+
+##### PARAMETROS #####
+def p_a_params(p):
+    'A : T ID K'
+    buffer_params.append([p[2],p[1]])
+
+def p_a_empty(p):
+    'A : empty'
+
+def p_k_params(p):
+    'K : COMA T ID K'
+    buffer_params.append([p[3],p[2]])
 
 
+def p_k_empty(p):
+    'K : empty'
+    
+#####################
+
+def p_w_d(p):
+    'W : D W'
+
+def p_w_empty(p):
+    'W : empty'
+
+def p_define_var_func(p):
+    'D : VAR T ID PYC'
+    if not var_already_exist(p[3]):
+        if p[2] == 'bool':
+            booleanos.setdefault(str(p[3]),False)
+            print(booleanos)
+        elif p[2] == 'int':
+            enteros.setdefault(str(p[3]),0)
+            print(enteros)
+        elif p[2] == 'string':
+            cadenas.setdefault(str(p[3]),'')
+            print(cadenas)
+    else:
+        print('The variable already exist')
+
+def p_d_do_while(p):
+    'D : DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC'
+    if type(p[7]) is not bool:
+        print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[7]))
+
+def p_d_if(p):
+    'D : IF LPAREN E RPAREN LLLAVE W RLLAVE'
+    if type(p[3]) is not bool:
+        print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[3]))
+
+def p_d_s(p):
+    'D : G'
 
 
+################# RETOCAR #################
+def p_asig_func(p):
+    'G : ID ASIG E PYC'
+    if p[1] in enteros.keys(): 
+        if type(p[3]) is int:
+            enteros[str(p[1])] = p[3]
+        elif isinstance(p[3],str) and p[3] in enteros.keys():
+            enteros[str(p[1])] = enteros[str(p[3])]
+            print(enteros)
+        else:
+            print('Syntax error ASIG')
+
+    elif p[1] in booleanos.keys():
+        if isinstance(p[3],bool):
+            booleanos[str(p[1])] = p[3]
+            print(booleanos)
+        elif isinstance(p[3],str) and p[3] in booleanos.keys():
+            booleanos[str(p[1])] = booleanos[str(p[3])]
+        else:
+            print('Syntax error ASIG')
+
+    elif p[1] in cadenas.keys():
+        if isinstance(p[3],str) and var_is_cadena(p[3]) :
+            cadenas[str(p[1])] = p[3]
+        elif isinstance(p[3],str) and not var_is_cadena(p[3]):
+            if p[3] in cadenas.keys():
+                cadenas[str(p[1])] = cadenas[str(p[3])]
+            else:
+                print('Syntax error ASIG')
+        else:
+            print('Syntax error ASIG')
+    else:
+        print('Variable {} not define'.format(p[1]))
+
+def p_s_function_func(p):
+    'G : ID LPAREN L RPAREN PYC'
+
+def p_print_func(p):
+    'G : PRINT LPAREN E RPAREN PYC'
+    if type(p[3]) is str:
+        if var_is_cadena(p[3]): 
+            print(p[3])
+        elif not var_is_cadena(p[3]):    
+            if var_already_exist(p[3]):
+                if p[3] in enteros.keys():
+                    print(enteros[p[3]])
+                elif p[3] in booleanos.keys():
+                    print(booleanos[p[3]])
+                elif p[3] in cadenas.keys():
+                    print(cadenas[p[3]])
+            else:
+                print('Syntax error PRINT. Variable {} is not define'.format(p[3]))   
+
+    else:
+        print(p[3]) 
+
+def p_prompt_func(p):
+    'G : PROMPT LPAREN E RPAREN PYC'
+    if type(p[3]) is str:
+        if not var_is_cadena(p[3]):    
+            if var_already_exist(p[3]):
+                if p[3] in enteros.keys():
+                    try:
+                        enteros[p[3]] = int(input())
+                    except ValueError:
+                        print('Not acceptable value. {} is an integer variable'.format(p[3]))
+                elif p[3] in booleanos.keys():
+                    try:
+                        booleanos[p[3]] = bool(input())
+                    except ValueError:
+                        print('Not acceptable value. {} is boolean variable'.format(p[3]))
+                elif p[3] in cadenas.keys():
+                    try:
+                        cadenas[p[3]] = '\''+input()+'\''
+                    except ValueError:
+                        print('Not acceptable value. {} is a string variable'.format(p[3]))
+            else:
+                print('Syntax error PROMPT. Variable {} is not define'.format(p[3]))
+        else:
+            print('Syntax error PROMPT. {} is not a variable'.format(p[3])) 
+    else:
+        print('Syntax error PROMPT. {} is not a variable'.format(p[3]))  
+
+def p_id_mm_func(p):
+    'G : MMENOS ID PYC'
+    if p[2] in enteros.keys():
+        enteros[p[2]] = enteros[p[2]] - 1
+    else:
+        print('Syntax error MMINUS')
+
+############################################################################################################
+############################################################################################################
+############################################################################################################
+
+
+######
+# IF #
+######
+def p_if(p):
+    'B : IF LPAREN E RPAREN LLLAVE C RLLAVE'
+    if type(p[3]) is not bool:
+        print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[3]))
+
+
+#####################
+# Llamada a funcion #
+#####################
+
+def p_s_function(p):
+    'S : ID LPAREN L RPAREN PYC'
+
+def p_l_eq(p):
+    'L : E Q'
+
+def p_l_empty(p):
+    'L : empty'
+
+def p_q_eq(p):
+    'Q : COMA E Q'
+
+def p_q_empty(p):
+    'Q : empty'
+
+##########
+# Return #
+##########
+
+def p_return(p):
+    'W : RETURN X PYC'
+    print(len(funciones)-1)
+    if type(p[2]) is str:
+        if var_is_cadena(p[2]): 
+            return p[2]
+        elif not var_is_cadena(p[2]):    
+            if var_already_exist(p[2]):
+                if p[2] in enteros.keys():
+                    return enteros[p[2]]
+                elif p[2] in booleanos.keys():
+                    return booleanos[p[2]]
+                elif p[2] in cadenas.keys():
+                    return cadenas[p[2]]
+            else:
+                print('Syntax error RETURN. Variable {} is not define'.format(p[2]))
+
+def p_return_empty(p):
+    'X : empty'
+
+def p_return_e(p):
+    'X : E'
+    p[0] = p[1]
 ############
 # Do While #
 ############
@@ -212,29 +492,7 @@ def p_asig(p):
     else:
         print('Variable {} not define'.format(p[1]))
 
-##########
-# Return #
-##########
 
-def p_return(p):
-    'S : RETURN E PYC'
-    if type(p[2]) is str:
-        if var_is_cadena(p[2]): 
-            return p[2]
-        elif not var_is_cadena(p[2]):    
-            if var_already_exist(p[2]):
-                if p[2] in enteros.keys():
-                    return enteros[p[2]]
-                elif p[2] in booleanos.keys():
-                    return booleanos[p[2]]
-                elif p[2] in cadenas.keys():
-                    return cadenas[p[2]]
-            else:
-                print('Syntax error RETURN. Variable {} is not define'.format(p[2]))
-
-def p_return_empty(p):
-    'S : RETURN empty PYC'
-    
 #########
 # Tipos #
 #########
@@ -422,6 +680,11 @@ def p_term_string(p):
 def p_paren(p):
     'V : LPAREN E RPAREN'
     p[0]= (p[2])
+
+
+####### FALTA SEMANTICO ######   
+def p_v_func(p):
+    'V : ID LPAREN L RPAREN'
 
 
 ###############
