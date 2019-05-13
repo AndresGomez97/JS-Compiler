@@ -123,8 +123,13 @@ booleanos = {}
 
 ### ESQUEMA --> {'id': nombre,'tipo': tipo,'params':{},'vars':{}}
 funciones = []
+
+### BUFFERS ###
 buffer_params = []
 buffer_returns = []
+buffer_vars_locales = []
+
+nec_returns = 0
 
 ########################
 # Funciones auxiliares #
@@ -135,6 +140,27 @@ def var_already_exist(x):
         return True
     else:
         return False
+
+def var_is_local_int(x):
+    for n in buffer_vars_locales:
+        if n[0] == x and n[1] == 'int':
+            return True
+        else:
+            return False
+
+def var_is_local_bool(x):
+    for n in buffer_vars_locales:
+        if n[0] == x and n[1] == 'bool':
+            return True
+        else:
+            return False
+
+def var_is_local_str(x):
+    for n in buffer_vars_locales:
+        if n[0] == x and n[1] == 'string':
+            return True
+        else:
+            return False
 
 def var_is_cadena(var):
     num = 0
@@ -147,10 +173,17 @@ def var_is_cadena(var):
         return False   
 
 def delete_buffer():
+    global nec_returns
+    nec_returns = 0
     l = len(buffer_params)
     while l>0:
         del buffer_params[l-1]
         l = l-1
+    l = len(buffer_returns)
+    while l>0:
+        del buffer_returns[l-1]
+        l=l-1
+
 #########
 # START #
 #########
@@ -170,9 +203,15 @@ def p_f_p(p):
 
 def p_f_function(p):
     'F : FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVE'
+
+    global nec_returns
+    
+    nec_returns = nec_returns + 1
+
     encontrado = 0
     check = {}
     duplicados = 0
+    returns_ok = 0
     duplicado = ''
     #Comprobamos si el id de la funcion ya existe
     for fun in funciones:
@@ -190,9 +229,26 @@ def p_f_function(p):
                 duplicados = 1
         
         #Si no hay duplicados
+        #Comprobamos returns
+        if p[2] != None:
+            if len(buffer_returns) == 0:
+                returns_ok = 1
+            if len(buffer_returns) != nec_returns:
+                returns_ok = 1
+            for n in buffer_returns:
+                if n != p[2]:
+                    returns_ok = 1
+        else:
+            for n in buffer_returns:
+                if n != 'null':
+                    returns_ok = 1
+
+        #Si las dos cosas están bien
         if duplicados == 0:
-            funciones.append({'id':p[3],'tipo': p[2],'params':check,'vars':{}})
-            
+            if returns_ok == 0:
+                funciones.append({'id':p[3],'tipo': p[2],'params':check,'vars':{}})
+            else:
+                print('Syntax error FUNCTION. Returns dont match with the specified type')
         #Si hay duplicados
         else:
             print('Syntax error FUNCTION. ID {} is already used as param'.format(duplicado))
@@ -203,7 +259,9 @@ def p_f_function(p):
     
     #Limpiamos buffer
     delete_buffer()
-
+    
+    print(nec_returns)
+    print(buffer_returns)
     print(buffer_params)
     print(funciones)          
 
@@ -237,6 +295,7 @@ def p_k_empty(p):
 
 def p_w_d(p):
     'W : D W'
+    
 
 def p_w_empty(p):
     'W : empty'
@@ -269,6 +328,42 @@ def p_d_if(p):
 def p_d_s(p):
     'D : G'
 
+##########
+# Return #
+##########
+
+def p_return(p):
+    'W : RETURN X PYC'
+    if type(p[2]) is str:
+        if var_is_cadena(p[2]): 
+            buffer_returns.append('string')
+        elif not var_is_cadena(p[2]):    
+            if var_already_exist(p[2]):
+                if p[2] in enteros.keys():
+                    buffer_returns.append('int')
+                elif p[2] in booleanos.keys():
+                    buffer_returns.append('bool')
+                elif p[2] in cadenas.keys():
+                    buffer_returns.append('string')
+            elif var_is_local_int(p[2]):
+                buffer_returns.append('int')
+            elif var_is_local_bool:
+                buffer_returns.append('bool')
+            elif var_is_local_str:
+                buffer_returns.append('string')
+            else:
+                print('Syntax error RETURN. Variable {} is not define'.format(p[2]))
+    elif type(p[2]) is int:
+        buffer_returns.append('int')
+    elif type(p[2]) is bool:
+        buffer_returns.append('bool')    
+
+def p_return_empty(p):
+    'X : empty'
+    buffer_returns.append('null')
+def p_return_e(p):
+    'X : E'
+    p[0] = p[1]
 
 ################# RETOCAR #################
 def p_asig_func(p):
@@ -370,6 +465,8 @@ def p_id_mm_func(p):
 ######
 def p_if(p):
     'B : IF LPAREN E RPAREN LLLAVE C RLLAVE'
+    global nec_returns
+    nec_returns = nec_returns+1
     if type(p[3]) is not bool:
         print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[3]))
 
@@ -393,39 +490,15 @@ def p_q_eq(p):
 def p_q_empty(p):
     'Q : empty'
 
-##########
-# Return #
-##########
 
-def p_return(p):
-    'W : RETURN X PYC'
-    print(len(funciones)-1)
-    if type(p[2]) is str:
-        if var_is_cadena(p[2]): 
-            return p[2]
-        elif not var_is_cadena(p[2]):    
-            if var_already_exist(p[2]):
-                if p[2] in enteros.keys():
-                    return enteros[p[2]]
-                elif p[2] in booleanos.keys():
-                    return booleanos[p[2]]
-                elif p[2] in cadenas.keys():
-                    return cadenas[p[2]]
-            else:
-                print('Syntax error RETURN. Variable {} is not define'.format(p[2]))
-
-def p_return_empty(p):
-    'X : empty'
-
-def p_return_e(p):
-    'X : E'
-    p[0] = p[1]
 ############
 # Do While #
 ############
 
 def p_do_while(p):
     'B : DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC'
+    global nec_returns
+    nec_returns = nec_returns+1
     if type(p[7]) is not bool:
         print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[7]))
 
