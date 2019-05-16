@@ -127,11 +127,55 @@ buffer_params = []
 buffer_returns = []
 buffer_vars_locales = []
 
-
+buffer_params_llamada = []
 
 ########################
 # Funciones auxiliares #
 ########################
+
+def get_id_function(string):
+    flag = 0
+    i = 0
+    res = ''
+    while flag==0:
+        if string[i] == '(':
+            flag = 1
+        else:
+            res = res+string[i]
+        i = i+1
+    return res
+
+def get_global_or_local_var(x):
+    res = None
+    for n in vars_globales:
+        if x == n['0']:
+            res = n
+    for m in buffer_vars_locales:
+        if x == m['0']:
+            res = m
+    return res
+
+def var_is_func(cadena):
+    cont = 0
+    for n in cadena:
+        if n == ')' or n == '(':
+            cont = cont + 1
+    if cont%2 == 0:
+        return True
+    else:
+        return False
+
+def func_exist(x):
+    for f in funciones:
+        if f['id'] == x:
+            return f
+    return None
+
+def duplicated_param(x,params):
+    for n in params:
+        if n[0] == x:
+            return True
+    return False
 
 def var_already_exist(x):
     for n in buffer_vars_locales:
@@ -209,6 +253,17 @@ def delete_buffer():
         del buffer_vars_locales[l-1]
         l=l-1
 
+def delete_buffer_llamada():
+    l = len(buffer_params_llamada)
+    while l> 0:
+        del buffer_params_llamada[l-1]
+        l=l-1
+
+def get_tipos_params(params):
+    res = []
+    for p in params:
+        res.append(p[1])
+    return res
 #########
 # START #
 #########
@@ -229,8 +284,8 @@ def p_f_p(p):
 def p_f_function(p):
     'F : FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVE'
 
-    loc_vars = {}
-    check = {}
+    loc_vars = []
+    check = []
 
     encontrado = 0
     duplicados = 0
@@ -247,15 +302,15 @@ def p_f_function(p):
     if encontrado == 0:
         #Volcamos datos de variables locales
         for n in buffer_vars_locales:
-            loc_vars.setdefault(n[0],n[1])
+            loc_vars.append([n[0],n[1]])
 
         #Check de que no haya params duplicados
         for n in buffer_params:
-            if n[0] not in check.keys():
-                check.setdefault(n[0],n[1])
-            else:
+            if duplicated_param(n[0],check):
                 duplicado = n[0]
                 duplicados = 1
+            else:
+                check.append([n[0],n[1]])
 
         #Si no hay duplicados
         #Comprobamos returns
@@ -284,6 +339,7 @@ def p_f_function(p):
     else:
         print('Syntax error FUNCTION. ID {} already exists'.format(p[3]))
     
+    print(buffer_params)
     #Limpiamos buffer
     delete_buffer()
 
@@ -332,13 +388,23 @@ def p_define_var_func(p):
 
 def p_d_do_while(p):
     'D : DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC'
-    if type(p[7]) is not bool:
+    if type(p[7]) is int:
         print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[7]))
+    elif type(p[7]) is str:
+        if var_is_cadena(p[7]):
+            print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[7]))
+        elif not (var_is_global_bool(p[7]) or var_is_local_bool(p[7])):
+            print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[7]))
 
 def p_d_if(p):
     'D : IF LPAREN E RPAREN LLLAVE W RLLAVE'
-    if type(p[3]) is not bool:
-        print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[3]))
+    if type(p[3]) is int:
+        print('Syntax error IF. {} is not a bool expression'.format(p[3]))
+    elif type(p[3]) is str:
+        if var_is_cadena(p[3]):
+            print('Syntax error IF. {} is not a bool expression'.format(p[3]))
+        elif not(var_is_global_bool(p[3]) or var_is_local_bool(p[3])):
+            print('Syntax error IF. {} is not a bool expression'.format(p[3]))
 
 def p_d_s(p):
     'D : S'
@@ -391,9 +457,13 @@ def p_return_e(p):
 ######
 def p_if(p):
     'B : IF LPAREN E RPAREN LLLAVE C RLLAVE'
-    if type(p[3]) is not bool:
-        print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[3]))
-
+    if type(p[3]) is int:
+        print('Syntax error IF. {} is not a bool expression'.format(p[3]))
+    elif type(p[3]) is str:
+        if var_is_cadena(p[3]):
+            print('Syntax error IF. {} is not a bool expression'.format(p[3]))
+        elif not var_is_global_bool(p[3]):
+            print('Syntax error IF. {} is not a bool expression'.format(p[3]))
 
 #####################
 # Llamada a funcion #
@@ -401,16 +471,61 @@ def p_if(p):
 
 def p_s_function(p):
     'S : ID LPAREN L RPAREN PYC'
+    fun = func_exist(p[1])
+    if fun == None:
+        print('Syntax error ID(). Function {} does not exist'.format(p[1]))
+    else:
+        if buffer_params_llamada != get_tipos_params(fun['params']):
+            print('Syntax error ID(). Params are not right')
+    delete_buffer_llamada()
 
 def p_l_eq(p):
     'L : E Q'
+    if type(p[1]) is int:
+        buffer_params_llamada.append('int')
+    elif type(p[1]) is bool:
+        buffer_params_llamada.append('bool')
+    elif type(p[1]) is str:
+        if var_is_cadena(p[1]):
+            buffer_params_llamada.append('string')
+        elif var_is_func(p[1]):
+            fun = func_exist(p[1])
+            if fun != None:
+                tipo = fun['tipo']
+                buffer_params_llamada.append(tipo)
+            else:
+                print('Syntax error CALLING FUNCTION')
+        elif var_already_exist(p[1]):
+            var = get_global_or_local_var(p[1])
+            buffer_params_llamada.append(var[1])
+        else:
+            print('Syntax error CALLING FUNCTION')  
 
 def p_l_empty(p):
     'L : empty'
 
 def p_q_eq(p):
     'Q : COMA E Q'
-
+    if type(p[2]) is int:
+        buffer_params_llamada.append('int')
+    elif type(p[2]) is bool:
+        buffer_params_llamada.append('bool')
+    elif type(p[2]) is str:
+        if var_is_cadena(p[2]):
+            buffer_params_llamada.append('string')
+        elif var_is_func(p[2]):
+            fun = func_exist(p[2])
+            if fun != None:
+                tipo = fun['tipo']
+                buffer_params_llamada.append(tipo)
+            else:
+                print('Syntax error CALLING FUNCTION')
+        elif var_already_exist(p[2]):
+            var = get_global_or_local_var(p[2])
+            buffer_params_llamada.append(var[1])
+        else:
+            print('Syntax error CALLING FUNCTION')
+            
 def p_q_empty(p):
     'Q : empty'
 
@@ -421,8 +536,13 @@ def p_q_empty(p):
 
 def p_do_while(p):
     'B : DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC'
-    if type(p[7]) is not bool:
+    if type(p[7]) is int:
         print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[7]))
+    elif type(p[7]) is str:
+        if var_is_cadena(p[7]):
+            print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[7]))
+        elif not var_is_global_bool(p[7]):
+            print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[7]))
 
 def p_c_b_c(p):
     'C : B C'
@@ -440,7 +560,7 @@ def p_define_var(p):
         vars_globales.append([p[3],p[2]])
     else:
         print('The variable already exist')
-    print(vars_globales)
+    
 
 def p_b_s(p):
     'B : S'
@@ -455,26 +575,53 @@ def p_asig(p):
         elif type(p[3]) is str:
             if var_is_cadena(p[3]):
                print('Syntax error ASIG') 
+            elif var_is_func(p[3]):
+                id_func = get_id_function(p[3])
+                fun = func_exist(id_func)
+                if fun != None:
+                    if fun['tipo'] != 'int':
+                        print('Syntax error ASIG')
+                else:
+                    print('Syntax error ASIG')
             elif not(var_is_global_int(p[3]) or var_is_local_int(p[3])):
                 print('Syntax error ASIG')
-            
+
     elif var_is_global_bool(p[1]) or var_is_local_bool(p[1]): 
         if type(p[3]) is int:
             print('Syntax error ASIG')
         elif type(p[3]) is str:
             if var_is_cadena(p[3]):
                 print('Syntax error ASIG')
-            if not(var_is_global_bool(p[3]) or var_is_local_bool(p[3])):
+            elif var_is_func(p[3]):
+                id_func = get_id_function(p[3])
+                fun = func_exist(id_func)
+                if fun != None:
+                    if fun['tipo'] != 'bool':
+                        print('Syntax error ASIG')
+                else:
+                    print('Syntax error ASIG')
+            elif not(var_is_global_bool(p[3]) or var_is_local_bool(p[3])):
                 print('Syntax error ASIG')
     
-    elif var_is_global_string(p[1]) or var_is_local_str(p[3]):
-        if type(p[3]) is str and not var_is_cadena(p[3]):
-            if not (var_is_global_string(p[3]) or var_is_local_str(p[3])):
-                print('Syntax error ASIG')
+    elif var_is_global_string(p[1]) or var_is_local_str(p[1]):
+        if type(p[3]) is str:
+            if var_is_func(p[3]):
+                id_func = get_id_function(p[3])
+                fun = func_exist(id_func)
+                if fun != None:
+                    if fun['tipo'] != 'string':
+                        print('Syntax error ASIG')
+                else:
+                    print('Syntax error ASIG')
+            elif not var_is_cadena(p[3]):
+                if not (var_is_global_string(p[3]) or var_is_local_str(p[3])):
+                    print('Syntax error ASIG')
+
         elif type(p[3]) is bool:
             print('Syntax error ASIG')
         elif type(p[3]) is int:
             print('Syntax error ASIG')
+     
     else:
         print('Variable {} not define'.format(p[1]))
 
@@ -637,7 +784,15 @@ def p_paren(p):
 ####### FALTA SEMANTICO ######   
 def p_v_func(p):
     'V : ID LPAREN L RPAREN'
-
+    fun = func_exist(p[1])
+    if fun == None:
+        print('Syntax error ID(). Function {} does not exist'.format(p[1]))
+    else:
+        if buffer_params_llamada != get_tipos_params(fun['params']):
+            print('Syntax error ID(). Params are not right')
+    delete_buffer_llamada()     
+    p[0] = p[1]+'('+ ')'  
+        
 
 ###############
 #### Empty ####
