@@ -153,6 +153,9 @@ def get_global_or_local_var(x):
     for m in buffer_vars_locales:
         if x == m[0]:
             res = m
+    for k in buffer_params:
+        if x == k[0]:
+            res = k
     return res
 
 def var_is_func(cadena):
@@ -184,7 +187,9 @@ def var_already_exist(x):
     for n in vars_globales:
         if n[0] == x:
             return True
-    
+    for n in buffer_params:
+        if n[0] == x:
+            return True
     return False
 
 def var_is_global_int(x):
@@ -197,8 +202,7 @@ def var_is_global_int(x):
 def var_is_global_bool(x):
     for n in vars_globales:
         if n[0] == x and n[1] == 'bool':
-            return True
-        
+            return True    
     return False
 
 def var_is_global_string(x):
@@ -212,21 +216,27 @@ def var_is_local_int(x):
     for n in buffer_vars_locales:
         if n[0] == x and n[1] == 'int':
             return True
-
+    for n in buffer_params:
+        if n[0] == x and n[1] == 'int':
+            return True
     return False
 
 def var_is_local_bool(x):
     for n in buffer_vars_locales:
         if n[0] == x and n[1] == 'bool':
             return True
-        
+    for n in buffer_params:
+        if n[0] == x and n[1] == 'bool':
+            return True    
     return False
 
 def var_is_local_str(x):
     for n in buffer_vars_locales:
         if n[0] == x and n[1] == 'string':
             return True
-        
+    for n in buffer_params:
+        if n[0] == x and n[1] == 'string':
+            return True    
     return False
 
 def var_is_cadena(var):
