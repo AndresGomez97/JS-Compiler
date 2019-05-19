@@ -413,6 +413,8 @@ def p_d_do_while(p):
                 print('Syntax error DO/WHILE. Function doesnt exist')
         elif not (var_is_global_bool(p[7]) or var_is_local_bool(p[7])):
             print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[7]))
+    elif p[3] is None:
+        print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[7]))
 
 def p_d_if(p):
     'D : IF LPAREN E RPAREN LLLAVE W RLLAVE'
@@ -431,6 +433,8 @@ def p_d_if(p):
                 print('Syntax error IF. Function doesnt exist')
         elif not(var_is_global_bool(p[3]) or var_is_local_bool(p[3])):
             print('Syntax error IF. {} is not a bool expression'.format(p[3]))
+    elif p[3] is None:
+        print('Syntax error IF. {} is not a bool expression'.format(p[3]))
 
 def p_d_s(p):
     'D : S'
@@ -464,6 +468,7 @@ def p_return(p):
         buffer_returns.append('int')
     elif type(p[2]) is bool:
         buffer_returns.append('bool')    
+        
 
 def p_return_empty(p):
     'X : empty'
@@ -498,7 +503,8 @@ def p_if(p):
                 print('Syntax error IF. Function doesnt exist')
         elif not var_is_global_bool(p[3]):
             print('Syntax error IF. {} is not a bool expression'.format(p[3]))
-
+    elif p[3] is None:
+        print('Syntax error IF. {} is not a bool expression'.format(p[3]))
 #####################
 # Llamada a funcion #
 #####################
@@ -536,7 +542,8 @@ def p_l_eq(p):
                 print('Syntax error CALLING FUNCTION')
         else:
             print('Syntax error CALLING FUNCTION')  
-
+    else:
+        print('Syntax error CALLING FUNCTION')
 def p_l_empty(p):
     'L : empty'
 
@@ -589,6 +596,8 @@ def p_do_while(p):
                 print('Syntax error DO/WHILE. Function doesnt exist')
         elif not var_is_global_bool(p[7]):
             print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[7]))
+    elif p[7] is None:
+        print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[7]))
 
 def p_c_b_c(p):
     'C : B C'
@@ -708,7 +717,8 @@ def p_print(p):
         elif not var_is_cadena(p[3]):    
             if not var_already_exist(p[3]):
                 print('Syntax error PRINT. Variable {} is not define'.format(p[3]))  
-
+    elif p[3] is None:
+        print('Syntax error PRINT.')
 
 #########
 # Prompt #
@@ -831,8 +841,6 @@ def p_expression_plus(p):
                 print('Variable {} is not an integer'.format(p[1]))
         else:
             print('Variable {} not define'.format(p[1]))
-
-########### RETOCAR ############
     #Si los dos son ids
     elif type(p[1]) is str and type(p[3]) is str:
         if var_already_exist(p[1]):
