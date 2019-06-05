@@ -9,1663 +9,1760 @@ Unused terminals:
 Grammar
 
 Rule 0     S' -> P
-Rule 1     P -> B
-Rule 2     P -> F
-Rule 3     F -> FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVE
-Rule 4     H -> T
-Rule 5     H -> empty
-Rule 6     A -> T ID K
-Rule 7     A -> empty
-Rule 8     K -> COMA T ID K
-Rule 9     K -> empty
-Rule 10    W -> D W
-Rule 11    W -> empty
-Rule 12    D -> VAR T ID PYC
-Rule 13    D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC
-Rule 14    D -> IF LPAREN E RPAREN LLLAVE W RLLAVE
-Rule 15    D -> S
-Rule 16    W -> RETURN X PYC
-Rule 17    X -> empty
-Rule 18    X -> E
-Rule 19    B -> IF LPAREN E RPAREN LLLAVE C RLLAVE
-Rule 20    S -> ID LPAREN L RPAREN PYC
-Rule 21    L -> E Q
-Rule 22    L -> empty
-Rule 23    Q -> COMA E Q
-Rule 24    Q -> empty
-Rule 25    B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC
-Rule 26    C -> B C
-Rule 27    C -> empty
-Rule 28    B -> VAR T ID PYC
-Rule 29    B -> S
-Rule 30    S -> ID ASIG E PYC
-Rule 31    T -> STRING
-Rule 32    T -> BOOLEAN
-Rule 33    T -> INT
-Rule 34    S -> PRINT LPAREN E RPAREN PYC
-Rule 35    S -> PROMPT LPAREN ID RPAREN PYC
-Rule 36    S -> MMENOS ID PYC
-Rule 37    E -> NEG R
-Rule 38    E -> R
-Rule 39    R -> U MENORQUE U
-Rule 40    R -> U
-Rule 41    U -> V SUM U
-Rule 42    U -> V
-Rule 43    V -> ENTERO
-Rule 44    V -> ID
-Rule 45    V -> CADENA
-Rule 46    V -> LPAREN E RPAREN
-Rule 47    V -> ID LPAREN L RPAREN
-Rule 48    empty -> <empty>
+Rule 1     P -> B P
+Rule 2     P -> F P
+Rule 3     P -> empty
+Rule 4     F -> FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVE
+Rule 5     H -> T
+Rule 6     H -> empty
+Rule 7     A -> T ID K
+Rule 8     A -> empty
+Rule 9     K -> COMA T ID K
+Rule 10    K -> empty
+Rule 11    W -> D W
+Rule 12    W -> empty
+Rule 13    D -> VAR T ID PYC
+Rule 14    D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC
+Rule 15    D -> IF LPAREN E RPAREN LLLAVE W RLLAVE
+Rule 16    D -> S
+Rule 17    W -> RETURN X PYC
+Rule 18    X -> empty
+Rule 19    X -> E
+Rule 20    B -> IF LPAREN E RPAREN LLLAVE C RLLAVE
+Rule 21    S -> ID LPAREN L RPAREN PYC
+Rule 22    L -> E Q
+Rule 23    L -> empty
+Rule 24    Q -> COMA E Q
+Rule 25    Q -> empty
+Rule 26    B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC
+Rule 27    C -> B C
+Rule 28    C -> empty
+Rule 29    B -> VAR T ID PYC
+Rule 30    B -> S
+Rule 31    S -> ID ASIG E PYC
+Rule 32    T -> STRING
+Rule 33    T -> BOOLEAN
+Rule 34    T -> INT
+Rule 35    S -> PRINT LPAREN E RPAREN PYC
+Rule 36    S -> PROMPT LPAREN ID RPAREN PYC
+Rule 37    S -> MMENOS ID PYC
+Rule 38    E -> NEG R
+Rule 39    E -> R
+Rule 40    R -> U MENORQUE U
+Rule 41    R -> U
+Rule 42    U -> V SUM U
+Rule 43    U -> V
+Rule 44    V -> ENTERO
+Rule 45    V -> ID
+Rule 46    V -> CADENA
+Rule 47    V -> LPAREN E RPAREN
+Rule 48    V -> ID LPAREN L RPAREN
+Rule 49    empty -> <empty>
 
 Terminals, with rules where they appear
 
-ASIG                 : 30
-BOOLEAN              : 32
-CADENA               : 45
-COMA                 : 8 23
-DO                   : 13 25
-ENTERO               : 43
-FUNCTION             : 3
-ID                   : 3 6 8 12 20 28 30 35 36 44 47
-IF                   : 14 19
-INT                  : 33
+ASIG                 : 31
+BOOLEAN              : 33
+CADENA               : 46
+COMA                 : 9 24
+DO                   : 14 26
+ENTERO               : 44
+FUNCTION             : 4
+ID                   : 4 7 9 13 21 29 31 36 37 45 48
+IF                   : 15 20
+INT                  : 34
 LCORCH               : 
-LLLAVE               : 3 13 14 19 25
-LPAREN               : 3 13 14 19 20 25 34 35 46 47
-MENORQUE             : 39
-MMENOS               : 36
-NEG                  : 37
-PRINT                : 34
-PROMPT               : 35
+LLLAVE               : 4 14 15 20 26
+LPAREN               : 4 14 15 20 21 26 35 36 47 48
+MENORQUE             : 40
+MMENOS               : 37
+NEG                  : 38
+PRINT                : 35
+PROMPT               : 36
 PUNTO                : 
-PYC                  : 12 13 16 20 25 28 30 34 35 36
+PYC                  : 13 14 17 21 26 29 31 35 36 37
 RCORCH               : 
-RETURN               : 16
-RLLAVE               : 3 13 14 19 25
-RPAREN               : 3 13 14 19 20 25 34 35 46 47
-STRING               : 31
-SUM                  : 41
-VAR                  : 12 28
-WHILE                : 13 25
+RETURN               : 17
+RLLAVE               : 4 14 15 20 26
+RPAREN               : 4 14 15 20 21 26 35 36 47 48
+STRING               : 32
+SUM                  : 42
+VAR                  : 13 29
+WHILE                : 14 26
 error                : 
 
 Nonterminals, with rules where they appear
 
-A                    : 3
-B                    : 1 26
-C                    : 19 25 26
-D                    : 10
-E                    : 13 14 18 19 21 23 25 30 34 46
+A                    : 4
+B                    : 1 27
+C                    : 20 26 27
+D                    : 11
+E                    : 14 15 19 20 22 24 26 31 35 47
 F                    : 2
-H                    : 3
-K                    : 6 8
-L                    : 20 47
-P                    : 0
-Q                    : 21 23
-R                    : 37 38
-S                    : 15 29
-T                    : 4 6 8 12 28
-U                    : 39 39 40 41
-V                    : 41 42
-W                    : 3 10 13 14
-X                    : 16
-empty                : 5 7 9 11 17 22 24 27
+H                    : 4
+K                    : 7 9
+L                    : 21 48
+P                    : 1 2 0
+Q                    : 22 24
+R                    : 38 39
+S                    : 16 30
+T                    : 5 7 9 13 29
+U                    : 40 40 41 42
+V                    : 42 43
+W                    : 4 11 14 15
+X                    : 17
+empty                : 3 6 8 10 12 18 23 25 28
 
 Parsing method: LALR
 
 state 0
 
     (0) S' -> . P
-    (1) P -> . B
-    (2) P -> . F
-    (19) B -> . IF LPAREN E RPAREN LLLAVE C RLLAVE
-    (25) B -> . DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC
-    (28) B -> . VAR T ID PYC
-    (29) B -> . S
-    (3) F -> . FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVE
-    (20) S -> . ID LPAREN L RPAREN PYC
-    (30) S -> . ID ASIG E PYC
-    (34) S -> . PRINT LPAREN E RPAREN PYC
-    (35) S -> . PROMPT LPAREN ID RPAREN PYC
-    (36) S -> . MMENOS ID PYC
+    (1) P -> . B P
+    (2) P -> . F P
+    (3) P -> . empty
+    (20) B -> . IF LPAREN E RPAREN LLLAVE C RLLAVE
+    (26) B -> . DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC
+    (29) B -> . VAR T ID PYC
+    (30) B -> . S
+    (4) F -> . FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVE
+    (49) empty -> .
+    (21) S -> . ID LPAREN L RPAREN PYC
+    (31) S -> . ID ASIG E PYC
+    (35) S -> . PRINT LPAREN E RPAREN PYC
+    (36) S -> . PROMPT LPAREN ID RPAREN PYC
+    (37) S -> . MMENOS ID PYC
 
-    IF              shift and go to state 8
-    DO              shift and go to state 9
-    VAR             shift and go to state 6
-    FUNCTION        shift and go to state 4
-    ID              shift and go to state 12
-    PRINT           shift and go to state 11
-    PROMPT          shift and go to state 2
-    MMENOS          shift and go to state 5
+    IF              shift and go to state 7
+    DO              shift and go to state 12
+    VAR             shift and go to state 4
+    FUNCTION        shift and go to state 11
+    $end            reduce using rule 49 (empty -> .)
+    ID              shift and go to state 6
+    PRINT           shift and go to state 9
+    PROMPT          shift and go to state 8
+    MMENOS          shift and go to state 10
 
-    P                              shift and go to state 1
-    B                              shift and go to state 7
-    S                              shift and go to state 10
-    F                              shift and go to state 3
+    empty                          shift and go to state 1
+    B                              shift and go to state 2
+    P                              shift and go to state 3
+    F                              shift and go to state 13
+    S                              shift and go to state 5
 
 state 1
+
+    (3) P -> empty .
+
+    $end            reduce using rule 3 (P -> empty .)
+
+
+state 2
+
+    (1) P -> B . P
+    (1) P -> . B P
+    (2) P -> . F P
+    (3) P -> . empty
+    (20) B -> . IF LPAREN E RPAREN LLLAVE C RLLAVE
+    (26) B -> . DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC
+    (29) B -> . VAR T ID PYC
+    (30) B -> . S
+    (4) F -> . FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVE
+    (49) empty -> .
+    (21) S -> . ID LPAREN L RPAREN PYC
+    (31) S -> . ID ASIG E PYC
+    (35) S -> . PRINT LPAREN E RPAREN PYC
+    (36) S -> . PROMPT LPAREN ID RPAREN PYC
+    (37) S -> . MMENOS ID PYC
+
+    IF              shift and go to state 7
+    DO              shift and go to state 12
+    VAR             shift and go to state 4
+    FUNCTION        shift and go to state 11
+    $end            reduce using rule 49 (empty -> .)
+    ID              shift and go to state 6
+    PRINT           shift and go to state 9
+    PROMPT          shift and go to state 8
+    MMENOS          shift and go to state 10
+
+    empty                          shift and go to state 1
+    B                              shift and go to state 2
+    P                              shift and go to state 14
+    F                              shift and go to state 13
+    S                              shift and go to state 5
+
+state 3
 
     (0) S' -> P .
 
 
 
-state 2
-
-    (35) S -> PROMPT . LPAREN ID RPAREN PYC
-
-    LPAREN          shift and go to state 13
-
-
-state 3
-
-    (2) P -> F .
-
-    $end            reduce using rule 2 (P -> F .)
-
-
 state 4
 
-    (3) F -> FUNCTION . H ID LPAREN A RPAREN LLLAVE W RLLAVE
-    (4) H -> . T
-    (5) H -> . empty
-    (31) T -> . STRING
-    (32) T -> . BOOLEAN
-    (33) T -> . INT
-    (48) empty -> .
+    (29) B -> VAR . T ID PYC
+    (32) T -> . STRING
+    (33) T -> . BOOLEAN
+    (34) T -> . INT
 
-    STRING          shift and go to state 16
-    BOOLEAN         shift and go to state 14
+    STRING          shift and go to state 17
+    BOOLEAN         shift and go to state 16
     INT             shift and go to state 15
-    ID              reduce using rule 48 (empty -> .)
 
-    empty                          shift and go to state 18
-    H                              shift and go to state 19
-    T                              shift and go to state 17
+    T                              shift and go to state 18
 
 state 5
 
-    (36) S -> MMENOS . ID PYC
+    (30) B -> S .
 
-    ID              shift and go to state 20
+    IF              reduce using rule 30 (B -> S .)
+    DO              reduce using rule 30 (B -> S .)
+    VAR             reduce using rule 30 (B -> S .)
+    FUNCTION        reduce using rule 30 (B -> S .)
+    ID              reduce using rule 30 (B -> S .)
+    PRINT           reduce using rule 30 (B -> S .)
+    PROMPT          reduce using rule 30 (B -> S .)
+    MMENOS          reduce using rule 30 (B -> S .)
+    $end            reduce using rule 30 (B -> S .)
+    RLLAVE          reduce using rule 30 (B -> S .)
 
 
 state 6
 
-    (28) B -> VAR . T ID PYC
-    (31) T -> . STRING
-    (32) T -> . BOOLEAN
-    (33) T -> . INT
+    (21) S -> ID . LPAREN L RPAREN PYC
+    (31) S -> ID . ASIG E PYC
 
-    STRING          shift and go to state 16
-    BOOLEAN         shift and go to state 14
-    INT             shift and go to state 15
+    LPAREN          shift and go to state 20
+    ASIG            shift and go to state 19
 
-    T                              shift and go to state 21
 
 state 7
 
-    (1) P -> B .
+    (20) B -> IF . LPAREN E RPAREN LLLAVE C RLLAVE
 
-    $end            reduce using rule 1 (P -> B .)
+    LPAREN          shift and go to state 21
 
 
 state 8
 
-    (19) B -> IF . LPAREN E RPAREN LLLAVE C RLLAVE
+    (36) S -> PROMPT . LPAREN ID RPAREN PYC
 
     LPAREN          shift and go to state 22
 
 
 state 9
 
-    (25) B -> DO . LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC
+    (35) S -> PRINT . LPAREN E RPAREN PYC
 
-    LLLAVE          shift and go to state 23
+    LPAREN          shift and go to state 23
 
 
 state 10
 
-    (29) B -> S .
+    (37) S -> MMENOS . ID PYC
 
-    IF              reduce using rule 29 (B -> S .)
-    DO              reduce using rule 29 (B -> S .)
-    VAR             reduce using rule 29 (B -> S .)
-    ID              reduce using rule 29 (B -> S .)
-    PRINT           reduce using rule 29 (B -> S .)
-    PROMPT          reduce using rule 29 (B -> S .)
-    MMENOS          reduce using rule 29 (B -> S .)
-    RLLAVE          reduce using rule 29 (B -> S .)
-    $end            reduce using rule 29 (B -> S .)
+    ID              shift and go to state 24
 
 
 state 11
 
-    (34) S -> PRINT . LPAREN E RPAREN PYC
+    (4) F -> FUNCTION . H ID LPAREN A RPAREN LLLAVE W RLLAVE
+    (5) H -> . T
+    (6) H -> . empty
+    (32) T -> . STRING
+    (33) T -> . BOOLEAN
+    (34) T -> . INT
+    (49) empty -> .
 
-    LPAREN          shift and go to state 24
+    STRING          shift and go to state 17
+    BOOLEAN         shift and go to state 16
+    INT             shift and go to state 15
+    ID              reduce using rule 49 (empty -> .)
 
+    empty                          shift and go to state 25
+    T                              shift and go to state 26
+    H                              shift and go to state 27
 
 state 12
 
-    (20) S -> ID . LPAREN L RPAREN PYC
-    (30) S -> ID . ASIG E PYC
+    (26) B -> DO . LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC
 
-    LPAREN          shift and go to state 25
-    ASIG            shift and go to state 26
+    LLLAVE          shift and go to state 28
 
 
 state 13
 
-    (35) S -> PROMPT LPAREN . ID RPAREN PYC
+    (2) P -> F . P
+    (1) P -> . B P
+    (2) P -> . F P
+    (3) P -> . empty
+    (20) B -> . IF LPAREN E RPAREN LLLAVE C RLLAVE
+    (26) B -> . DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC
+    (29) B -> . VAR T ID PYC
+    (30) B -> . S
+    (4) F -> . FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVE
+    (49) empty -> .
+    (21) S -> . ID LPAREN L RPAREN PYC
+    (31) S -> . ID ASIG E PYC
+    (35) S -> . PRINT LPAREN E RPAREN PYC
+    (36) S -> . PROMPT LPAREN ID RPAREN PYC
+    (37) S -> . MMENOS ID PYC
 
-    ID              shift and go to state 27
+    IF              shift and go to state 7
+    DO              shift and go to state 12
+    VAR             shift and go to state 4
+    FUNCTION        shift and go to state 11
+    $end            reduce using rule 49 (empty -> .)
+    ID              shift and go to state 6
+    PRINT           shift and go to state 9
+    PROMPT          shift and go to state 8
+    MMENOS          shift and go to state 10
 
+    empty                          shift and go to state 1
+    B                              shift and go to state 2
+    P                              shift and go to state 29
+    F                              shift and go to state 13
+    S                              shift and go to state 5
 
 state 14
 
-    (32) T -> BOOLEAN .
+    (1) P -> B P .
 
-    ID              reduce using rule 32 (T -> BOOLEAN .)
+    $end            reduce using rule 1 (P -> B P .)
 
 
 state 15
 
-    (33) T -> INT .
+    (34) T -> INT .
 
-    ID              reduce using rule 33 (T -> INT .)
+    ID              reduce using rule 34 (T -> INT .)
 
 
 state 16
 
-    (31) T -> STRING .
+    (33) T -> BOOLEAN .
 
-    ID              reduce using rule 31 (T -> STRING .)
+    ID              reduce using rule 33 (T -> BOOLEAN .)
 
 
 state 17
 
-    (4) H -> T .
+    (32) T -> STRING .
 
-    ID              reduce using rule 4 (H -> T .)
+    ID              reduce using rule 32 (T -> STRING .)
 
 
 state 18
 
-    (5) H -> empty .
-
-    ID              reduce using rule 5 (H -> empty .)
-
-
-state 19
-
-    (3) F -> FUNCTION H . ID LPAREN A RPAREN LLLAVE W RLLAVE
-
-    ID              shift and go to state 28
-
-
-state 20
-
-    (36) S -> MMENOS ID . PYC
-
-    PYC             shift and go to state 29
-
-
-state 21
-
-    (28) B -> VAR T . ID PYC
+    (29) B -> VAR T . ID PYC
 
     ID              shift and go to state 30
 
 
+state 19
+
+    (31) S -> ID ASIG . E PYC
+    (38) E -> . NEG R
+    (39) E -> . R
+    (40) R -> . U MENORQUE U
+    (41) R -> . U
+    (42) U -> . V SUM U
+    (43) U -> . V
+    (44) V -> . ENTERO
+    (45) V -> . ID
+    (46) V -> . CADENA
+    (47) V -> . LPAREN E RPAREN
+    (48) V -> . ID LPAREN L RPAREN
+
+    NEG             shift and go to state 34
+    ENTERO          shift and go to state 37
+    ID              shift and go to state 32
+    CADENA          shift and go to state 31
+    LPAREN          shift and go to state 38
+
+    U                              shift and go to state 35
+    R                              shift and go to state 33
+    E                              shift and go to state 39
+    V                              shift and go to state 36
+
+state 20
+
+    (21) S -> ID LPAREN . L RPAREN PYC
+    (22) L -> . E Q
+    (23) L -> . empty
+    (38) E -> . NEG R
+    (39) E -> . R
+    (49) empty -> .
+    (40) R -> . U MENORQUE U
+    (41) R -> . U
+    (42) U -> . V SUM U
+    (43) U -> . V
+    (44) V -> . ENTERO
+    (45) V -> . ID
+    (46) V -> . CADENA
+    (47) V -> . LPAREN E RPAREN
+    (48) V -> . ID LPAREN L RPAREN
+
+    NEG             shift and go to state 34
+    RPAREN          reduce using rule 49 (empty -> .)
+    ENTERO          shift and go to state 37
+    ID              shift and go to state 32
+    CADENA          shift and go to state 31
+    LPAREN          shift and go to state 38
+
+    empty                          shift and go to state 40
+    U                              shift and go to state 35
+    L                              shift and go to state 41
+    V                              shift and go to state 36
+    R                              shift and go to state 33
+    E                              shift and go to state 42
+
+state 21
+
+    (20) B -> IF LPAREN . E RPAREN LLLAVE C RLLAVE
+    (38) E -> . NEG R
+    (39) E -> . R
+    (40) R -> . U MENORQUE U
+    (41) R -> . U
+    (42) U -> . V SUM U
+    (43) U -> . V
+    (44) V -> . ENTERO
+    (45) V -> . ID
+    (46) V -> . CADENA
+    (47) V -> . LPAREN E RPAREN
+    (48) V -> . ID LPAREN L RPAREN
+
+    NEG             shift and go to state 34
+    ENTERO          shift and go to state 37
+    ID              shift and go to state 32
+    CADENA          shift and go to state 31
+    LPAREN          shift and go to state 38
+
+    U                              shift and go to state 35
+    V                              shift and go to state 36
+    R                              shift and go to state 33
+    E                              shift and go to state 43
+
 state 22
 
-    (19) B -> IF LPAREN . E RPAREN LLLAVE C RLLAVE
-    (37) E -> . NEG R
-    (38) E -> . R
-    (39) R -> . U MENORQUE U
-    (40) R -> . U
-    (41) U -> . V SUM U
-    (42) U -> . V
-    (43) V -> . ENTERO
-    (44) V -> . ID
-    (45) V -> . CADENA
-    (46) V -> . LPAREN E RPAREN
-    (47) V -> . ID LPAREN L RPAREN
+    (36) S -> PROMPT LPAREN . ID RPAREN PYC
 
-    NEG             shift and go to state 39
-    ENTERO          shift and go to state 33
-    ID              shift and go to state 38
-    CADENA          shift and go to state 32
-    LPAREN          shift and go to state 31
+    ID              shift and go to state 44
 
-    E                              shift and go to state 37
-    U                              shift and go to state 34
-    R                              shift and go to state 35
-    V                              shift and go to state 36
 
 state 23
 
-    (25) B -> DO LLLAVE . C RLLAVE WHILE LPAREN E RPAREN PYC
-    (26) C -> . B C
-    (27) C -> . empty
-    (19) B -> . IF LPAREN E RPAREN LLLAVE C RLLAVE
-    (25) B -> . DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC
-    (28) B -> . VAR T ID PYC
-    (29) B -> . S
-    (48) empty -> .
-    (20) S -> . ID LPAREN L RPAREN PYC
-    (30) S -> . ID ASIG E PYC
-    (34) S -> . PRINT LPAREN E RPAREN PYC
-    (35) S -> . PROMPT LPAREN ID RPAREN PYC
-    (36) S -> . MMENOS ID PYC
+    (35) S -> PRINT LPAREN . E RPAREN PYC
+    (38) E -> . NEG R
+    (39) E -> . R
+    (40) R -> . U MENORQUE U
+    (41) R -> . U
+    (42) U -> . V SUM U
+    (43) U -> . V
+    (44) V -> . ENTERO
+    (45) V -> . ID
+    (46) V -> . CADENA
+    (47) V -> . LPAREN E RPAREN
+    (48) V -> . ID LPAREN L RPAREN
 
-    IF              shift and go to state 8
-    DO              shift and go to state 9
-    VAR             shift and go to state 6
-    RLLAVE          reduce using rule 48 (empty -> .)
-    ID              shift and go to state 12
-    PRINT           shift and go to state 11
-    PROMPT          shift and go to state 2
-    MMENOS          shift and go to state 5
+    NEG             shift and go to state 34
+    ENTERO          shift and go to state 37
+    ID              shift and go to state 32
+    CADENA          shift and go to state 31
+    LPAREN          shift and go to state 38
 
-    C                              shift and go to state 41
-    empty                          shift and go to state 42
-    B                              shift and go to state 40
-    S                              shift and go to state 10
+    U                              shift and go to state 35
+    R                              shift and go to state 33
+    E                              shift and go to state 45
+    V                              shift and go to state 36
 
 state 24
 
-    (34) S -> PRINT LPAREN . E RPAREN PYC
-    (37) E -> . NEG R
-    (38) E -> . R
-    (39) R -> . U MENORQUE U
-    (40) R -> . U
-    (41) U -> . V SUM U
-    (42) U -> . V
-    (43) V -> . ENTERO
-    (44) V -> . ID
-    (45) V -> . CADENA
-    (46) V -> . LPAREN E RPAREN
-    (47) V -> . ID LPAREN L RPAREN
+    (37) S -> MMENOS ID . PYC
 
-    NEG             shift and go to state 39
-    ENTERO          shift and go to state 33
-    ID              shift and go to state 38
-    CADENA          shift and go to state 32
-    LPAREN          shift and go to state 31
+    PYC             shift and go to state 46
 
-    E                              shift and go to state 43
-    U                              shift and go to state 34
-    R                              shift and go to state 35
-    V                              shift and go to state 36
 
 state 25
 
-    (20) S -> ID LPAREN . L RPAREN PYC
-    (21) L -> . E Q
-    (22) L -> . empty
-    (37) E -> . NEG R
-    (38) E -> . R
-    (48) empty -> .
-    (39) R -> . U MENORQUE U
-    (40) R -> . U
-    (41) U -> . V SUM U
-    (42) U -> . V
-    (43) V -> . ENTERO
-    (44) V -> . ID
-    (45) V -> . CADENA
-    (46) V -> . LPAREN E RPAREN
-    (47) V -> . ID LPAREN L RPAREN
+    (6) H -> empty .
 
-    NEG             shift and go to state 39
-    RPAREN          reduce using rule 48 (empty -> .)
-    ENTERO          shift and go to state 33
-    ID              shift and go to state 38
-    CADENA          shift and go to state 32
-    LPAREN          shift and go to state 31
+    ID              reduce using rule 6 (H -> empty .)
 
-    E                              shift and go to state 44
-    U                              shift and go to state 34
-    empty                          shift and go to state 45
-    R                              shift and go to state 35
-    V                              shift and go to state 36
-    L                              shift and go to state 46
 
 state 26
 
-    (30) S -> ID ASIG . E PYC
-    (37) E -> . NEG R
-    (38) E -> . R
-    (39) R -> . U MENORQUE U
-    (40) R -> . U
-    (41) U -> . V SUM U
-    (42) U -> . V
-    (43) V -> . ENTERO
-    (44) V -> . ID
-    (45) V -> . CADENA
-    (46) V -> . LPAREN E RPAREN
-    (47) V -> . ID LPAREN L RPAREN
+    (5) H -> T .
 
-    NEG             shift and go to state 39
-    ENTERO          shift and go to state 33
-    ID              shift and go to state 38
-    CADENA          shift and go to state 32
-    LPAREN          shift and go to state 31
+    ID              reduce using rule 5 (H -> T .)
 
-    E                              shift and go to state 47
-    U                              shift and go to state 34
-    R                              shift and go to state 35
-    V                              shift and go to state 36
 
 state 27
 
-    (35) S -> PROMPT LPAREN ID . RPAREN PYC
+    (4) F -> FUNCTION H . ID LPAREN A RPAREN LLLAVE W RLLAVE
 
-    RPAREN          shift and go to state 48
+    ID              shift and go to state 47
 
 
 state 28
 
-    (3) F -> FUNCTION H ID . LPAREN A RPAREN LLLAVE W RLLAVE
+    (26) B -> DO LLLAVE . C RLLAVE WHILE LPAREN E RPAREN PYC
+    (27) C -> . B C
+    (28) C -> . empty
+    (20) B -> . IF LPAREN E RPAREN LLLAVE C RLLAVE
+    (26) B -> . DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC
+    (29) B -> . VAR T ID PYC
+    (30) B -> . S
+    (49) empty -> .
+    (21) S -> . ID LPAREN L RPAREN PYC
+    (31) S -> . ID ASIG E PYC
+    (35) S -> . PRINT LPAREN E RPAREN PYC
+    (36) S -> . PROMPT LPAREN ID RPAREN PYC
+    (37) S -> . MMENOS ID PYC
 
-    LPAREN          shift and go to state 49
+    IF              shift and go to state 7
+    DO              shift and go to state 12
+    VAR             shift and go to state 4
+    RLLAVE          reduce using rule 49 (empty -> .)
+    ID              shift and go to state 6
+    PRINT           shift and go to state 9
+    PROMPT          shift and go to state 8
+    MMENOS          shift and go to state 10
 
+    C                              shift and go to state 50
+    empty                          shift and go to state 48
+    B                              shift and go to state 49
+    S                              shift and go to state 5
 
 state 29
 
-    (36) S -> MMENOS ID PYC .
+    (2) P -> F P .
 
-    IF              reduce using rule 36 (S -> MMENOS ID PYC .)
-    DO              reduce using rule 36 (S -> MMENOS ID PYC .)
-    VAR             reduce using rule 36 (S -> MMENOS ID PYC .)
-    ID              reduce using rule 36 (S -> MMENOS ID PYC .)
-    PRINT           reduce using rule 36 (S -> MMENOS ID PYC .)
-    PROMPT          reduce using rule 36 (S -> MMENOS ID PYC .)
-    MMENOS          reduce using rule 36 (S -> MMENOS ID PYC .)
-    RLLAVE          reduce using rule 36 (S -> MMENOS ID PYC .)
-    $end            reduce using rule 36 (S -> MMENOS ID PYC .)
-    RETURN          reduce using rule 36 (S -> MMENOS ID PYC .)
+    $end            reduce using rule 2 (P -> F P .)
 
 
 state 30
 
-    (28) B -> VAR T ID . PYC
+    (29) B -> VAR T ID . PYC
 
-    PYC             shift and go to state 50
+    PYC             shift and go to state 51
 
 
 state 31
 
-    (46) V -> LPAREN . E RPAREN
-    (37) E -> . NEG R
-    (38) E -> . R
-    (39) R -> . U MENORQUE U
-    (40) R -> . U
-    (41) U -> . V SUM U
-    (42) U -> . V
-    (43) V -> . ENTERO
-    (44) V -> . ID
-    (45) V -> . CADENA
-    (46) V -> . LPAREN E RPAREN
-    (47) V -> . ID LPAREN L RPAREN
+    (46) V -> CADENA .
 
-    NEG             shift and go to state 39
-    ENTERO          shift and go to state 33
-    ID              shift and go to state 38
-    CADENA          shift and go to state 32
-    LPAREN          shift and go to state 31
+    SUM             reduce using rule 46 (V -> CADENA .)
+    MENORQUE        reduce using rule 46 (V -> CADENA .)
+    RPAREN          reduce using rule 46 (V -> CADENA .)
+    PYC             reduce using rule 46 (V -> CADENA .)
+    COMA            reduce using rule 46 (V -> CADENA .)
 
-    E                              shift and go to state 51
-    U                              shift and go to state 34
-    R                              shift and go to state 35
-    V                              shift and go to state 36
 
 state 32
 
-    (45) V -> CADENA .
+    (45) V -> ID .
+    (48) V -> ID . LPAREN L RPAREN
 
-    SUM             reduce using rule 45 (V -> CADENA .)
-    MENORQUE        reduce using rule 45 (V -> CADENA .)
-    PYC             reduce using rule 45 (V -> CADENA .)
-    COMA            reduce using rule 45 (V -> CADENA .)
-    RPAREN          reduce using rule 45 (V -> CADENA .)
+    SUM             reduce using rule 45 (V -> ID .)
+    MENORQUE        reduce using rule 45 (V -> ID .)
+    RPAREN          reduce using rule 45 (V -> ID .)
+    PYC             reduce using rule 45 (V -> ID .)
+    COMA            reduce using rule 45 (V -> ID .)
+    LPAREN          shift and go to state 52
 
 
 state 33
 
-    (43) V -> ENTERO .
+    (39) E -> R .
 
-    SUM             reduce using rule 43 (V -> ENTERO .)
-    MENORQUE        reduce using rule 43 (V -> ENTERO .)
-    PYC             reduce using rule 43 (V -> ENTERO .)
-    COMA            reduce using rule 43 (V -> ENTERO .)
-    RPAREN          reduce using rule 43 (V -> ENTERO .)
+    RPAREN          reduce using rule 39 (E -> R .)
+    COMA            reduce using rule 39 (E -> R .)
+    PYC             reduce using rule 39 (E -> R .)
 
 
 state 34
 
-    (39) R -> U . MENORQUE U
-    (40) R -> U .
+    (38) E -> NEG . R
+    (40) R -> . U MENORQUE U
+    (41) R -> . U
+    (42) U -> . V SUM U
+    (43) U -> . V
+    (44) V -> . ENTERO
+    (45) V -> . ID
+    (46) V -> . CADENA
+    (47) V -> . LPAREN E RPAREN
+    (48) V -> . ID LPAREN L RPAREN
 
-    MENORQUE        shift and go to state 52
-    RPAREN          reduce using rule 40 (R -> U .)
-    COMA            reduce using rule 40 (R -> U .)
-    PYC             reduce using rule 40 (R -> U .)
+    ENTERO          shift and go to state 37
+    ID              shift and go to state 32
+    CADENA          shift and go to state 31
+    LPAREN          shift and go to state 38
 
+    U                              shift and go to state 35
+    R                              shift and go to state 53
+    V                              shift and go to state 36
 
 state 35
 
-    (38) E -> R .
+    (40) R -> U . MENORQUE U
+    (41) R -> U .
 
-    PYC             reduce using rule 38 (E -> R .)
-    COMA            reduce using rule 38 (E -> R .)
-    RPAREN          reduce using rule 38 (E -> R .)
+    MENORQUE        shift and go to state 54
+    RPAREN          reduce using rule 41 (R -> U .)
+    COMA            reduce using rule 41 (R -> U .)
+    PYC             reduce using rule 41 (R -> U .)
 
 
 state 36
 
-    (41) U -> V . SUM U
-    (42) U -> V .
+    (42) U -> V . SUM U
+    (43) U -> V .
 
-    SUM             shift and go to state 53
-    RPAREN          reduce using rule 42 (U -> V .)
-    COMA            reduce using rule 42 (U -> V .)
-    PYC             reduce using rule 42 (U -> V .)
-    MENORQUE        reduce using rule 42 (U -> V .)
+    SUM             shift and go to state 55
+    MENORQUE        reduce using rule 43 (U -> V .)
+    RPAREN          reduce using rule 43 (U -> V .)
+    COMA            reduce using rule 43 (U -> V .)
+    PYC             reduce using rule 43 (U -> V .)
 
 
 state 37
 
-    (19) B -> IF LPAREN E . RPAREN LLLAVE C RLLAVE
+    (44) V -> ENTERO .
 
-    RPAREN          shift and go to state 54
+    SUM             reduce using rule 44 (V -> ENTERO .)
+    MENORQUE        reduce using rule 44 (V -> ENTERO .)
+    RPAREN          reduce using rule 44 (V -> ENTERO .)
+    PYC             reduce using rule 44 (V -> ENTERO .)
+    COMA            reduce using rule 44 (V -> ENTERO .)
 
 
 state 38
 
-    (44) V -> ID .
-    (47) V -> ID . LPAREN L RPAREN
+    (47) V -> LPAREN . E RPAREN
+    (38) E -> . NEG R
+    (39) E -> . R
+    (40) R -> . U MENORQUE U
+    (41) R -> . U
+    (42) U -> . V SUM U
+    (43) U -> . V
+    (44) V -> . ENTERO
+    (45) V -> . ID
+    (46) V -> . CADENA
+    (47) V -> . LPAREN E RPAREN
+    (48) V -> . ID LPAREN L RPAREN
 
-    SUM             reduce using rule 44 (V -> ID .)
-    MENORQUE        reduce using rule 44 (V -> ID .)
-    PYC             reduce using rule 44 (V -> ID .)
-    COMA            reduce using rule 44 (V -> ID .)
-    RPAREN          reduce using rule 44 (V -> ID .)
-    LPAREN          shift and go to state 55
+    NEG             shift and go to state 34
+    ENTERO          shift and go to state 37
+    ID              shift and go to state 32
+    CADENA          shift and go to state 31
+    LPAREN          shift and go to state 38
 
+    U                              shift and go to state 35
+    R                              shift and go to state 33
+    E                              shift and go to state 56
+    V                              shift and go to state 36
 
 state 39
 
-    (37) E -> NEG . R
-    (39) R -> . U MENORQUE U
-    (40) R -> . U
-    (41) U -> . V SUM U
-    (42) U -> . V
-    (43) V -> . ENTERO
-    (44) V -> . ID
-    (45) V -> . CADENA
-    (46) V -> . LPAREN E RPAREN
-    (47) V -> . ID LPAREN L RPAREN
+    (31) S -> ID ASIG E . PYC
 
-    ENTERO          shift and go to state 33
-    ID              shift and go to state 38
-    CADENA          shift and go to state 32
-    LPAREN          shift and go to state 31
+    PYC             shift and go to state 57
 
-    U                              shift and go to state 34
-    R                              shift and go to state 56
-    V                              shift and go to state 36
 
 state 40
 
-    (26) C -> B . C
-    (26) C -> . B C
-    (27) C -> . empty
-    (19) B -> . IF LPAREN E RPAREN LLLAVE C RLLAVE
-    (25) B -> . DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC
-    (28) B -> . VAR T ID PYC
-    (29) B -> . S
-    (48) empty -> .
-    (20) S -> . ID LPAREN L RPAREN PYC
-    (30) S -> . ID ASIG E PYC
-    (34) S -> . PRINT LPAREN E RPAREN PYC
-    (35) S -> . PROMPT LPAREN ID RPAREN PYC
-    (36) S -> . MMENOS ID PYC
+    (23) L -> empty .
 
-    IF              shift and go to state 8
-    DO              shift and go to state 9
-    VAR             shift and go to state 6
-    RLLAVE          reduce using rule 48 (empty -> .)
-    ID              shift and go to state 12
-    PRINT           shift and go to state 11
-    PROMPT          shift and go to state 2
-    MMENOS          shift and go to state 5
+    RPAREN          reduce using rule 23 (L -> empty .)
 
-    C                              shift and go to state 57
-    empty                          shift and go to state 42
-    B                              shift and go to state 40
-    S                              shift and go to state 10
 
 state 41
 
-    (25) B -> DO LLLAVE C . RLLAVE WHILE LPAREN E RPAREN PYC
+    (21) S -> ID LPAREN L . RPAREN PYC
 
-    RLLAVE          shift and go to state 58
+    RPAREN          shift and go to state 58
 
 
 state 42
 
-    (27) C -> empty .
+    (22) L -> E . Q
+    (24) Q -> . COMA E Q
+    (25) Q -> . empty
+    (49) empty -> .
 
-    RLLAVE          reduce using rule 27 (C -> empty .)
+    COMA            shift and go to state 59
+    RPAREN          reduce using rule 49 (empty -> .)
 
+    empty                          shift and go to state 60
+    Q                              shift and go to state 61
 
 state 43
 
-    (34) S -> PRINT LPAREN E . RPAREN PYC
+    (20) B -> IF LPAREN E . RPAREN LLLAVE C RLLAVE
 
-    RPAREN          shift and go to state 59
+    RPAREN          shift and go to state 62
 
 
 state 44
 
-    (21) L -> E . Q
-    (23) Q -> . COMA E Q
-    (24) Q -> . empty
-    (48) empty -> .
-
-    COMA            shift and go to state 60
-    RPAREN          reduce using rule 48 (empty -> .)
-
-    empty                          shift and go to state 61
-    Q                              shift and go to state 62
-
-state 45
-
-    (22) L -> empty .
-
-    RPAREN          reduce using rule 22 (L -> empty .)
-
-
-state 46
-
-    (20) S -> ID LPAREN L . RPAREN PYC
+    (36) S -> PROMPT LPAREN ID . RPAREN PYC
 
     RPAREN          shift and go to state 63
 
 
+state 45
+
+    (35) S -> PRINT LPAREN E . RPAREN PYC
+
+    RPAREN          shift and go to state 64
+
+
+state 46
+
+    (37) S -> MMENOS ID PYC .
+
+    IF              reduce using rule 37 (S -> MMENOS ID PYC .)
+    DO              reduce using rule 37 (S -> MMENOS ID PYC .)
+    VAR             reduce using rule 37 (S -> MMENOS ID PYC .)
+    ID              reduce using rule 37 (S -> MMENOS ID PYC .)
+    PRINT           reduce using rule 37 (S -> MMENOS ID PYC .)
+    PROMPT          reduce using rule 37 (S -> MMENOS ID PYC .)
+    MMENOS          reduce using rule 37 (S -> MMENOS ID PYC .)
+    RLLAVE          reduce using rule 37 (S -> MMENOS ID PYC .)
+    RETURN          reduce using rule 37 (S -> MMENOS ID PYC .)
+    FUNCTION        reduce using rule 37 (S -> MMENOS ID PYC .)
+    $end            reduce using rule 37 (S -> MMENOS ID PYC .)
+
+
 state 47
 
-    (30) S -> ID ASIG E . PYC
+    (4) F -> FUNCTION H ID . LPAREN A RPAREN LLLAVE W RLLAVE
 
-    PYC             shift and go to state 64
+    LPAREN          shift and go to state 65
 
 
 state 48
 
-    (35) S -> PROMPT LPAREN ID RPAREN . PYC
+    (28) C -> empty .
 
-    PYC             shift and go to state 65
+    RLLAVE          reduce using rule 28 (C -> empty .)
 
 
 state 49
 
-    (3) F -> FUNCTION H ID LPAREN . A RPAREN LLLAVE W RLLAVE
-    (6) A -> . T ID K
-    (7) A -> . empty
-    (31) T -> . STRING
-    (32) T -> . BOOLEAN
-    (33) T -> . INT
-    (48) empty -> .
+    (27) C -> B . C
+    (27) C -> . B C
+    (28) C -> . empty
+    (20) B -> . IF LPAREN E RPAREN LLLAVE C RLLAVE
+    (26) B -> . DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC
+    (29) B -> . VAR T ID PYC
+    (30) B -> . S
+    (49) empty -> .
+    (21) S -> . ID LPAREN L RPAREN PYC
+    (31) S -> . ID ASIG E PYC
+    (35) S -> . PRINT LPAREN E RPAREN PYC
+    (36) S -> . PROMPT LPAREN ID RPAREN PYC
+    (37) S -> . MMENOS ID PYC
 
-    STRING          shift and go to state 16
-    BOOLEAN         shift and go to state 14
-    INT             shift and go to state 15
-    RPAREN          reduce using rule 48 (empty -> .)
+    IF              shift and go to state 7
+    DO              shift and go to state 12
+    VAR             shift and go to state 4
+    RLLAVE          reduce using rule 49 (empty -> .)
+    ID              shift and go to state 6
+    PRINT           shift and go to state 9
+    PROMPT          shift and go to state 8
+    MMENOS          shift and go to state 10
 
-    T                              shift and go to state 66
-    empty                          shift and go to state 67
-    A                              shift and go to state 68
+    C                              shift and go to state 66
+    empty                          shift and go to state 48
+    B                              shift and go to state 49
+    S                              shift and go to state 5
 
 state 50
 
-    (28) B -> VAR T ID PYC .
+    (26) B -> DO LLLAVE C . RLLAVE WHILE LPAREN E RPAREN PYC
 
-    IF              reduce using rule 28 (B -> VAR T ID PYC .)
-    DO              reduce using rule 28 (B -> VAR T ID PYC .)
-    VAR             reduce using rule 28 (B -> VAR T ID PYC .)
-    ID              reduce using rule 28 (B -> VAR T ID PYC .)
-    PRINT           reduce using rule 28 (B -> VAR T ID PYC .)
-    PROMPT          reduce using rule 28 (B -> VAR T ID PYC .)
-    MMENOS          reduce using rule 28 (B -> VAR T ID PYC .)
-    RLLAVE          reduce using rule 28 (B -> VAR T ID PYC .)
-    $end            reduce using rule 28 (B -> VAR T ID PYC .)
+    RLLAVE          shift and go to state 67
 
 
 state 51
 
-    (46) V -> LPAREN E . RPAREN
+    (29) B -> VAR T ID PYC .
 
-    RPAREN          shift and go to state 69
+    IF              reduce using rule 29 (B -> VAR T ID PYC .)
+    DO              reduce using rule 29 (B -> VAR T ID PYC .)
+    VAR             reduce using rule 29 (B -> VAR T ID PYC .)
+    FUNCTION        reduce using rule 29 (B -> VAR T ID PYC .)
+    ID              reduce using rule 29 (B -> VAR T ID PYC .)
+    PRINT           reduce using rule 29 (B -> VAR T ID PYC .)
+    PROMPT          reduce using rule 29 (B -> VAR T ID PYC .)
+    MMENOS          reduce using rule 29 (B -> VAR T ID PYC .)
+    $end            reduce using rule 29 (B -> VAR T ID PYC .)
+    RLLAVE          reduce using rule 29 (B -> VAR T ID PYC .)
 
 
 state 52
 
-    (39) R -> U MENORQUE . U
-    (41) U -> . V SUM U
-    (42) U -> . V
-    (43) V -> . ENTERO
-    (44) V -> . ID
-    (45) V -> . CADENA
-    (46) V -> . LPAREN E RPAREN
-    (47) V -> . ID LPAREN L RPAREN
+    (48) V -> ID LPAREN . L RPAREN
+    (22) L -> . E Q
+    (23) L -> . empty
+    (38) E -> . NEG R
+    (39) E -> . R
+    (49) empty -> .
+    (40) R -> . U MENORQUE U
+    (41) R -> . U
+    (42) U -> . V SUM U
+    (43) U -> . V
+    (44) V -> . ENTERO
+    (45) V -> . ID
+    (46) V -> . CADENA
+    (47) V -> . LPAREN E RPAREN
+    (48) V -> . ID LPAREN L RPAREN
 
-    ENTERO          shift and go to state 33
-    ID              shift and go to state 38
-    CADENA          shift and go to state 32
-    LPAREN          shift and go to state 31
+    NEG             shift and go to state 34
+    RPAREN          reduce using rule 49 (empty -> .)
+    ENTERO          shift and go to state 37
+    ID              shift and go to state 32
+    CADENA          shift and go to state 31
+    LPAREN          shift and go to state 38
+
+    empty                          shift and go to state 40
+    U                              shift and go to state 35
+    L                              shift and go to state 68
+    V                              shift and go to state 36
+    R                              shift and go to state 33
+    E                              shift and go to state 42
+
+state 53
+
+    (38) E -> NEG R .
+
+    RPAREN          reduce using rule 38 (E -> NEG R .)
+    COMA            reduce using rule 38 (E -> NEG R .)
+    PYC             reduce using rule 38 (E -> NEG R .)
+
+
+state 54
+
+    (40) R -> U MENORQUE . U
+    (42) U -> . V SUM U
+    (43) U -> . V
+    (44) V -> . ENTERO
+    (45) V -> . ID
+    (46) V -> . CADENA
+    (47) V -> . LPAREN E RPAREN
+    (48) V -> . ID LPAREN L RPAREN
+
+    ENTERO          shift and go to state 37
+    ID              shift and go to state 32
+    CADENA          shift and go to state 31
+    LPAREN          shift and go to state 38
+
+    U                              shift and go to state 69
+    V                              shift and go to state 36
+
+state 55
+
+    (42) U -> V SUM . U
+    (42) U -> . V SUM U
+    (43) U -> . V
+    (44) V -> . ENTERO
+    (45) V -> . ID
+    (46) V -> . CADENA
+    (47) V -> . LPAREN E RPAREN
+    (48) V -> . ID LPAREN L RPAREN
+
+    ENTERO          shift and go to state 37
+    ID              shift and go to state 32
+    CADENA          shift and go to state 31
+    LPAREN          shift and go to state 38
 
     U                              shift and go to state 70
     V                              shift and go to state 36
 
-state 53
-
-    (41) U -> V SUM . U
-    (41) U -> . V SUM U
-    (42) U -> . V
-    (43) V -> . ENTERO
-    (44) V -> . ID
-    (45) V -> . CADENA
-    (46) V -> . LPAREN E RPAREN
-    (47) V -> . ID LPAREN L RPAREN
-
-    ENTERO          shift and go to state 33
-    ID              shift and go to state 38
-    CADENA          shift and go to state 32
-    LPAREN          shift and go to state 31
-
-    U                              shift and go to state 71
-    V                              shift and go to state 36
-
-state 54
-
-    (19) B -> IF LPAREN E RPAREN . LLLAVE C RLLAVE
-
-    LLLAVE          shift and go to state 72
-
-
-state 55
-
-    (47) V -> ID LPAREN . L RPAREN
-    (21) L -> . E Q
-    (22) L -> . empty
-    (37) E -> . NEG R
-    (38) E -> . R
-    (48) empty -> .
-    (39) R -> . U MENORQUE U
-    (40) R -> . U
-    (41) U -> . V SUM U
-    (42) U -> . V
-    (43) V -> . ENTERO
-    (44) V -> . ID
-    (45) V -> . CADENA
-    (46) V -> . LPAREN E RPAREN
-    (47) V -> . ID LPAREN L RPAREN
-
-    NEG             shift and go to state 39
-    RPAREN          reduce using rule 48 (empty -> .)
-    ENTERO          shift and go to state 33
-    ID              shift and go to state 38
-    CADENA          shift and go to state 32
-    LPAREN          shift and go to state 31
-
-    E                              shift and go to state 44
-    U                              shift and go to state 34
-    empty                          shift and go to state 45
-    R                              shift and go to state 35
-    V                              shift and go to state 36
-    L                              shift and go to state 73
-
 state 56
 
-    (37) E -> NEG R .
+    (47) V -> LPAREN E . RPAREN
 
-    PYC             reduce using rule 37 (E -> NEG R .)
-    COMA            reduce using rule 37 (E -> NEG R .)
-    RPAREN          reduce using rule 37 (E -> NEG R .)
+    RPAREN          shift and go to state 71
 
 
 state 57
 
-    (26) C -> B C .
+    (31) S -> ID ASIG E PYC .
 
-    RLLAVE          reduce using rule 26 (C -> B C .)
+    IF              reduce using rule 31 (S -> ID ASIG E PYC .)
+    DO              reduce using rule 31 (S -> ID ASIG E PYC .)
+    VAR             reduce using rule 31 (S -> ID ASIG E PYC .)
+    ID              reduce using rule 31 (S -> ID ASIG E PYC .)
+    PRINT           reduce using rule 31 (S -> ID ASIG E PYC .)
+    PROMPT          reduce using rule 31 (S -> ID ASIG E PYC .)
+    MMENOS          reduce using rule 31 (S -> ID ASIG E PYC .)
+    RLLAVE          reduce using rule 31 (S -> ID ASIG E PYC .)
+    RETURN          reduce using rule 31 (S -> ID ASIG E PYC .)
+    FUNCTION        reduce using rule 31 (S -> ID ASIG E PYC .)
+    $end            reduce using rule 31 (S -> ID ASIG E PYC .)
 
 
 state 58
 
-    (25) B -> DO LLLAVE C RLLAVE . WHILE LPAREN E RPAREN PYC
+    (21) S -> ID LPAREN L RPAREN . PYC
 
-    WHILE           shift and go to state 74
+    PYC             shift and go to state 72
 
 
 state 59
 
-    (34) S -> PRINT LPAREN E RPAREN . PYC
+    (24) Q -> COMA . E Q
+    (38) E -> . NEG R
+    (39) E -> . R
+    (40) R -> . U MENORQUE U
+    (41) R -> . U
+    (42) U -> . V SUM U
+    (43) U -> . V
+    (44) V -> . ENTERO
+    (45) V -> . ID
+    (46) V -> . CADENA
+    (47) V -> . LPAREN E RPAREN
+    (48) V -> . ID LPAREN L RPAREN
 
-    PYC             shift and go to state 75
+    NEG             shift and go to state 34
+    ENTERO          shift and go to state 37
+    ID              shift and go to state 32
+    CADENA          shift and go to state 31
+    LPAREN          shift and go to state 38
 
+    U                              shift and go to state 35
+    V                              shift and go to state 36
+    R                              shift and go to state 33
+    E                              shift and go to state 73
 
 state 60
 
-    (23) Q -> COMA . E Q
-    (37) E -> . NEG R
-    (38) E -> . R
-    (39) R -> . U MENORQUE U
-    (40) R -> . U
-    (41) U -> . V SUM U
-    (42) U -> . V
-    (43) V -> . ENTERO
-    (44) V -> . ID
-    (45) V -> . CADENA
-    (46) V -> . LPAREN E RPAREN
-    (47) V -> . ID LPAREN L RPAREN
+    (25) Q -> empty .
 
-    NEG             shift and go to state 39
-    ENTERO          shift and go to state 33
-    ID              shift and go to state 38
-    CADENA          shift and go to state 32
-    LPAREN          shift and go to state 31
+    RPAREN          reduce using rule 25 (Q -> empty .)
 
-    E                              shift and go to state 76
-    U                              shift and go to state 34
-    R                              shift and go to state 35
-    V                              shift and go to state 36
 
 state 61
 
-    (24) Q -> empty .
+    (22) L -> E Q .
 
-    RPAREN          reduce using rule 24 (Q -> empty .)
+    RPAREN          reduce using rule 22 (L -> E Q .)
 
 
 state 62
 
-    (21) L -> E Q .
+    (20) B -> IF LPAREN E RPAREN . LLLAVE C RLLAVE
 
-    RPAREN          reduce using rule 21 (L -> E Q .)
+    LLLAVE          shift and go to state 74
 
 
 state 63
 
-    (20) S -> ID LPAREN L RPAREN . PYC
+    (36) S -> PROMPT LPAREN ID RPAREN . PYC
 
-    PYC             shift and go to state 77
+    PYC             shift and go to state 75
 
 
 state 64
 
-    (30) S -> ID ASIG E PYC .
+    (35) S -> PRINT LPAREN E RPAREN . PYC
 
-    IF              reduce using rule 30 (S -> ID ASIG E PYC .)
-    DO              reduce using rule 30 (S -> ID ASIG E PYC .)
-    VAR             reduce using rule 30 (S -> ID ASIG E PYC .)
-    ID              reduce using rule 30 (S -> ID ASIG E PYC .)
-    PRINT           reduce using rule 30 (S -> ID ASIG E PYC .)
-    PROMPT          reduce using rule 30 (S -> ID ASIG E PYC .)
-    MMENOS          reduce using rule 30 (S -> ID ASIG E PYC .)
-    RLLAVE          reduce using rule 30 (S -> ID ASIG E PYC .)
-    $end            reduce using rule 30 (S -> ID ASIG E PYC .)
-    RETURN          reduce using rule 30 (S -> ID ASIG E PYC .)
+    PYC             shift and go to state 76
 
 
 state 65
 
-    (35) S -> PROMPT LPAREN ID RPAREN PYC .
+    (4) F -> FUNCTION H ID LPAREN . A RPAREN LLLAVE W RLLAVE
+    (7) A -> . T ID K
+    (8) A -> . empty
+    (32) T -> . STRING
+    (33) T -> . BOOLEAN
+    (34) T -> . INT
+    (49) empty -> .
 
-    IF              reduce using rule 35 (S -> PROMPT LPAREN ID RPAREN PYC .)
-    DO              reduce using rule 35 (S -> PROMPT LPAREN ID RPAREN PYC .)
-    VAR             reduce using rule 35 (S -> PROMPT LPAREN ID RPAREN PYC .)
-    ID              reduce using rule 35 (S -> PROMPT LPAREN ID RPAREN PYC .)
-    PRINT           reduce using rule 35 (S -> PROMPT LPAREN ID RPAREN PYC .)
-    PROMPT          reduce using rule 35 (S -> PROMPT LPAREN ID RPAREN PYC .)
-    MMENOS          reduce using rule 35 (S -> PROMPT LPAREN ID RPAREN PYC .)
-    RLLAVE          reduce using rule 35 (S -> PROMPT LPAREN ID RPAREN PYC .)
-    $end            reduce using rule 35 (S -> PROMPT LPAREN ID RPAREN PYC .)
-    RETURN          reduce using rule 35 (S -> PROMPT LPAREN ID RPAREN PYC .)
+    STRING          shift and go to state 17
+    BOOLEAN         shift and go to state 16
+    INT             shift and go to state 15
+    RPAREN          reduce using rule 49 (empty -> .)
 
+    empty                          shift and go to state 77
+    T                              shift and go to state 78
+    A                              shift and go to state 79
 
 state 66
 
-    (6) A -> T . ID K
+    (27) C -> B C .
 
-    ID              shift and go to state 78
+    RLLAVE          reduce using rule 27 (C -> B C .)
 
 
 state 67
 
-    (7) A -> empty .
+    (26) B -> DO LLLAVE C RLLAVE . WHILE LPAREN E RPAREN PYC
 
-    RPAREN          reduce using rule 7 (A -> empty .)
+    WHILE           shift and go to state 80
 
 
 state 68
 
-    (3) F -> FUNCTION H ID LPAREN A . RPAREN LLLAVE W RLLAVE
-
-    RPAREN          shift and go to state 79
-
-
-state 69
-
-    (46) V -> LPAREN E RPAREN .
-
-    SUM             reduce using rule 46 (V -> LPAREN E RPAREN .)
-    MENORQUE        reduce using rule 46 (V -> LPAREN E RPAREN .)
-    PYC             reduce using rule 46 (V -> LPAREN E RPAREN .)
-    COMA            reduce using rule 46 (V -> LPAREN E RPAREN .)
-    RPAREN          reduce using rule 46 (V -> LPAREN E RPAREN .)
-
-
-state 70
-
-    (39) R -> U MENORQUE U .
-
-    RPAREN          reduce using rule 39 (R -> U MENORQUE U .)
-    COMA            reduce using rule 39 (R -> U MENORQUE U .)
-    PYC             reduce using rule 39 (R -> U MENORQUE U .)
-
-
-state 71
-
-    (41) U -> V SUM U .
-
-    RPAREN          reduce using rule 41 (U -> V SUM U .)
-    COMA            reduce using rule 41 (U -> V SUM U .)
-    PYC             reduce using rule 41 (U -> V SUM U .)
-    MENORQUE        reduce using rule 41 (U -> V SUM U .)
-
-
-state 72
-
-    (19) B -> IF LPAREN E RPAREN LLLAVE . C RLLAVE
-    (26) C -> . B C
-    (27) C -> . empty
-    (19) B -> . IF LPAREN E RPAREN LLLAVE C RLLAVE
-    (25) B -> . DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC
-    (28) B -> . VAR T ID PYC
-    (29) B -> . S
-    (48) empty -> .
-    (20) S -> . ID LPAREN L RPAREN PYC
-    (30) S -> . ID ASIG E PYC
-    (34) S -> . PRINT LPAREN E RPAREN PYC
-    (35) S -> . PROMPT LPAREN ID RPAREN PYC
-    (36) S -> . MMENOS ID PYC
-
-    IF              shift and go to state 8
-    DO              shift and go to state 9
-    VAR             shift and go to state 6
-    RLLAVE          reduce using rule 48 (empty -> .)
-    ID              shift and go to state 12
-    PRINT           shift and go to state 11
-    PROMPT          shift and go to state 2
-    MMENOS          shift and go to state 5
-
-    empty                          shift and go to state 42
-    B                              shift and go to state 40
-    C                              shift and go to state 80
-    S                              shift and go to state 10
-
-state 73
-
-    (47) V -> ID LPAREN L . RPAREN
+    (48) V -> ID LPAREN L . RPAREN
 
     RPAREN          shift and go to state 81
 
 
+state 69
+
+    (40) R -> U MENORQUE U .
+
+    RPAREN          reduce using rule 40 (R -> U MENORQUE U .)
+    COMA            reduce using rule 40 (R -> U MENORQUE U .)
+    PYC             reduce using rule 40 (R -> U MENORQUE U .)
+
+
+state 70
+
+    (42) U -> V SUM U .
+
+    MENORQUE        reduce using rule 42 (U -> V SUM U .)
+    RPAREN          reduce using rule 42 (U -> V SUM U .)
+    COMA            reduce using rule 42 (U -> V SUM U .)
+    PYC             reduce using rule 42 (U -> V SUM U .)
+
+
+state 71
+
+    (47) V -> LPAREN E RPAREN .
+
+    SUM             reduce using rule 47 (V -> LPAREN E RPAREN .)
+    MENORQUE        reduce using rule 47 (V -> LPAREN E RPAREN .)
+    RPAREN          reduce using rule 47 (V -> LPAREN E RPAREN .)
+    PYC             reduce using rule 47 (V -> LPAREN E RPAREN .)
+    COMA            reduce using rule 47 (V -> LPAREN E RPAREN .)
+
+
+state 72
+
+    (21) S -> ID LPAREN L RPAREN PYC .
+
+    IF              reduce using rule 21 (S -> ID LPAREN L RPAREN PYC .)
+    DO              reduce using rule 21 (S -> ID LPAREN L RPAREN PYC .)
+    VAR             reduce using rule 21 (S -> ID LPAREN L RPAREN PYC .)
+    ID              reduce using rule 21 (S -> ID LPAREN L RPAREN PYC .)
+    PRINT           reduce using rule 21 (S -> ID LPAREN L RPAREN PYC .)
+    PROMPT          reduce using rule 21 (S -> ID LPAREN L RPAREN PYC .)
+    MMENOS          reduce using rule 21 (S -> ID LPAREN L RPAREN PYC .)
+    RLLAVE          reduce using rule 21 (S -> ID LPAREN L RPAREN PYC .)
+    RETURN          reduce using rule 21 (S -> ID LPAREN L RPAREN PYC .)
+    FUNCTION        reduce using rule 21 (S -> ID LPAREN L RPAREN PYC .)
+    $end            reduce using rule 21 (S -> ID LPAREN L RPAREN PYC .)
+
+
+state 73
+
+    (24) Q -> COMA E . Q
+    (24) Q -> . COMA E Q
+    (25) Q -> . empty
+    (49) empty -> .
+
+    COMA            shift and go to state 59
+    RPAREN          reduce using rule 49 (empty -> .)
+
+    empty                          shift and go to state 60
+    Q                              shift and go to state 82
+
 state 74
 
-    (25) B -> DO LLLAVE C RLLAVE WHILE . LPAREN E RPAREN PYC
+    (20) B -> IF LPAREN E RPAREN LLLAVE . C RLLAVE
+    (27) C -> . B C
+    (28) C -> . empty
+    (20) B -> . IF LPAREN E RPAREN LLLAVE C RLLAVE
+    (26) B -> . DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC
+    (29) B -> . VAR T ID PYC
+    (30) B -> . S
+    (49) empty -> .
+    (21) S -> . ID LPAREN L RPAREN PYC
+    (31) S -> . ID ASIG E PYC
+    (35) S -> . PRINT LPAREN E RPAREN PYC
+    (36) S -> . PROMPT LPAREN ID RPAREN PYC
+    (37) S -> . MMENOS ID PYC
 
-    LPAREN          shift and go to state 82
+    IF              shift and go to state 7
+    DO              shift and go to state 12
+    VAR             shift and go to state 4
+    RLLAVE          reduce using rule 49 (empty -> .)
+    ID              shift and go to state 6
+    PRINT           shift and go to state 9
+    PROMPT          shift and go to state 8
+    MMENOS          shift and go to state 10
 
+    C                              shift and go to state 83
+    empty                          shift and go to state 48
+    B                              shift and go to state 49
+    S                              shift and go to state 5
 
 state 75
 
-    (34) S -> PRINT LPAREN E RPAREN PYC .
+    (36) S -> PROMPT LPAREN ID RPAREN PYC .
 
-    IF              reduce using rule 34 (S -> PRINT LPAREN E RPAREN PYC .)
-    DO              reduce using rule 34 (S -> PRINT LPAREN E RPAREN PYC .)
-    VAR             reduce using rule 34 (S -> PRINT LPAREN E RPAREN PYC .)
-    ID              reduce using rule 34 (S -> PRINT LPAREN E RPAREN PYC .)
-    PRINT           reduce using rule 34 (S -> PRINT LPAREN E RPAREN PYC .)
-    PROMPT          reduce using rule 34 (S -> PRINT LPAREN E RPAREN PYC .)
-    MMENOS          reduce using rule 34 (S -> PRINT LPAREN E RPAREN PYC .)
-    RLLAVE          reduce using rule 34 (S -> PRINT LPAREN E RPAREN PYC .)
-    $end            reduce using rule 34 (S -> PRINT LPAREN E RPAREN PYC .)
-    RETURN          reduce using rule 34 (S -> PRINT LPAREN E RPAREN PYC .)
+    IF              reduce using rule 36 (S -> PROMPT LPAREN ID RPAREN PYC .)
+    DO              reduce using rule 36 (S -> PROMPT LPAREN ID RPAREN PYC .)
+    VAR             reduce using rule 36 (S -> PROMPT LPAREN ID RPAREN PYC .)
+    ID              reduce using rule 36 (S -> PROMPT LPAREN ID RPAREN PYC .)
+    PRINT           reduce using rule 36 (S -> PROMPT LPAREN ID RPAREN PYC .)
+    PROMPT          reduce using rule 36 (S -> PROMPT LPAREN ID RPAREN PYC .)
+    MMENOS          reduce using rule 36 (S -> PROMPT LPAREN ID RPAREN PYC .)
+    RLLAVE          reduce using rule 36 (S -> PROMPT LPAREN ID RPAREN PYC .)
+    RETURN          reduce using rule 36 (S -> PROMPT LPAREN ID RPAREN PYC .)
+    FUNCTION        reduce using rule 36 (S -> PROMPT LPAREN ID RPAREN PYC .)
+    $end            reduce using rule 36 (S -> PROMPT LPAREN ID RPAREN PYC .)
 
 
 state 76
 
-    (23) Q -> COMA E . Q
-    (23) Q -> . COMA E Q
-    (24) Q -> . empty
-    (48) empty -> .
+    (35) S -> PRINT LPAREN E RPAREN PYC .
 
-    COMA            shift and go to state 60
-    RPAREN          reduce using rule 48 (empty -> .)
+    IF              reduce using rule 35 (S -> PRINT LPAREN E RPAREN PYC .)
+    DO              reduce using rule 35 (S -> PRINT LPAREN E RPAREN PYC .)
+    VAR             reduce using rule 35 (S -> PRINT LPAREN E RPAREN PYC .)
+    ID              reduce using rule 35 (S -> PRINT LPAREN E RPAREN PYC .)
+    PRINT           reduce using rule 35 (S -> PRINT LPAREN E RPAREN PYC .)
+    PROMPT          reduce using rule 35 (S -> PRINT LPAREN E RPAREN PYC .)
+    MMENOS          reduce using rule 35 (S -> PRINT LPAREN E RPAREN PYC .)
+    RLLAVE          reduce using rule 35 (S -> PRINT LPAREN E RPAREN PYC .)
+    RETURN          reduce using rule 35 (S -> PRINT LPAREN E RPAREN PYC .)
+    FUNCTION        reduce using rule 35 (S -> PRINT LPAREN E RPAREN PYC .)
+    $end            reduce using rule 35 (S -> PRINT LPAREN E RPAREN PYC .)
 
-    empty                          shift and go to state 61
-    Q                              shift and go to state 83
 
 state 77
 
-    (20) S -> ID LPAREN L RPAREN PYC .
+    (8) A -> empty .
 
-    IF              reduce using rule 20 (S -> ID LPAREN L RPAREN PYC .)
-    DO              reduce using rule 20 (S -> ID LPAREN L RPAREN PYC .)
-    VAR             reduce using rule 20 (S -> ID LPAREN L RPAREN PYC .)
-    ID              reduce using rule 20 (S -> ID LPAREN L RPAREN PYC .)
-    PRINT           reduce using rule 20 (S -> ID LPAREN L RPAREN PYC .)
-    PROMPT          reduce using rule 20 (S -> ID LPAREN L RPAREN PYC .)
-    MMENOS          reduce using rule 20 (S -> ID LPAREN L RPAREN PYC .)
-    RLLAVE          reduce using rule 20 (S -> ID LPAREN L RPAREN PYC .)
-    $end            reduce using rule 20 (S -> ID LPAREN L RPAREN PYC .)
-    RETURN          reduce using rule 20 (S -> ID LPAREN L RPAREN PYC .)
+    RPAREN          reduce using rule 8 (A -> empty .)
 
 
 state 78
 
-    (6) A -> T ID . K
-    (8) K -> . COMA T ID K
-    (9) K -> . empty
-    (48) empty -> .
+    (7) A -> T . ID K
 
-    COMA            shift and go to state 86
-    RPAREN          reduce using rule 48 (empty -> .)
+    ID              shift and go to state 84
 
-    K                              shift and go to state 84
-    empty                          shift and go to state 85
 
 state 79
 
-    (3) F -> FUNCTION H ID LPAREN A RPAREN . LLLAVE W RLLAVE
+    (4) F -> FUNCTION H ID LPAREN A . RPAREN LLLAVE W RLLAVE
 
-    LLLAVE          shift and go to state 87
+    RPAREN          shift and go to state 85
 
 
 state 80
 
-    (19) B -> IF LPAREN E RPAREN LLLAVE C . RLLAVE
+    (26) B -> DO LLLAVE C RLLAVE WHILE . LPAREN E RPAREN PYC
 
-    RLLAVE          shift and go to state 88
+    LPAREN          shift and go to state 86
 
 
 state 81
 
-    (47) V -> ID LPAREN L RPAREN .
+    (48) V -> ID LPAREN L RPAREN .
 
-    SUM             reduce using rule 47 (V -> ID LPAREN L RPAREN .)
-    MENORQUE        reduce using rule 47 (V -> ID LPAREN L RPAREN .)
-    PYC             reduce using rule 47 (V -> ID LPAREN L RPAREN .)
-    COMA            reduce using rule 47 (V -> ID LPAREN L RPAREN .)
-    RPAREN          reduce using rule 47 (V -> ID LPAREN L RPAREN .)
+    SUM             reduce using rule 48 (V -> ID LPAREN L RPAREN .)
+    MENORQUE        reduce using rule 48 (V -> ID LPAREN L RPAREN .)
+    RPAREN          reduce using rule 48 (V -> ID LPAREN L RPAREN .)
+    PYC             reduce using rule 48 (V -> ID LPAREN L RPAREN .)
+    COMA            reduce using rule 48 (V -> ID LPAREN L RPAREN .)
 
 
 state 82
 
-    (25) B -> DO LLLAVE C RLLAVE WHILE LPAREN . E RPAREN PYC
-    (37) E -> . NEG R
-    (38) E -> . R
-    (39) R -> . U MENORQUE U
-    (40) R -> . U
-    (41) U -> . V SUM U
-    (42) U -> . V
-    (43) V -> . ENTERO
-    (44) V -> . ID
-    (45) V -> . CADENA
-    (46) V -> . LPAREN E RPAREN
-    (47) V -> . ID LPAREN L RPAREN
+    (24) Q -> COMA E Q .
 
-    NEG             shift and go to state 39
-    ENTERO          shift and go to state 33
-    ID              shift and go to state 38
-    CADENA          shift and go to state 32
-    LPAREN          shift and go to state 31
+    RPAREN          reduce using rule 24 (Q -> COMA E Q .)
 
-    U                              shift and go to state 34
-    R                              shift and go to state 35
-    V                              shift and go to state 36
-    E                              shift and go to state 89
 
 state 83
 
-    (23) Q -> COMA E Q .
+    (20) B -> IF LPAREN E RPAREN LLLAVE C . RLLAVE
 
-    RPAREN          reduce using rule 23 (Q -> COMA E Q .)
+    RLLAVE          shift and go to state 87
 
 
 state 84
 
-    (6) A -> T ID K .
+    (7) A -> T ID . K
+    (9) K -> . COMA T ID K
+    (10) K -> . empty
+    (49) empty -> .
 
-    RPAREN          reduce using rule 6 (A -> T ID K .)
+    COMA            shift and go to state 89
+    RPAREN          reduce using rule 49 (empty -> .)
 
+    K                              shift and go to state 88
+    empty                          shift and go to state 90
 
 state 85
 
-    (9) K -> empty .
+    (4) F -> FUNCTION H ID LPAREN A RPAREN . LLLAVE W RLLAVE
 
-    RPAREN          reduce using rule 9 (K -> empty .)
+    LLLAVE          shift and go to state 91
 
 
 state 86
 
-    (8) K -> COMA . T ID K
-    (31) T -> . STRING
-    (32) T -> . BOOLEAN
-    (33) T -> . INT
+    (26) B -> DO LLLAVE C RLLAVE WHILE LPAREN . E RPAREN PYC
+    (38) E -> . NEG R
+    (39) E -> . R
+    (40) R -> . U MENORQUE U
+    (41) R -> . U
+    (42) U -> . V SUM U
+    (43) U -> . V
+    (44) V -> . ENTERO
+    (45) V -> . ID
+    (46) V -> . CADENA
+    (47) V -> . LPAREN E RPAREN
+    (48) V -> . ID LPAREN L RPAREN
 
-    STRING          shift and go to state 16
-    BOOLEAN         shift and go to state 14
-    INT             shift and go to state 15
+    NEG             shift and go to state 34
+    ENTERO          shift and go to state 37
+    ID              shift and go to state 32
+    CADENA          shift and go to state 31
+    LPAREN          shift and go to state 38
 
-    T                              shift and go to state 90
+    U                              shift and go to state 35
+    V                              shift and go to state 36
+    R                              shift and go to state 33
+    E                              shift and go to state 92
 
 state 87
 
-    (3) F -> FUNCTION H ID LPAREN A RPAREN LLLAVE . W RLLAVE
-    (10) W -> . D W
-    (11) W -> . empty
-    (16) W -> . RETURN X PYC
-    (12) D -> . VAR T ID PYC
-    (13) D -> . DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC
-    (14) D -> . IF LPAREN E RPAREN LLLAVE W RLLAVE
-    (15) D -> . S
-    (48) empty -> .
-    (20) S -> . ID LPAREN L RPAREN PYC
-    (30) S -> . ID ASIG E PYC
-    (34) S -> . PRINT LPAREN E RPAREN PYC
-    (35) S -> . PROMPT LPAREN ID RPAREN PYC
-    (36) S -> . MMENOS ID PYC
+    (20) B -> IF LPAREN E RPAREN LLLAVE C RLLAVE .
 
-    RETURN          shift and go to state 92
-    VAR             shift and go to state 93
-    DO              shift and go to state 97
-    IF              shift and go to state 96
-    RLLAVE          reduce using rule 48 (empty -> .)
-    ID              shift and go to state 12
-    PRINT           shift and go to state 11
-    PROMPT          shift and go to state 2
-    MMENOS          shift and go to state 5
+    IF              reduce using rule 20 (B -> IF LPAREN E RPAREN LLLAVE C RLLAVE .)
+    DO              reduce using rule 20 (B -> IF LPAREN E RPAREN LLLAVE C RLLAVE .)
+    VAR             reduce using rule 20 (B -> IF LPAREN E RPAREN LLLAVE C RLLAVE .)
+    FUNCTION        reduce using rule 20 (B -> IF LPAREN E RPAREN LLLAVE C RLLAVE .)
+    ID              reduce using rule 20 (B -> IF LPAREN E RPAREN LLLAVE C RLLAVE .)
+    PRINT           reduce using rule 20 (B -> IF LPAREN E RPAREN LLLAVE C RLLAVE .)
+    PROMPT          reduce using rule 20 (B -> IF LPAREN E RPAREN LLLAVE C RLLAVE .)
+    MMENOS          reduce using rule 20 (B -> IF LPAREN E RPAREN LLLAVE C RLLAVE .)
+    $end            reduce using rule 20 (B -> IF LPAREN E RPAREN LLLAVE C RLLAVE .)
+    RLLAVE          reduce using rule 20 (B -> IF LPAREN E RPAREN LLLAVE C RLLAVE .)
 
-    W                              shift and go to state 91
-    empty                          shift and go to state 94
-    D                              shift and go to state 95
-    S                              shift and go to state 98
 
 state 88
 
-    (19) B -> IF LPAREN E RPAREN LLLAVE C RLLAVE .
+    (7) A -> T ID K .
 
-    IF              reduce using rule 19 (B -> IF LPAREN E RPAREN LLLAVE C RLLAVE .)
-    DO              reduce using rule 19 (B -> IF LPAREN E RPAREN LLLAVE C RLLAVE .)
-    VAR             reduce using rule 19 (B -> IF LPAREN E RPAREN LLLAVE C RLLAVE .)
-    ID              reduce using rule 19 (B -> IF LPAREN E RPAREN LLLAVE C RLLAVE .)
-    PRINT           reduce using rule 19 (B -> IF LPAREN E RPAREN LLLAVE C RLLAVE .)
-    PROMPT          reduce using rule 19 (B -> IF LPAREN E RPAREN LLLAVE C RLLAVE .)
-    MMENOS          reduce using rule 19 (B -> IF LPAREN E RPAREN LLLAVE C RLLAVE .)
-    RLLAVE          reduce using rule 19 (B -> IF LPAREN E RPAREN LLLAVE C RLLAVE .)
-    $end            reduce using rule 19 (B -> IF LPAREN E RPAREN LLLAVE C RLLAVE .)
+    RPAREN          reduce using rule 7 (A -> T ID K .)
 
 
 state 89
 
-    (25) B -> DO LLLAVE C RLLAVE WHILE LPAREN E . RPAREN PYC
+    (9) K -> COMA . T ID K
+    (32) T -> . STRING
+    (33) T -> . BOOLEAN
+    (34) T -> . INT
 
-    RPAREN          shift and go to state 99
+    STRING          shift and go to state 17
+    BOOLEAN         shift and go to state 16
+    INT             shift and go to state 15
 
+    T                              shift and go to state 93
 
 state 90
 
-    (8) K -> COMA T . ID K
+    (10) K -> empty .
 
-    ID              shift and go to state 100
+    RPAREN          reduce using rule 10 (K -> empty .)
 
 
 state 91
 
-    (3) F -> FUNCTION H ID LPAREN A RPAREN LLLAVE W . RLLAVE
+    (4) F -> FUNCTION H ID LPAREN A RPAREN LLLAVE . W RLLAVE
+    (11) W -> . D W
+    (12) W -> . empty
+    (17) W -> . RETURN X PYC
+    (13) D -> . VAR T ID PYC
+    (14) D -> . DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC
+    (15) D -> . IF LPAREN E RPAREN LLLAVE W RLLAVE
+    (16) D -> . S
+    (49) empty -> .
+    (21) S -> . ID LPAREN L RPAREN PYC
+    (31) S -> . ID ASIG E PYC
+    (35) S -> . PRINT LPAREN E RPAREN PYC
+    (36) S -> . PROMPT LPAREN ID RPAREN PYC
+    (37) S -> . MMENOS ID PYC
 
-    RLLAVE          shift and go to state 101
+    RETURN          shift and go to state 99
+    VAR             shift and go to state 96
+    DO              shift and go to state 100
+    IF              shift and go to state 98
+    RLLAVE          reduce using rule 49 (empty -> .)
+    ID              shift and go to state 6
+    PRINT           shift and go to state 9
+    PROMPT          shift and go to state 8
+    MMENOS          shift and go to state 10
 
+    empty                          shift and go to state 94
+    W                              shift and go to state 95
+    D                              shift and go to state 101
+    S                              shift and go to state 97
 
 state 92
 
-    (16) W -> RETURN . X PYC
-    (17) X -> . empty
-    (18) X -> . E
-    (48) empty -> .
-    (37) E -> . NEG R
-    (38) E -> . R
-    (39) R -> . U MENORQUE U
-    (40) R -> . U
-    (41) U -> . V SUM U
-    (42) U -> . V
-    (43) V -> . ENTERO
-    (44) V -> . ID
-    (45) V -> . CADENA
-    (46) V -> . LPAREN E RPAREN
-    (47) V -> . ID LPAREN L RPAREN
+    (26) B -> DO LLLAVE C RLLAVE WHILE LPAREN E . RPAREN PYC
 
-    PYC             reduce using rule 48 (empty -> .)
-    NEG             shift and go to state 39
-    ENTERO          shift and go to state 33
-    ID              shift and go to state 38
-    CADENA          shift and go to state 32
-    LPAREN          shift and go to state 31
+    RPAREN          shift and go to state 102
 
-    E                              shift and go to state 102
-    X                              shift and go to state 103
-    empty                          shift and go to state 104
-    R                              shift and go to state 35
-    V                              shift and go to state 36
-    U                              shift and go to state 34
 
 state 93
 
-    (12) D -> VAR . T ID PYC
-    (31) T -> . STRING
-    (32) T -> . BOOLEAN
-    (33) T -> . INT
+    (9) K -> COMA T . ID K
 
-    STRING          shift and go to state 16
-    BOOLEAN         shift and go to state 14
-    INT             shift and go to state 15
+    ID              shift and go to state 103
 
-    T                              shift and go to state 105
 
 state 94
 
-    (11) W -> empty .
+    (12) W -> empty .
 
-    RLLAVE          reduce using rule 11 (W -> empty .)
+    RLLAVE          reduce using rule 12 (W -> empty .)
 
 
 state 95
 
-    (10) W -> D . W
-    (10) W -> . D W
-    (11) W -> . empty
-    (16) W -> . RETURN X PYC
-    (12) D -> . VAR T ID PYC
-    (13) D -> . DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC
-    (14) D -> . IF LPAREN E RPAREN LLLAVE W RLLAVE
-    (15) D -> . S
-    (48) empty -> .
-    (20) S -> . ID LPAREN L RPAREN PYC
-    (30) S -> . ID ASIG E PYC
-    (34) S -> . PRINT LPAREN E RPAREN PYC
-    (35) S -> . PROMPT LPAREN ID RPAREN PYC
-    (36) S -> . MMENOS ID PYC
+    (4) F -> FUNCTION H ID LPAREN A RPAREN LLLAVE W . RLLAVE
 
-    RETURN          shift and go to state 92
-    VAR             shift and go to state 93
-    DO              shift and go to state 97
-    IF              shift and go to state 96
-    RLLAVE          reduce using rule 48 (empty -> .)
-    ID              shift and go to state 12
-    PRINT           shift and go to state 11
-    PROMPT          shift and go to state 2
-    MMENOS          shift and go to state 5
+    RLLAVE          shift and go to state 104
 
-    W                              shift and go to state 106
-    empty                          shift and go to state 94
-    D                              shift and go to state 95
-    S                              shift and go to state 98
 
 state 96
 
-    (14) D -> IF . LPAREN E RPAREN LLLAVE W RLLAVE
+    (13) D -> VAR . T ID PYC
+    (32) T -> . STRING
+    (33) T -> . BOOLEAN
+    (34) T -> . INT
 
-    LPAREN          shift and go to state 107
+    STRING          shift and go to state 17
+    BOOLEAN         shift and go to state 16
+    INT             shift and go to state 15
 
+    T                              shift and go to state 105
 
 state 97
 
-    (13) D -> DO . LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC
+    (16) D -> S .
 
-    LLLAVE          shift and go to state 108
+    RETURN          reduce using rule 16 (D -> S .)
+    VAR             reduce using rule 16 (D -> S .)
+    DO              reduce using rule 16 (D -> S .)
+    IF              reduce using rule 16 (D -> S .)
+    ID              reduce using rule 16 (D -> S .)
+    PRINT           reduce using rule 16 (D -> S .)
+    PROMPT          reduce using rule 16 (D -> S .)
+    MMENOS          reduce using rule 16 (D -> S .)
+    RLLAVE          reduce using rule 16 (D -> S .)
 
 
 state 98
 
-    (15) D -> S .
+    (15) D -> IF . LPAREN E RPAREN LLLAVE W RLLAVE
 
-    RETURN          reduce using rule 15 (D -> S .)
-    VAR             reduce using rule 15 (D -> S .)
-    DO              reduce using rule 15 (D -> S .)
-    IF              reduce using rule 15 (D -> S .)
-    ID              reduce using rule 15 (D -> S .)
-    PRINT           reduce using rule 15 (D -> S .)
-    PROMPT          reduce using rule 15 (D -> S .)
-    MMENOS          reduce using rule 15 (D -> S .)
-    RLLAVE          reduce using rule 15 (D -> S .)
+    LPAREN          shift and go to state 106
 
 
 state 99
 
-    (25) B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN . PYC
+    (17) W -> RETURN . X PYC
+    (18) X -> . empty
+    (19) X -> . E
+    (49) empty -> .
+    (38) E -> . NEG R
+    (39) E -> . R
+    (40) R -> . U MENORQUE U
+    (41) R -> . U
+    (42) U -> . V SUM U
+    (43) U -> . V
+    (44) V -> . ENTERO
+    (45) V -> . ID
+    (46) V -> . CADENA
+    (47) V -> . LPAREN E RPAREN
+    (48) V -> . ID LPAREN L RPAREN
 
-    PYC             shift and go to state 109
+    PYC             reduce using rule 49 (empty -> .)
+    NEG             shift and go to state 34
+    ENTERO          shift and go to state 37
+    ID              shift and go to state 32
+    CADENA          shift and go to state 31
+    LPAREN          shift and go to state 38
 
+    empty                          shift and go to state 107
+    U                              shift and go to state 35
+    V                              shift and go to state 36
+    X                              shift and go to state 108
+    R                              shift and go to state 33
+    E                              shift and go to state 109
 
 state 100
 
-    (8) K -> COMA T ID . K
-    (8) K -> . COMA T ID K
-    (9) K -> . empty
-    (48) empty -> .
+    (14) D -> DO . LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC
 
-    COMA            shift and go to state 86
-    RPAREN          reduce using rule 48 (empty -> .)
+    LLLAVE          shift and go to state 110
 
-    K                              shift and go to state 110
-    empty                          shift and go to state 85
 
 state 101
 
-    (3) F -> FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVE .
+    (11) W -> D . W
+    (11) W -> . D W
+    (12) W -> . empty
+    (17) W -> . RETURN X PYC
+    (13) D -> . VAR T ID PYC
+    (14) D -> . DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC
+    (15) D -> . IF LPAREN E RPAREN LLLAVE W RLLAVE
+    (16) D -> . S
+    (49) empty -> .
+    (21) S -> . ID LPAREN L RPAREN PYC
+    (31) S -> . ID ASIG E PYC
+    (35) S -> . PRINT LPAREN E RPAREN PYC
+    (36) S -> . PROMPT LPAREN ID RPAREN PYC
+    (37) S -> . MMENOS ID PYC
 
-    $end            reduce using rule 3 (F -> FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVE .)
+    RETURN          shift and go to state 99
+    VAR             shift and go to state 96
+    DO              shift and go to state 100
+    IF              shift and go to state 98
+    RLLAVE          reduce using rule 49 (empty -> .)
+    ID              shift and go to state 6
+    PRINT           shift and go to state 9
+    PROMPT          shift and go to state 8
+    MMENOS          shift and go to state 10
 
+    empty                          shift and go to state 94
+    W                              shift and go to state 111
+    D                              shift and go to state 101
+    S                              shift and go to state 97
 
 state 102
 
-    (18) X -> E .
+    (26) B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN . PYC
 
-    PYC             reduce using rule 18 (X -> E .)
+    PYC             shift and go to state 112
 
 
 state 103
 
-    (16) W -> RETURN X . PYC
+    (9) K -> COMA T ID . K
+    (9) K -> . COMA T ID K
+    (10) K -> . empty
+    (49) empty -> .
 
-    PYC             shift and go to state 111
+    COMA            shift and go to state 89
+    RPAREN          reduce using rule 49 (empty -> .)
 
+    K                              shift and go to state 113
+    empty                          shift and go to state 90
 
 state 104
 
-    (17) X -> empty .
+    (4) F -> FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVE .
 
-    PYC             reduce using rule 17 (X -> empty .)
+    IF              reduce using rule 4 (F -> FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVE .)
+    DO              reduce using rule 4 (F -> FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVE .)
+    VAR             reduce using rule 4 (F -> FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVE .)
+    FUNCTION        reduce using rule 4 (F -> FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVE .)
+    ID              reduce using rule 4 (F -> FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVE .)
+    PRINT           reduce using rule 4 (F -> FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVE .)
+    PROMPT          reduce using rule 4 (F -> FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVE .)
+    MMENOS          reduce using rule 4 (F -> FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVE .)
+    $end            reduce using rule 4 (F -> FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVE .)
 
 
 state 105
 
-    (12) D -> VAR T . ID PYC
+    (13) D -> VAR T . ID PYC
 
-    ID              shift and go to state 112
+    ID              shift and go to state 114
 
 
 state 106
 
-    (10) W -> D W .
+    (15) D -> IF LPAREN . E RPAREN LLLAVE W RLLAVE
+    (38) E -> . NEG R
+    (39) E -> . R
+    (40) R -> . U MENORQUE U
+    (41) R -> . U
+    (42) U -> . V SUM U
+    (43) U -> . V
+    (44) V -> . ENTERO
+    (45) V -> . ID
+    (46) V -> . CADENA
+    (47) V -> . LPAREN E RPAREN
+    (48) V -> . ID LPAREN L RPAREN
 
-    RLLAVE          reduce using rule 10 (W -> D W .)
+    NEG             shift and go to state 34
+    ENTERO          shift and go to state 37
+    ID              shift and go to state 32
+    CADENA          shift and go to state 31
+    LPAREN          shift and go to state 38
 
+    V                              shift and go to state 36
+    R                              shift and go to state 33
+    U                              shift and go to state 35
+    E                              shift and go to state 115
 
 state 107
 
-    (14) D -> IF LPAREN . E RPAREN LLLAVE W RLLAVE
-    (37) E -> . NEG R
-    (38) E -> . R
-    (39) R -> . U MENORQUE U
-    (40) R -> . U
-    (41) U -> . V SUM U
-    (42) U -> . V
-    (43) V -> . ENTERO
-    (44) V -> . ID
-    (45) V -> . CADENA
-    (46) V -> . LPAREN E RPAREN
-    (47) V -> . ID LPAREN L RPAREN
+    (18) X -> empty .
 
-    NEG             shift and go to state 39
-    ENTERO          shift and go to state 33
-    ID              shift and go to state 38
-    CADENA          shift and go to state 32
-    LPAREN          shift and go to state 31
+    PYC             reduce using rule 18 (X -> empty .)
 
-    E                              shift and go to state 113
-    U                              shift and go to state 34
-    R                              shift and go to state 35
-    V                              shift and go to state 36
 
 state 108
 
-    (13) D -> DO LLLAVE . W RLLAVE WHILE LPAREN E RPAREN PYC
-    (10) W -> . D W
-    (11) W -> . empty
-    (16) W -> . RETURN X PYC
-    (12) D -> . VAR T ID PYC
-    (13) D -> . DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC
-    (14) D -> . IF LPAREN E RPAREN LLLAVE W RLLAVE
-    (15) D -> . S
-    (48) empty -> .
-    (20) S -> . ID LPAREN L RPAREN PYC
-    (30) S -> . ID ASIG E PYC
-    (34) S -> . PRINT LPAREN E RPAREN PYC
-    (35) S -> . PROMPT LPAREN ID RPAREN PYC
-    (36) S -> . MMENOS ID PYC
+    (17) W -> RETURN X . PYC
 
-    RETURN          shift and go to state 92
-    VAR             shift and go to state 93
-    DO              shift and go to state 97
-    IF              shift and go to state 96
-    RLLAVE          reduce using rule 48 (empty -> .)
-    ID              shift and go to state 12
-    PRINT           shift and go to state 11
-    PROMPT          shift and go to state 2
-    MMENOS          shift and go to state 5
+    PYC             shift and go to state 116
 
-    W                              shift and go to state 114
-    empty                          shift and go to state 94
-    D                              shift and go to state 95
-    S                              shift and go to state 98
 
 state 109
 
-    (25) B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC .
+    (19) X -> E .
 
-    IF              reduce using rule 25 (B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC .)
-    DO              reduce using rule 25 (B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC .)
-    VAR             reduce using rule 25 (B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC .)
-    ID              reduce using rule 25 (B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC .)
-    PRINT           reduce using rule 25 (B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC .)
-    PROMPT          reduce using rule 25 (B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC .)
-    MMENOS          reduce using rule 25 (B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC .)
-    RLLAVE          reduce using rule 25 (B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC .)
-    $end            reduce using rule 25 (B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC .)
+    PYC             reduce using rule 19 (X -> E .)
 
 
 state 110
 
-    (8) K -> COMA T ID K .
+    (14) D -> DO LLLAVE . W RLLAVE WHILE LPAREN E RPAREN PYC
+    (11) W -> . D W
+    (12) W -> . empty
+    (17) W -> . RETURN X PYC
+    (13) D -> . VAR T ID PYC
+    (14) D -> . DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC
+    (15) D -> . IF LPAREN E RPAREN LLLAVE W RLLAVE
+    (16) D -> . S
+    (49) empty -> .
+    (21) S -> . ID LPAREN L RPAREN PYC
+    (31) S -> . ID ASIG E PYC
+    (35) S -> . PRINT LPAREN E RPAREN PYC
+    (36) S -> . PROMPT LPAREN ID RPAREN PYC
+    (37) S -> . MMENOS ID PYC
 
-    RPAREN          reduce using rule 8 (K -> COMA T ID K .)
+    RETURN          shift and go to state 99
+    VAR             shift and go to state 96
+    DO              shift and go to state 100
+    IF              shift and go to state 98
+    RLLAVE          reduce using rule 49 (empty -> .)
+    ID              shift and go to state 6
+    PRINT           shift and go to state 9
+    PROMPT          shift and go to state 8
+    MMENOS          shift and go to state 10
 
+    empty                          shift and go to state 94
+    W                              shift and go to state 117
+    D                              shift and go to state 101
+    S                              shift and go to state 97
 
 state 111
 
-    (16) W -> RETURN X PYC .
+    (11) W -> D W .
 
-    RLLAVE          reduce using rule 16 (W -> RETURN X PYC .)
+    RLLAVE          reduce using rule 11 (W -> D W .)
 
 
 state 112
 
-    (12) D -> VAR T ID . PYC
+    (26) B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC .
 
-    PYC             shift and go to state 115
+    IF              reduce using rule 26 (B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC .)
+    DO              reduce using rule 26 (B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC .)
+    VAR             reduce using rule 26 (B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC .)
+    FUNCTION        reduce using rule 26 (B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC .)
+    ID              reduce using rule 26 (B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC .)
+    PRINT           reduce using rule 26 (B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC .)
+    PROMPT          reduce using rule 26 (B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC .)
+    MMENOS          reduce using rule 26 (B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC .)
+    $end            reduce using rule 26 (B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC .)
+    RLLAVE          reduce using rule 26 (B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC .)
 
 
 state 113
 
-    (14) D -> IF LPAREN E . RPAREN LLLAVE W RLLAVE
+    (9) K -> COMA T ID K .
 
-    RPAREN          shift and go to state 116
+    RPAREN          reduce using rule 9 (K -> COMA T ID K .)
 
 
 state 114
 
-    (13) D -> DO LLLAVE W . RLLAVE WHILE LPAREN E RPAREN PYC
+    (13) D -> VAR T ID . PYC
 
-    RLLAVE          shift and go to state 117
+    PYC             shift and go to state 118
 
 
 state 115
 
-    (12) D -> VAR T ID PYC .
+    (15) D -> IF LPAREN E . RPAREN LLLAVE W RLLAVE
 
-    RETURN          reduce using rule 12 (D -> VAR T ID PYC .)
-    VAR             reduce using rule 12 (D -> VAR T ID PYC .)
-    DO              reduce using rule 12 (D -> VAR T ID PYC .)
-    IF              reduce using rule 12 (D -> VAR T ID PYC .)
-    ID              reduce using rule 12 (D -> VAR T ID PYC .)
-    PRINT           reduce using rule 12 (D -> VAR T ID PYC .)
-    PROMPT          reduce using rule 12 (D -> VAR T ID PYC .)
-    MMENOS          reduce using rule 12 (D -> VAR T ID PYC .)
-    RLLAVE          reduce using rule 12 (D -> VAR T ID PYC .)
+    RPAREN          shift and go to state 119
 
 
 state 116
 
-    (14) D -> IF LPAREN E RPAREN . LLLAVE W RLLAVE
+    (17) W -> RETURN X PYC .
 
-    LLLAVE          shift and go to state 118
+    RLLAVE          reduce using rule 17 (W -> RETURN X PYC .)
 
 
 state 117
 
-    (13) D -> DO LLLAVE W RLLAVE . WHILE LPAREN E RPAREN PYC
+    (14) D -> DO LLLAVE W . RLLAVE WHILE LPAREN E RPAREN PYC
 
-    WHILE           shift and go to state 119
+    RLLAVE          shift and go to state 120
 
 
 state 118
 
-    (14) D -> IF LPAREN E RPAREN LLLAVE . W RLLAVE
-    (10) W -> . D W
-    (11) W -> . empty
-    (16) W -> . RETURN X PYC
-    (12) D -> . VAR T ID PYC
-    (13) D -> . DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC
-    (14) D -> . IF LPAREN E RPAREN LLLAVE W RLLAVE
-    (15) D -> . S
-    (48) empty -> .
-    (20) S -> . ID LPAREN L RPAREN PYC
-    (30) S -> . ID ASIG E PYC
-    (34) S -> . PRINT LPAREN E RPAREN PYC
-    (35) S -> . PROMPT LPAREN ID RPAREN PYC
-    (36) S -> . MMENOS ID PYC
+    (13) D -> VAR T ID PYC .
 
-    RETURN          shift and go to state 92
-    VAR             shift and go to state 93
-    DO              shift and go to state 97
-    IF              shift and go to state 96
-    RLLAVE          reduce using rule 48 (empty -> .)
-    ID              shift and go to state 12
-    PRINT           shift and go to state 11
-    PROMPT          shift and go to state 2
-    MMENOS          shift and go to state 5
+    RETURN          reduce using rule 13 (D -> VAR T ID PYC .)
+    VAR             reduce using rule 13 (D -> VAR T ID PYC .)
+    DO              reduce using rule 13 (D -> VAR T ID PYC .)
+    IF              reduce using rule 13 (D -> VAR T ID PYC .)
+    ID              reduce using rule 13 (D -> VAR T ID PYC .)
+    PRINT           reduce using rule 13 (D -> VAR T ID PYC .)
+    PROMPT          reduce using rule 13 (D -> VAR T ID PYC .)
+    MMENOS          reduce using rule 13 (D -> VAR T ID PYC .)
+    RLLAVE          reduce using rule 13 (D -> VAR T ID PYC .)
 
-    empty                          shift and go to state 94
-    S                              shift and go to state 98
-    D                              shift and go to state 95
-    W                              shift and go to state 120
 
 state 119
 
-    (13) D -> DO LLLAVE W RLLAVE WHILE . LPAREN E RPAREN PYC
+    (15) D -> IF LPAREN E RPAREN . LLLAVE W RLLAVE
 
-    LPAREN          shift and go to state 121
+    LLLAVE          shift and go to state 121
 
 
 state 120
 
-    (14) D -> IF LPAREN E RPAREN LLLAVE W . RLLAVE
+    (14) D -> DO LLLAVE W RLLAVE . WHILE LPAREN E RPAREN PYC
 
-    RLLAVE          shift and go to state 122
+    WHILE           shift and go to state 122
 
 
 state 121
 
-    (13) D -> DO LLLAVE W RLLAVE WHILE LPAREN . E RPAREN PYC
-    (37) E -> . NEG R
-    (38) E -> . R
-    (39) R -> . U MENORQUE U
-    (40) R -> . U
-    (41) U -> . V SUM U
-    (42) U -> . V
-    (43) V -> . ENTERO
-    (44) V -> . ID
-    (45) V -> . CADENA
-    (46) V -> . LPAREN E RPAREN
-    (47) V -> . ID LPAREN L RPAREN
+    (15) D -> IF LPAREN E RPAREN LLLAVE . W RLLAVE
+    (11) W -> . D W
+    (12) W -> . empty
+    (17) W -> . RETURN X PYC
+    (13) D -> . VAR T ID PYC
+    (14) D -> . DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC
+    (15) D -> . IF LPAREN E RPAREN LLLAVE W RLLAVE
+    (16) D -> . S
+    (49) empty -> .
+    (21) S -> . ID LPAREN L RPAREN PYC
+    (31) S -> . ID ASIG E PYC
+    (35) S -> . PRINT LPAREN E RPAREN PYC
+    (36) S -> . PROMPT LPAREN ID RPAREN PYC
+    (37) S -> . MMENOS ID PYC
 
-    NEG             shift and go to state 39
-    ENTERO          shift and go to state 33
-    ID              shift and go to state 38
-    CADENA          shift and go to state 32
-    LPAREN          shift and go to state 31
+    RETURN          shift and go to state 99
+    VAR             shift and go to state 96
+    DO              shift and go to state 100
+    IF              shift and go to state 98
+    RLLAVE          reduce using rule 49 (empty -> .)
+    ID              shift and go to state 6
+    PRINT           shift and go to state 9
+    PROMPT          shift and go to state 8
+    MMENOS          shift and go to state 10
 
-    U                              shift and go to state 34
-    R                              shift and go to state 35
-    V                              shift and go to state 36
-    E                              shift and go to state 123
+    empty                          shift and go to state 94
+    W                              shift and go to state 123
+    D                              shift and go to state 101
+    S                              shift and go to state 97
 
 state 122
 
-    (14) D -> IF LPAREN E RPAREN LLLAVE W RLLAVE .
+    (14) D -> DO LLLAVE W RLLAVE WHILE . LPAREN E RPAREN PYC
 
-    RETURN          reduce using rule 14 (D -> IF LPAREN E RPAREN LLLAVE W RLLAVE .)
-    VAR             reduce using rule 14 (D -> IF LPAREN E RPAREN LLLAVE W RLLAVE .)
-    DO              reduce using rule 14 (D -> IF LPAREN E RPAREN LLLAVE W RLLAVE .)
-    IF              reduce using rule 14 (D -> IF LPAREN E RPAREN LLLAVE W RLLAVE .)
-    ID              reduce using rule 14 (D -> IF LPAREN E RPAREN LLLAVE W RLLAVE .)
-    PRINT           reduce using rule 14 (D -> IF LPAREN E RPAREN LLLAVE W RLLAVE .)
-    PROMPT          reduce using rule 14 (D -> IF LPAREN E RPAREN LLLAVE W RLLAVE .)
-    MMENOS          reduce using rule 14 (D -> IF LPAREN E RPAREN LLLAVE W RLLAVE .)
-    RLLAVE          reduce using rule 14 (D -> IF LPAREN E RPAREN LLLAVE W RLLAVE .)
+    LPAREN          shift and go to state 124
 
 
 state 123
 
-    (13) D -> DO LLLAVE W RLLAVE WHILE LPAREN E . RPAREN PYC
+    (15) D -> IF LPAREN E RPAREN LLLAVE W . RLLAVE
 
-    RPAREN          shift and go to state 124
+    RLLAVE          shift and go to state 125
 
 
 state 124
 
-    (13) D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN . PYC
+    (14) D -> DO LLLAVE W RLLAVE WHILE LPAREN . E RPAREN PYC
+    (38) E -> . NEG R
+    (39) E -> . R
+    (40) R -> . U MENORQUE U
+    (41) R -> . U
+    (42) U -> . V SUM U
+    (43) U -> . V
+    (44) V -> . ENTERO
+    (45) V -> . ID
+    (46) V -> . CADENA
+    (47) V -> . LPAREN E RPAREN
+    (48) V -> . ID LPAREN L RPAREN
 
-    PYC             shift and go to state 125
+    NEG             shift and go to state 34
+    ENTERO          shift and go to state 37
+    ID              shift and go to state 32
+    CADENA          shift and go to state 31
+    LPAREN          shift and go to state 38
 
+    V                              shift and go to state 36
+    R                              shift and go to state 33
+    U                              shift and go to state 35
+    E                              shift and go to state 126
 
 state 125
 
-    (13) D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC .
+    (15) D -> IF LPAREN E RPAREN LLLAVE W RLLAVE .
 
-    RETURN          reduce using rule 13 (D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC .)
-    VAR             reduce using rule 13 (D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC .)
-    DO              reduce using rule 13 (D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC .)
-    IF              reduce using rule 13 (D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC .)
-    ID              reduce using rule 13 (D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC .)
-    PRINT           reduce using rule 13 (D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC .)
-    PROMPT          reduce using rule 13 (D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC .)
-    MMENOS          reduce using rule 13 (D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC .)
-    RLLAVE          reduce using rule 13 (D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC .)
+    RETURN          reduce using rule 15 (D -> IF LPAREN E RPAREN LLLAVE W RLLAVE .)
+    VAR             reduce using rule 15 (D -> IF LPAREN E RPAREN LLLAVE W RLLAVE .)
+    DO              reduce using rule 15 (D -> IF LPAREN E RPAREN LLLAVE W RLLAVE .)
+    IF              reduce using rule 15 (D -> IF LPAREN E RPAREN LLLAVE W RLLAVE .)
+    ID              reduce using rule 15 (D -> IF LPAREN E RPAREN LLLAVE W RLLAVE .)
+    PRINT           reduce using rule 15 (D -> IF LPAREN E RPAREN LLLAVE W RLLAVE .)
+    PROMPT          reduce using rule 15 (D -> IF LPAREN E RPAREN LLLAVE W RLLAVE .)
+    MMENOS          reduce using rule 15 (D -> IF LPAREN E RPAREN LLLAVE W RLLAVE .)
+    RLLAVE          reduce using rule 15 (D -> IF LPAREN E RPAREN LLLAVE W RLLAVE .)
+
+
+state 126
+
+    (14) D -> DO LLLAVE W RLLAVE WHILE LPAREN E . RPAREN PYC
+
+    RPAREN          shift and go to state 127
+
+
+state 127
+
+    (14) D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN . PYC
+
+    PYC             shift and go to state 128
+
+
+state 128
+
+    (14) D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC .
+
+    RETURN          reduce using rule 14 (D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC .)
+    VAR             reduce using rule 14 (D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC .)
+    DO              reduce using rule 14 (D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC .)
+    IF              reduce using rule 14 (D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC .)
+    ID              reduce using rule 14 (D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC .)
+    PRINT           reduce using rule 14 (D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC .)
+    PROMPT          reduce using rule 14 (D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC .)
+    MMENOS          reduce using rule 14 (D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC .)
+    RLLAVE          reduce using rule 14 (D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC .)
 

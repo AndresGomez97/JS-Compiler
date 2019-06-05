@@ -92,6 +92,7 @@ def parser(t):
 #T_IGNORE
 
 t_ignore_TAB = r'\t' #TABULADOR
+t_ignore_Line = r'\n'    
 t_ignore_RT = r'\r'  #RETORNO DE CARRO
 t_ignore_COMENTARIO = r'/\*.*?\*/'    #COMENTARIOS(/*comentario*/)
 
@@ -119,7 +120,7 @@ lexer = lex.lex()
 #############################
 vars_globales = []
 
-### ESQUEMA --> {'id': nombre,'tipo': tipo,'params':{},'vars':{}}
+### ESQUEMA --> {'id': nombre,'tipo': tipo,'params':[],'vars':[]}
 funciones = []
 
 ### BUFFERS ###
@@ -279,13 +280,13 @@ def get_tipos_params(params):
 #########
 
 def p_b_p(p):
-    'P : B'
+    'P : B P'
     
 def p_f_p(p):
-    'P : F'
+    'P : F P'
 
-#def p_eof(p):
-#    'P : empty'
+def p_eof(p):
+    'P : empty'
 
 ############################################################################################################
 ######################################### Function #########################################################
@@ -350,6 +351,7 @@ def p_f_function(p):
         print('Syntax error FUNCTION. ID {} already exists'.format(p[3]))
     
     print(buffer_params)
+    print(buffer_vars_locales)
     #Limpiamos buffer
     delete_buffer()
 
@@ -924,11 +926,17 @@ def p_error(p):
 
 yacc.yacc()
 
-while 1:
+f = open("code.txt","r")
+fl =f.read()
+#for x in fl:
+yacc.parse(fl)
+"""
+while True:
     try:
-        s = raw_input('Input > ')
+        s = raw_input('input>')
     except EOFError:
         break
     if not s:
         continue
     yacc.parse(s)
+ """   

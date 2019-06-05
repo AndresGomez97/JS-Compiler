@@ -1,0 +1,7 @@
+function int a(int b,bool c){
+var int q; q = 23+24;
+print(q);
+return q;
+}
+var int t;
+t = a(23,23<24);

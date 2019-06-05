@@ -101,6 +101,7 @@ def parser(t):
 
 t_ignore_TAB = r'\t' #TABULADOR
 t_ignore_RT = r'\r'  #RETORNO DE CARRO
+t_ignore_Line = r'\n'#SALTO DE LINEA     
 t_ignore_COMENTARIO = r'/\*.*?\*/'    #COMENTARIOS(/*comentario*/)
 
 #T_ERROR
@@ -113,7 +114,7 @@ def t_error(t):
 lexer = lex.lex()
 f = open("tokens.txt","w+")
 
-lexer.input("")
+lexer.input("a23 function \n int")
 
 # Tokenize
 while True:

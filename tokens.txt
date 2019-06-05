@@ -1,1 +1,3 @@
-<ID,hola>
+<ID,a23>
+<FUNCTION,function>
+<INT,int>
