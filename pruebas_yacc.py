@@ -105,9 +105,6 @@ def t_error(t):
 ###############
 lexer = lex.lex()
 
-
-
-
 #################################################################################################################################
 #################################### Sintactico y Semantico #####################################################################
 #################################################################################################################################
@@ -924,12 +921,35 @@ def p_error(p):
         print("Syntax error at EOF")
 
 
+###############
+### Lectura ###
+###############
+
+codeRead = open("code.txt","r")
+fl =codeRead.read()
+
+########################
+### Generamos Tokens ###
+########################
+
+f = open("tokens.txt","w+")
+lexer.input(fl)
+
+# Tokenize
+while True:
+    tok = lexer.token()
+    if not tok: 
+        break      # No more input
+    f.write(parser(tok)+"\n")
+
+
+############
+### Yacc ###
+############
 yacc.yacc()
 
-f = open("code.txt","r")
-fl =f.read()
-#for x in fl:
 yacc.parse(fl)
+
 """
 while True:
     try:

@@ -5,3 +5,5 @@ return q;
 }
 var int t;
 t = a(23,23<24);
+var bool x;
+if(23<34){x = 24<12;}
