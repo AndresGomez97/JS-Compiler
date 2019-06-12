@@ -1,9 +1,15 @@
+<<<<<<< HEAD
+<VAR,var>
+<STRING,string>
+<ID,casa>
+=======
 <FUNCTION,function>
 <INT,int>
 <ID,a>
 <LPAREN,(>
 <INT,int>
 <ID,b>
+>>>>>>> 6c2ef033c7908e5234ff318a003d8e2df128f6e9
 <COMA,,>
 <BOOLEAN,bool>
 <ID,c>
@@ -61,7 +67,3 @@
 <ENTERO,12>
 <PYC,;>
 <RLLAVE,}>
-<ENTERO,32760>
-<ID,rojo94>
-<CADENA,'_rojo 67'>
-<ID,function_n>

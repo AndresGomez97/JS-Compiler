@@ -4,6 +4,7 @@ import ply.lex as lex
 #Lista de tokens
 
 
+
 tokens = [
     'CADENA',
     'ENTERO',
@@ -38,7 +39,6 @@ reserved = {
     'string' : 'STRING',
     'bool' : 'BOOLEAN',
     'if' : 'IF'
-    
 }
 
 #Anadimos palabras reservadas a la lista de tokens
@@ -63,7 +63,6 @@ t_LLLAVE = r'\{'
 t_RLLAVE = r'\}'
 t_LCORCH = r'\['
 t_RCORCH = r'\]'
-
 
 
 
@@ -102,6 +101,7 @@ def parser(t):
 
 t_ignore_TAB = r'\t' #TABULADOR
 t_ignore_RT = r'\r'  #RETORNO DE CARRO
+t_ignore_Line = r'\n'#SALTO DE LINEA     
 t_ignore_COMENTARIO = r'/\*.*?\*/'    #COMENTARIOS(/*comentario*/)
 
 #T_ERROR
@@ -114,7 +114,7 @@ def t_error(t):
 lexer = lex.lex()
 f = open("tokens.txt","w+")
 
-lexer.input("var string casa,53 = 34casa if{} 32760 rojo94 '_rojo 67' function_n")
+lexer.input("a23 function \n int")
 
 # Tokenize
 while True:

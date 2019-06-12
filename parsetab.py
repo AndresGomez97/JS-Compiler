@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'ASIG BOOLEAN CADENA COMA DO ENTERO FUNCTION ID IF INT LCORCH LLLAVE LPAREN MENORQUE MMENOS NEG PRINT PROMPT PUNTO PYC RCORCH RETURN RLLAVE RPAREN STRING SUM VAR WHILEB : DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYCC : B CC : emptyB : VAR T ID PYCB : SS : ID ASIG E PYCS : RETURN E PYCT : STRINGT : BOOLEANT : INTS : PRINT LPAREN E RPAREN PYCS : PROMPT LPAREN E RPAREN PYCS : MMENOS ID PYCE : NEG RE : RR : U MENORQUE UR : UU : V SUM UU : VV : ENTEROV : IDV : CADENAV : LPAREN E RPARENempty :'
+_lr_signature = 'ASIG BOOLEAN CADENA COMA DO ENTERO FUNCTION ID IF INT LCORCH LLLAVE LPAREN MENORQUE MMENOS NEG PRINT PROMPT PUNTO PYC RCORCH RETURN RLLAVE RPAREN STRING SUM VAR WHILEP : B PP : F PP : emptyF : FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVEH : TH : emptyA : T ID KA : emptyK : COMA T ID KK : emptyW : D WW : emptyD : VAR T ID PYCD : DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYCD : IF LPAREN E RPAREN LLLAVE W RLLAVED : SW : RETURN X PYCX : emptyX : EB : IF LPAREN E RPAREN LLLAVE C RLLAVES : ID LPAREN L RPAREN PYCL : E QL : emptyQ : COMA E QQ : emptyB : DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYCC : B CC : emptyB : VAR T ID PYCB : SS : ID ASIG E PYCT : STRINGT : BOOLEANT : INTS : PRINT LPAREN E RPAREN PYCS : PROMPT LPAREN ID RPAREN PYCS : MMENOS ID PYCE : NEG RE : RR : U MENORQUE UR : UU : V SUM UU : VV : ENTEROV : IDV : CADENAV : LPAREN E RPARENV : ID LPAREN L RPARENempty :'
     
-_lr_action_items = {'PRINT':([0,6,17,31,33,39,43,49,50,51,56,],[1,-5,1,-13,1,-7,-4,-6,-11,-12,-1,]),'ASIG':([9,],[27,]),'NEG':([8,10,11,18,27,53,],[20,20,20,20,20,20,]),'ID':([0,5,6,8,10,11,12,13,14,15,17,18,20,27,31,33,37,38,39,43,49,50,51,53,56,],[9,16,-5,22,22,22,-8,-10,-9,30,9,22,22,22,-13,9,22,22,-7,-4,-6,-11,-12,22,-1,]),'RETURN':([0,6,17,31,33,39,43,49,50,51,56,],[8,-5,8,-13,8,-7,-4,-6,-11,-12,-1,]),'SUM':([19,22,24,26,46,],[-22,-21,38,-20,-23,]),'STRING':([4,],[12,]),'LLLAVE':([7,],[17,]),'INT':([4,],[13,]),'PROMPT':([0,6,17,31,33,39,43,49,50,51,56,],[2,-5,2,-13,2,-7,-4,-6,-11,-12,-1,]),'CADENA':([8,10,11,18,20,27,37,38,53,],[19,19,19,19,19,19,19,19,19,]),'LPAREN':([1,2,8,10,11,18,20,27,37,38,52,53,],[10,11,18,18,18,18,18,18,18,18,53,18,]),'RLLAVE':([6,17,31,32,33,34,39,43,44,49,50,51,56,],[-5,-24,-13,-3,-24,45,-7,-4,-2,-6,-11,-12,-1,]),'MENORQUE':([19,22,23,24,26,46,48,],[-22,-21,37,-19,-20,-23,-18,]),'VAR':([0,6,17,31,33,39,43,49,50,51,56,],[4,-5,4,-13,4,-7,-4,-6,-11,-12,-1,]),'ENTERO':([8,10,11,18,20,27,37,38,53,],[26,26,26,26,26,26,26,26,26,]),'MMENOS':([0,6,17,31,33,39,43,49,50,51,56,],[5,-5,5,-13,5,-7,-4,-6,-11,-12,-1,]),'$end':([3,6,31,39,43,49,50,51,56,],[0,-5,-13,-7,-4,-6,-11,-12,-1,]),'DO':([0,6,17,31,33,39,43,49,50,51,56,],[7,-5,7,-13,7,-7,-4,-6,-11,-12,-1,]),'BOOLEAN':([4,],[14,]),'WHILE':([45,],[52,]),'PYC':([16,19,21,22,23,24,25,26,30,36,40,41,42,46,47,48,55,],[31,-22,-15,-21,-17,-19,39,-20,43,-14,49,50,51,-23,-16,-18,56,]),'RPAREN':([19,21,22,23,24,26,28,29,35,36,46,47,48,54,],[-22,-15,-21,-17,-19,-20,41,42,46,-14,-23,-16,-18,55,]),}
+_lr_action_items = {'CADENA':([19,20,21,23,34,38,52,54,55,59,86,99,106,124,],[31,31,31,31,31,31,31,31,31,31,31,31,31,31,]),'BOOLEAN':([4,11,65,89,96,],[16,16,16,16,16,]),'SUM':([31,32,36,37,71,81,],[-46,-45,55,-44,-47,-48,]),'RPAREN':([20,31,32,33,35,36,37,40,41,42,43,44,45,52,53,56,60,61,65,68,69,70,71,73,77,79,81,82,84,88,90,92,103,113,115,126,],[-49,-46,-45,-39,-41,-43,-44,-23,58,-49,62,63,64,-49,-38,71,-25,-22,-49,81,-40,-42,-47,-49,-8,85,-48,-24,-49,-7,-10,102,-49,-9,119,127,]),'NEG':([19,20,21,23,38,52,59,86,99,106,124,],[34,34,34,34,34,34,34,34,34,34,34,]),'FUNCTION':([0,2,5,13,46,51,57,72,75,76,87,104,112,],[11,11,-30,11,-37,-29,-31,-21,-36,-35,-20,-4,-26,]),'ASIG':([6,],[19,]),'VAR':([0,2,5,13,28,46,49,51,57,72,74,75,76,87,91,97,101,104,110,112,118,121,125,128,],[4,4,-30,4,4,-37,4,-29,-31,-21,4,-36,-35,-20,96,-16,96,-4,96,-26,-13,96,-15,-14,]),'MENORQUE':([31,32,35,36,37,70,71,81,],[-46,-45,54,-43,-44,-42,-47,-48,]),'$end':([0,1,2,3,5,13,14,29,46,51,57,72,75,76,87,104,112,],[-49,-3,-49,0,-30,-49,-1,-2,-37,-29,-31,-21,-36,-35,-20,-4,-26,]),'RLLAVE':([5,28,46,48,49,50,51,57,66,72,74,75,76,83,87,91,94,95,97,101,110,111,112,116,117,118,121,123,125,128,],[-30,-49,-37,-28,-49,67,-29,-31,-27,-21,-49,-36,-35,87,-20,-49,-12,104,-16,-49,-49,-11,-26,-17,120,-13,-49,125,-15,-14,]),'LLLAVE':([12,62,85,100,119,],[28,74,91,110,121,]),'ID':([0,2,5,10,11,13,15,16,17,18,19,20,21,22,23,25,26,27,28,34,38,46,49,51,52,54,55,57,59,72,74,75,76,78,86,87,91,93,97,99,101,104,105,106,110,112,118,121,124,125,128,],[6,6,-30,24,-49,6,-34,-33,-32,30,32,32,32,44,32,-6,-5,47,6,32,32,-37,6,-29,32,32,32,-31,32,-21,6,-36,-35,84,32,-20,6,103,-16,32,6,-4,114,32,6,-26,-13,6,32,-15,-14,]),'IF':([0,2,5,13,28,46,49,51,57,72,74,75,76,87,91,97,101,104,110,112,118,121,125,128,],[7,7,-30,7,7,-37,7,-29,-31,-21,7,-36,-35,-20,98,-16,98,-4,98,-26,-13,98,-15,-14,]),'PROMPT':([0,2,5,13,28,46,49,51,57,72,74,75,76,87,91,97,101,104,110,112,118,121,125,128,],[8,8,-30,8,8,-37,8,-29,-31,-21,8,-36,-35,-20,8,-16,8,-4,8,-26,-13,8,-15,-14,]),'PRINT':([0,2,5,13,28,46,49,51,57,72,74,75,76,87,91,97,101,104,110,112,118,121,125,128,],[9,9,-30,9,9,-37,9,-29,-31,-21,9,-36,-35,-20,9,-16,9,-4,9,-26,-13,9,-15,-14,]),'MMENOS':([0,2,5,13,28,46,49,51,57,72,74,75,76,87,91,97,101,104,110,112,118,121,125,128,],[10,10,-30,10,10,-37,10,-29,-31,-21,10,-36,-35,-20,10,-16,10,-4,10,-26,-13,10,-15,-14,]),'INT':([4,11,65,89,96,],[15,15,15,15,15,]),'PYC':([24,30,31,32,33,35,36,37,39,53,58,63,64,69,70,71,81,99,102,107,108,109,114,127,],[46,51,-46,-45,-39,-41,-43,-44,57,-38,72,75,76,-40,-42,-47,-48,-49,112,-18,116,-19,118,128,]),'DO':([0,2,5,13,28,46,49,51,57,72,74,75,76,87,91,97,101,104,110,112,118,121,125,128,],[12,12,-30,12,12,-37,12,-29,-31,-21,12,-36,-35,-20,100,-16,100,-4,100,-26,-13,100,-15,-14,]),'RETURN':([46,57,72,75,76,91,97,101,110,118,121,125,128,],[-37,-31,-21,-36,-35,99,-16,99,99,-13,99,-15,-14,]),'COMA':([31,32,33,35,36,37,42,53,69,70,71,73,81,84,103,],[-46,-45,-39,-41,-43,-44,59,-38,-40,-42,-47,59,-48,89,89,]),'STRING':([4,11,65,89,96,],[17,17,17,17,17,]),'ENTERO':([19,20,21,23,34,38,52,54,55,59,86,99,106,124,],[37,37,37,37,37,37,37,37,37,37,37,37,37,37,]),'LPAREN':([6,7,8,9,19,20,21,23,32,34,38,47,52,54,55,59,80,86,98,99,106,122,124,],[20,21,22,23,38,38,38,38,52,38,38,65,38,38,38,38,86,38,106,38,38,124,38,]),'WHILE':([67,120,],[80,122,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'C':([17,33,],[34,44,]),'empty':([17,33,],[32,32,]),'V':([8,10,11,18,20,27,37,38,53,],[24,24,24,24,24,24,24,24,24,]),'B':([0,17,33,],[3,33,33,]),'E':([8,10,11,18,27,53,],[25,28,29,35,40,54,]),'U':([8,10,11,18,20,27,37,38,53,],[23,23,23,23,23,23,47,48,23,]),'S':([0,17,33,],[6,6,6,]),'R':([8,10,11,18,20,27,53,],[21,21,21,21,36,21,21,]),'T':([4,],[15,]),}
+_lr_goto_items = {'K':([84,103,],[88,113,]),'empty':([0,2,11,13,20,28,42,49,52,65,73,74,84,91,99,101,103,110,121,],[1,1,25,1,40,48,60,48,40,77,60,48,90,94,107,94,90,94,94,]),'W':([91,101,110,121,],[95,111,117,123,]),'B':([0,2,13,28,49,74,],[2,2,2,49,49,49,]),'L':([20,52,],[41,68,]),'Q':([42,73,],[61,82,]),'T':([4,11,65,89,96,],[18,26,78,93,105,]),'R':([19,20,21,23,34,38,52,59,86,99,106,124,],[33,33,33,33,53,33,33,33,33,33,33,33,]),'D':([91,101,110,121,],[101,101,101,101,]),'X':([99,],[108,]),'C':([28,49,74,],[50,66,83,]),'P':([0,2,13,],[3,14,29,]),'U':([19,20,21,23,34,38,52,54,55,59,86,99,106,124,],[35,35,35,35,35,35,35,69,70,35,35,35,35,35,]),'H':([11,],[27,]),'V':([19,20,21,23,34,38,52,54,55,59,86,99,106,124,],[36,36,36,36,36,36,36,36,36,36,36,36,36,36,]),'E':([19,20,21,23,38,52,59,86,99,106,124,],[39,42,43,45,56,42,73,92,109,115,126,]),'A':([65,],[79,]),'F':([0,2,13,],[13,13,13,]),'S':([0,2,13,28,49,74,91,101,110,121,],[5,5,5,5,5,5,97,97,97,97,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,29 +26,54 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> B","S'",1,None,None,None),
-  ('B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC','B',9,'p_do_while','pruebas_yacc.py',146),
-  ('C -> B C','C',2,'p_c_b_c','pruebas_yacc.py',149),
-  ('C -> empty','C',1,'p_c_empty','pruebas_yacc.py',152),
-  ('B -> VAR T ID PYC','B',4,'p_define_var','pruebas_yacc.py',159),
-  ('B -> S','B',1,'p_b_s','pruebas_yacc.py',174),
-  ('S -> ID ASIG E PYC','S',4,'p_asig','pruebas_yacc.py',179),
-  ('S -> RETURN E PYC','S',3,'p_return','pruebas_yacc.py',216),
-  ('T -> STRING','T',1,'p_tipo_str','pruebas_yacc.py',236),
-  ('T -> BOOLEAN','T',1,'p_tipo_bool','pruebas_yacc.py',240),
-  ('T -> INT','T',1,'p_tipo_int','pruebas_yacc.py',244),
-  ('S -> PRINT LPAREN E RPAREN PYC','S',5,'p_print','pruebas_yacc.py',254),
-  ('S -> PROMPT LPAREN E RPAREN PYC','S',5,'p_prompt','pruebas_yacc.py',277),
-  ('S -> MMENOS ID PYC','S',3,'p_id_mm','pruebas_yacc.py',308),
-  ('E -> NEG R','E',2,'p_e_notr','pruebas_yacc.py',315),
-  ('E -> R','E',1,'p_e_r','pruebas_yacc.py',326),
-  ('R -> U MENORQUE U','R',3,'p_erre_expression_minusthan','pruebas_yacc.py',330),
-  ('R -> U','R',1,'p_erre_expression','pruebas_yacc.py',352),
-  ('U -> V SUM U','U',3,'p_expression_plus','pruebas_yacc.py',356),
-  ('U -> V','U',1,'p_expression_term','pruebas_yacc.py',401),
-  ('V -> ENTERO','V',1,'p_term_number','pruebas_yacc.py',405),
-  ('V -> ID','V',1,'p_term_id','pruebas_yacc.py',408),
-  ('V -> CADENA','V',1,'p_term_string','pruebas_yacc.py',412),
-  ('V -> LPAREN E RPAREN','V',3,'p_paren','pruebas_yacc.py',416),
-  ('empty -> <empty>','empty',0,'p_empty','pruebas_yacc.py',425),
+  ("S' -> P","S'",1,None,None,None),
+  ('P -> B P','P',2,'p_b_p','pruebas_yacc.py',283),
+  ('P -> F P','P',2,'p_f_p','pruebas_yacc.py',286),
+  ('P -> empty','P',1,'p_eof','pruebas_yacc.py',289),
+  ('F -> FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVE','F',9,'p_f_function','pruebas_yacc.py',296),
+  ('H -> T','H',1,'p_h_tipo','pruebas_yacc.py',362),
+  ('H -> empty','H',1,'p_h_empty','pruebas_yacc.py',366),
+  ('A -> T ID K','A',3,'p_a_params','pruebas_yacc.py',372),
+  ('A -> empty','A',1,'p_a_empty','pruebas_yacc.py',376),
+  ('K -> COMA T ID K','K',4,'p_k_params','pruebas_yacc.py',379),
+  ('K -> empty','K',1,'p_k_empty','pruebas_yacc.py',383),
+  ('W -> D W','W',2,'p_w_d','pruebas_yacc.py',388),
+  ('W -> empty','W',1,'p_w_empty','pruebas_yacc.py',392),
+  ('D -> VAR T ID PYC','D',4,'p_define_var_func','pruebas_yacc.py',395),
+  ('D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC','D',9,'p_d_do_while','pruebas_yacc.py',402),
+  ('D -> IF LPAREN E RPAREN LLLAVE W RLLAVE','D',7,'p_d_if','pruebas_yacc.py',422),
+  ('D -> S','D',1,'p_d_s','pruebas_yacc.py',442),
+  ('W -> RETURN X PYC','W',3,'p_return','pruebas_yacc.py',449),
+  ('X -> empty','X',1,'p_return_empty','pruebas_yacc.py',476),
+  ('X -> E','X',1,'p_return_e','pruebas_yacc.py',479),
+  ('B -> IF LPAREN E RPAREN LLLAVE C RLLAVE','B',7,'p_if','pruebas_yacc.py',492),
+  ('S -> ID LPAREN L RPAREN PYC','S',5,'p_s_function','pruebas_yacc.py',515),
+  ('L -> E Q','L',2,'p_l_eq','pruebas_yacc.py',526),
+  ('L -> empty','L',1,'p_l_empty','pruebas_yacc.py',550),
+  ('Q -> COMA E Q','Q',3,'p_q_eq','pruebas_yacc.py',553),
+  ('Q -> empty','Q',1,'p_q_empty','pruebas_yacc.py',577),
+  ('B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC','B',9,'p_do_while','pruebas_yacc.py',585),
+  ('C -> B C','C',2,'p_c_b_c','pruebas_yacc.py',605),
+  ('C -> empty','C',1,'p_c_empty','pruebas_yacc.py',608),
+  ('B -> VAR T ID PYC','B',4,'p_define_var','pruebas_yacc.py',615),
+  ('B -> S','B',1,'p_b_s','pruebas_yacc.py',623),
+  ('S -> ID ASIG E PYC','S',4,'p_asig','pruebas_yacc.py',628),
+  ('T -> STRING','T',1,'p_tipo_str','pruebas_yacc.py',691),
+  ('T -> BOOLEAN','T',1,'p_tipo_bool','pruebas_yacc.py',695),
+  ('T -> INT','T',1,'p_tipo_int','pruebas_yacc.py',699),
+  ('S -> PRINT LPAREN E RPAREN PYC','S',5,'p_print','pruebas_yacc.py',709),
+  ('S -> PROMPT LPAREN ID RPAREN PYC','S',5,'p_prompt','pruebas_yacc.py',730),
+  ('S -> MMENOS ID PYC','S',3,'p_id_mm','pruebas_yacc.py',739),
+  ('E -> NEG R','E',2,'p_e_notr','pruebas_yacc.py',746),
+  ('E -> R','E',1,'p_e_r','pruebas_yacc.py',756),
+  ('R -> U MENORQUE U','R',3,'p_erre_expression_minusthan','pruebas_yacc.py',761),
+  ('R -> U','R',1,'p_erre_expression','pruebas_yacc.py',799),
+  ('U -> V SUM U','U',3,'p_expression_plus','pruebas_yacc.py',803),
+  ('U -> V','U',1,'p_expression_term','pruebas_yacc.py',865),
+  ('V -> ENTERO','V',1,'p_term_number','pruebas_yacc.py',869),
+  ('V -> ID','V',1,'p_term_id','pruebas_yacc.py',872),
+  ('V -> CADENA','V',1,'p_term_string','pruebas_yacc.py',876),
+  ('V -> LPAREN E RPAREN','V',3,'p_paren','pruebas_yacc.py',880),
+  ('V -> ID LPAREN L RPAREN','V',4,'p_v_func','pruebas_yacc.py',886),
+  ('empty -> <empty>','empty',0,'p_empty','pruebas_yacc.py',913),
 ]
