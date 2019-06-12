@@ -6,4 +6,9 @@ return q;
 var int t;
 t = a(23,23<24);
 var bool x;
-if(23<34){x = 24<12;}
+if(23<34){
+x = 24<12;
+}
+do{
+t = a(23,x);
+}while(x);

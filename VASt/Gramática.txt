@@ -1,0 +1,60 @@
+
+
+Axioma = S'
+
+NoTerminales = {S' P F H A K W D X B S L Q B C T E R U V empty}
+
+Terminales = {<empty> FUNCTION ID LPAREN RPAREN LLLAVE RLLAVE COMA VAR PYC DO WHILE IF RETURN ASIG STRING BOOLEAN INT PRINT PROMPT MMENOS NEG MENORQUE SUM ENTERO CADENA}
+
+Producciones = {   
+    S' -> P
+    P -> B P
+    P -> F P
+    P -> empty
+    F -> FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVE
+    H -> T
+    H -> empty
+    A -> T ID K
+    A -> empty
+    K -> COMA T ID K
+    K -> empty
+    W -> D W
+    W -> empty
+    D -> VAR T ID PYC
+    D -> DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC
+    D -> IF LPAREN E RPAREN LLLAVE W RLLAVE
+    D -> S
+    W -> RETURN X PYC
+    X -> empty
+    X -> E
+    B -> IF LPAREN E RPAREN LLLAVE C RLLAVE
+    S -> ID LPAREN L RPAREN PYC
+    L -> E Q
+    L -> empty
+    Q -> COMA E Q
+    Q -> empty
+    B -> DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC
+    C -> B C
+    C -> empty
+    B -> VAR T ID PYC
+    B -> S
+    S -> ID ASIG E PYC
+    T -> STRING
+    T -> BOOLEAN
+    T -> INT
+    S -> PRINT LPAREN E RPAREN PYC
+    S -> PROMPT LPAREN ID RPAREN PYC
+    S -> MMENOS ID PYC
+    E -> NEG R
+    E -> R
+    R -> U MENORQUE U
+    R -> U
+    U -> V SUM U
+    U -> V
+    V -> ENTERO
+    V -> ID
+    V -> CADENA
+    V -> LPAREN E RPAREN
+    V -> ID LPAREN L RPAREN
+    empty -> <empty>
+}

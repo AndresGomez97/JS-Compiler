@@ -114,7 +114,7 @@ def t_error(t):
 lexer = lex.lex()
 f = open("tokens.txt","w+")
 
-lexer.input("a23 function \n int")
+
 
 # Tokenize
 while True:
