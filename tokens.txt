@@ -1,7 +1,5 @@
 <VAR,var>
 <STRING,string>
-<ID,print>
-<LPAREN,(>
 <ID,casa>
 <COMA,,>
 <ENTERO,53>
