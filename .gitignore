@@ -1,3 +1,4 @@
-*.txt
+code.txt
+tokens.txt
 *.orig
 .DS_Store

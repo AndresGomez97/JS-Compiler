@@ -275,15 +275,22 @@ def get_tipos_params(params):
 #########
 # START #
 #########
+parse_text = ""
 
 def p_b_p(p):
     'P : B P'
+    global parse_text 
+    parse_text = parse_text + "2 "
     
 def p_f_p(p):
     'P : F P'
+    global parse_text 
+    parse_text = parse_text + "3 "
 
 def p_eof(p):
     'P : empty'
+    global parse_text 
+    parse_text = parse_text + "4 "
 
 ############################################################################################################
 ######################################### Function #########################################################
@@ -291,6 +298,8 @@ def p_eof(p):
 
 def p_f_function(p):
     'F : FUNCTION H ID LPAREN A RPAREN LLLAVE W RLLAVE'
+    global parse_text 
+    parse_text = parse_text + "5 "
 
     loc_vars = []
     check = []
@@ -358,38 +367,56 @@ def p_f_function(p):
 def p_h_tipo(p):
     'H : T'
     p[0] = p[1]
+    global parse_text 
+    parse_text = parse_text + "6 "
 
 def p_h_empty(p):
     'H : empty'
+    global parse_text 
+    parse_text = parse_text + "7 "
     p[0] = p[1]
 ##########################
 
 ##### PARAMETROS #####
 def p_a_params(p):
     'A : T ID K'
+    global parse_text 
+    parse_text = parse_text + "8 "
     buffer_params.append([p[2],p[1]])
 
 def p_a_empty(p):
     'A : empty'
+    global parse_text 
+    parse_text = parse_text + "9 "
 
 def p_k_params(p):
     'K : COMA T ID K'
+    global parse_text 
+    parse_text = parse_text + "10 "
     buffer_params.append([p[3],p[2]])
+    
 
 def p_k_empty(p):
     'K : empty'
+    global parse_text 
+    parse_text = parse_text + "11 "
     
 #####################
 
 def p_w_d(p):
     'W : D W'
-    
+    global parse_text 
+    parse_text = parse_text + "12 "
 
 def p_w_empty(p):
     'W : empty'
+    global parse_text 
+    parse_text = parse_text + "13 "
 
 def p_define_var_func(p):
     'D : VAR T ID PYC'
+    global parse_text 
+    parse_text = parse_text + "14 "
     if not var_already_exist(p[3]):
         buffer_vars_locales.append([p[3],p[2]])
     else:
@@ -397,6 +424,8 @@ def p_define_var_func(p):
 
 def p_d_do_while(p):
     'D : DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC'
+    global parse_text 
+    parse_text = parse_text + "15 "
     if type(p[7]) is int:
         print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[7]))
     elif type(p[7]) is str:
@@ -417,6 +446,8 @@ def p_d_do_while(p):
 
 def p_d_if(p):
     'D : IF LPAREN E RPAREN LLLAVE W RLLAVE'
+    global parse_text 
+    parse_text = parse_text + "16 "
     if type(p[3]) is int:
         print('Syntax error IF. {} is not a bool expression'.format(p[3]))
     elif type(p[3]) is str:
@@ -437,6 +468,8 @@ def p_d_if(p):
 
 def p_d_s(p):
     'D : S'
+    global parse_text 
+    parse_text = parse_text + "17 "
 
 ##########
 # Return #
@@ -444,6 +477,8 @@ def p_d_s(p):
 
 def p_return(p):
     'W : RETURN X PYC'
+    global parse_text 
+    parse_text = parse_text + "18 "
     if type(p[2]) is str:
         if var_is_cadena(p[2]): 
             buffer_returns.append('string')
@@ -471,9 +506,13 @@ def p_return(p):
 
 def p_return_empty(p):
     'X : empty'
+    global parse_text 
+    parse_text = parse_text + "19 "
     buffer_returns.append('null')
 def p_return_e(p):
     'X : E'
+    global parse_text 
+    parse_text = parse_text + "20 "
     p[0] = p[1]
 
 
@@ -487,6 +526,8 @@ def p_return_e(p):
 ######
 def p_if(p):
     'B : IF LPAREN E RPAREN LLLAVE C RLLAVE'
+    global parse_text 
+    parse_text = parse_text + "21 "
     if type(p[3]) is int:
         print('Syntax error IF. {} is not a bool expression'.format(p[3]))
     elif type(p[3]) is str:
@@ -510,6 +551,8 @@ def p_if(p):
 
 def p_s_function(p):
     'S : ID LPAREN L RPAREN PYC'
+    global parse_text 
+    parse_text = parse_text + "22 "
     print(buffer_params_llamada)
     fun = func_exist(p[1])
     if fun == None:
@@ -521,6 +564,8 @@ def p_s_function(p):
 
 def p_l_eq(p):
     'L : E Q'
+    global parse_text 
+    parse_text = parse_text + "23 "
     if type(p[1]) is int:
         buffer_params_llamada.append('int')
     elif type(p[1]) is bool:
@@ -545,9 +590,13 @@ def p_l_eq(p):
         print('Syntax error CALLING FUNCTION')
 def p_l_empty(p):
     'L : empty'
+    global parse_text 
+    parse_text = parse_text + "24 "
 
 def p_q_eq(p):
     'Q : COMA E Q'
+    global parse_text 
+    parse_text = parse_text + "25 "
     if type(p[2]) is int:
         buffer_params_llamada.append('int')
     elif type(p[2]) is bool:
@@ -572,6 +621,8 @@ def p_q_eq(p):
             
 def p_q_empty(p):
     'Q : empty'
+    global parse_text 
+    parse_text = parse_text + "26 "
 
 
 ############
@@ -580,6 +631,8 @@ def p_q_empty(p):
 
 def p_do_while(p):
     'B : DO LLLAVE C RLLAVE WHILE LPAREN E RPAREN PYC'
+    global parse_text 
+    parse_text = parse_text + "27 "
     if type(p[7]) is int:
         print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[7]))
     elif type(p[7]) is str:
@@ -600,9 +653,13 @@ def p_do_while(p):
 
 def p_c_b_c(p):
     'C : B C'
+    global parse_text 
+    parse_text = parse_text + "28 "
 
 def p_c_empty(p):
     'C : empty'
+    global parse_text 
+    parse_text = parse_text + "29 "
 
 ######################################
 # Creación y asisgnación de Variable #
@@ -610,6 +667,8 @@ def p_c_empty(p):
 
 def p_define_var(p):
     'B : VAR T ID PYC'
+    global parse_text 
+    parse_text = parse_text + "30 "
     if not var_already_exist(p[3]):
         vars_globales.append([p[3],p[2]])
     else:
@@ -618,11 +677,15 @@ def p_define_var(p):
 
 def p_b_s(p):
     'B : S'
+    global parse_text 
+    parse_text = parse_text + "31 "
     p[0]=p[1]
 
 
 def p_asig(p):
     'S : ID ASIG E PYC'
+    global parse_text 
+    parse_text = parse_text + "32 "
     if var_is_global_int(p[1]) or var_is_local_int(p[1]): 
         if type(p[3]) is bool:
             print('Syntax error ASIG')
@@ -686,14 +749,20 @@ def p_asig(p):
 
 def p_tipo_str(p):
     'T : STRING'
+    global parse_text 
+    parse_text = parse_text + "33 "
     p[0] = p[1]
 
 def p_tipo_bool(p):
     'T : BOOLEAN'
+    global parse_text 
+    parse_text = parse_text + "34 "
     p[0] = p[1]
 
 def p_tipo_int(p):
     'T : INT'
+    global parse_text 
+    parse_text = parse_text + "35 "
     p[0] = p[1]
 #def p_tipo_empty(p):
 #    'T : empty'
@@ -704,6 +773,8 @@ def p_tipo_int(p):
 
 def p_print(p):
     'S : PRINT LPAREN E RPAREN PYC'
+    global parse_text 
+    parse_text = parse_text + "36 "
     if type(p[3]) is str:
         if var_is_func(p[3]):
             id_func = get_id_function(p[3])
@@ -725,6 +796,8 @@ def p_print(p):
 
 def p_prompt(p):
     'S : PROMPT LPAREN ID RPAREN PYC'  
+    global parse_text 
+    parse_text = parse_text + "37 "
     if not var_already_exist(p[3]):
             print('Syntax error PRINT. Variable {} is not define'.format(p[3]))   
 
@@ -734,6 +807,8 @@ def p_prompt(p):
 
 def p_id_mm(p):
     'S : MMENOS ID PYC'
+    global parse_text 
+    parse_text = parse_text + "38 "
     if not var_already_exist(p[2]):
         print('Syntax error MMINUS')
     elif not (var_is_global_int(p[2]) or var_is_local_int(p[2])):
@@ -741,6 +816,8 @@ def p_id_mm(p):
 
 def p_e_notr(p):
     'E : NEG R'
+    global parse_text 
+    parse_text = parse_text + "39 "
     if type(p[2]) is bool:
         p[0] = not p[2]
     elif type(p[2]) is str and not var_is_cadena(p[2]):
@@ -751,11 +828,15 @@ def p_e_notr(p):
 
 def p_e_r(p):
     'E : R'
+    global parse_text 
+    parse_text = parse_text + "40 "
     p[0]=p[1]
 
 ######## RETOCAR #########
 def p_erre_expression_minusthan(p):
     'R : U MENORQUE U'
+    global parse_text 
+    parse_text = parse_text + "41 "
     if type(p[1]) is int and type(p[3]) is int:
         p[0] = p[1] < p[3]
     elif type([1]) is int and type(p[3]) is str:
@@ -794,10 +875,14 @@ def p_erre_expression_minusthan(p):
 
 def p_erre_expression(p):
     'R : U'
+    global parse_text 
+    parse_text = parse_text + "42 "
     p[0] = p[1]
 
 def p_expression_plus(p):
     'U : V SUM U'
+    global parse_text 
+    parse_text = parse_text + "43 "
 
     #Si los dos son enteros
     if type(p[1]) is int and type(p[3]) is int:
@@ -860,27 +945,39 @@ def p_expression_plus(p):
 
 def p_expression_term(p):
     'U : V'
+    global parse_text 
+    parse_text = parse_text + "44 "
     p[0] = p[1]
 
 def p_term_number(p):
     'V : ENTERO'
+    global parse_text 
+    parse_text = parse_text + "45 "
     p[0] = p[1]
 def p_term_id(p):
     'V : ID'
+    global parse_text 
+    parse_text = parse_text + "46 "
     p[0] = p[1]
 
 def p_term_string(p):
     'V : CADENA'
+    global parse_text 
+    parse_text = parse_text + "47 "
     p[0] = p[1]
 
 def p_paren(p):
     'V : LPAREN E RPAREN'
+    global parse_text 
+    parse_text = parse_text + "48 "
     p[0]= (p[2])
 
 
    
 def p_v_func(p):
     'V : ID LPAREN L RPAREN'
+    global parse_text 
+    parse_text = parse_text + "49 "
     fun = func_exist(p[1])
     if fun == None:
         print('Syntax error ID(). Function {} does not exist'.format(p[1]))
@@ -907,8 +1004,10 @@ def p_v_func(p):
 ###############
 
 def p_empty(p):
-     'empty :'
-     pass
+    'empty :'
+    global parse_text 
+    parse_text = parse_text + "50 "
+    pass
 
 ###############
 #### Error ####
@@ -943,12 +1042,14 @@ while True:
     f.write(parser(tok)+"\n")
 
 
+
 ############
 ### Yacc ###
 ############
 yacc.yacc()
 
 yacc.parse(fl)
+
 
 """
 while True:
@@ -960,3 +1061,11 @@ while True:
         continue
     yacc.parse(s)
  """   
+
+
+#################
+# Fichero parse #
+#################
+
+f = open("./VASt/Parse.txt","w+")
+f.write('A '+parse_text+'1')
