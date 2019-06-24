@@ -76,7 +76,7 @@ def t_ENTERO(t):
     t.value = int(t.value)
     if t.value <= 32767 and t.value >= -32767:
         return t
-    print("ERROR 40: Entero mayor que 32767 o menor que -32767 no son contemplados")
+    print("Lex error: Entero mayor que 32767 o menor que -32767 no son contemplados")
     t.lexer.skip(1)
 
 def t_ID(t):
@@ -89,6 +89,10 @@ def parser(t):
     s = "<{},{}>".format(t.type, t.value)
     return s 
 
+#T_ERROR
+def t_error(t):
+    t.lexer.skip(1)
+
 #T_IGNORE
 
 t_ignore_TAB = r'\t' #TABULADOR
@@ -96,10 +100,8 @@ t_ignore_Line = r'\n'
 t_ignore_RT = r'\r'  #RETORNO DE CARRO
 t_ignore_COMENTARIO = r'/\*.*?\*/'    #COMENTARIOS(/*comentario*/)
 
-#T_ERROR
-def t_error(t):
-    t.lexer.skip(1)
-    
+
+
 ###############
 # Build Lexer #
 ###############
@@ -108,8 +110,6 @@ lexer = lex.lex()
 #################################################################################################################################
 #################################### Sintactico y Semantico #####################################################################
 #################################################################################################################################
-
-
 
 
 #############################
@@ -276,6 +276,7 @@ def get_tipos_params(params):
 # START #
 #########
 parse_text = ""
+linea = 0
 
 def p_b_p(p):
     'P : B P'
@@ -347,21 +348,21 @@ def p_f_function(p):
             if returns_ok == 0:
                 funciones.append({'id':p[3],'tipo': p[2],'params':check,'vars':loc_vars})
             else:
-                print('Syntax error FUNCTION. Returns dont match with the specified type')
+                print('Semantic error FUNCTION at line {}. Returns dont match with the specified type'.format(lineas()))
         #Si hay duplicados
         else:
-            print('Syntax error FUNCTION. ID {} is already used as param'.format(duplicado))
+            print('Semantic error FUNCTION at line {}. ID {} is already used as param'.format(lineas(),duplicado))
 
     #Si existe
     else:
-        print('Syntax error FUNCTION. ID {} already exists'.format(p[3]))
+        print('Semantic error FUNCTION at line {}. ID {} already exists'.format(lineas(),p[3]))
     
-    print(buffer_params)
-    print(buffer_vars_locales)
+    #print(buffer_params)
+    #print(buffer_vars_locales)
     #Limpiamos buffer
     delete_buffer()
 
-    print(funciones)   
+    #print(funciones)   
 
 ##### TIPO A DEVOLVER #####
 def p_h_tipo(p):
@@ -420,51 +421,51 @@ def p_define_var_func(p):
     if not var_already_exist(p[3]):
         buffer_vars_locales.append([p[3],p[2]])
     else:
-        print('The variable already exist')
+        print('Semantic error at line {}. The variable already exist'.format(lineas()))
 
 def p_d_do_while(p):
     'D : DO LLLAVE W RLLAVE WHILE LPAREN E RPAREN PYC'
     global parse_text 
     parse_text = parse_text + "15 "
     if type(p[7]) is int:
-        print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[7]))
+        print('Semantic error DO/WHILE at line {}. {} is not a bool expression'.format(lineas(),p[7]))
     elif type(p[7]) is str:
         if var_is_cadena(p[7]):
-            print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[7]))
+            print('Semantic error DO/WHILE at line {}. {} is not a bool expression'.format(lineas(),p[7]))
         elif var_is_func(p[7]):
             id_func = get_id_function(p[7])
             fun = func_exist(id_func)
             if fun != None:
                 if fun['tipo'] != 'bool':
-                    print('Syntax error IF. Function doestn return a bool')
+                    print('Semantic error IF at line {}. Function doestn return a bool'.format(lineas()))
             else:
-                print('Syntax error DO/WHILE. Function doesnt exist')
+                print('Semantic error DO/WHILE at line {}. Function doesnt exist'.format(lineas()))
         elif not (var_is_global_bool(p[7]) or var_is_local_bool(p[7])):
-            print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[7]))
+            print('Semantic error DO/WHILE at line {}. {} is not a bool expression'.format(lineas(),p[7]))
     elif p[3] is None:
-        print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[7]))
+        print('Semantic error DO/WHILE at line {}. {} is not a bool expression'.format(lineas(),p[7]))
 
 def p_d_if(p):
     'D : IF LPAREN E RPAREN LLLAVE W RLLAVE'
     global parse_text 
     parse_text = parse_text + "16 "
     if type(p[3]) is int:
-        print('Syntax error IF. {} is not a bool expression'.format(p[3]))
+        print('Semantic error IF at line {}. {} is not a bool expression'.format(lineas(),p[3]))
     elif type(p[3]) is str:
         if var_is_cadena(p[3]):
-            print('Syntax error IF. {} is not a bool expression'.format(p[3]))
+            print('Semantic error IF at line {}. {} is not a bool expression'.format(lineas(),p[3]))
         elif var_is_func(p[3]):
             id_func = get_id_function(p[3])
             fun = func_exist(id_func)
             if fun != None:
                 if fun['tipo'] != 'bool':
-                    print('Syntax error IF. Function doestn return a bool')
+                    print('Semantic error IF at line {}. Function doestn return a bool'.format(lineas()))
             else:
-                print('Syntax error IF. Function doesnt exist')
+                print('Semantic error IF. Function doesnt exist')
         elif not(var_is_global_bool(p[3]) or var_is_local_bool(p[3])):
-            print('Syntax error IF. {} is not a bool expression'.format(p[3]))
+            print('Semantic error IF at line {}. {} is not a bool expression'.format(lineas(),p[3]))
     elif p[3] is None:
-        print('Syntax error IF. {} is not a bool expression'.format(p[3]))
+        print('Semantic error IF at line {}. {} is not a bool expression'.format(lineas(),p[3]))
 
 def p_d_s(p):
     'D : S'
@@ -497,7 +498,7 @@ def p_return(p):
                 elif var_is_local_str(p[2]):
                     buffer_returns.append('string')
             else:
-                print('Syntax error RETURN. Variable {} is not define'.format(p[2]))
+                print('Semantic error RETURN at line {}. Variable {} is not define'.format(lineas(),p[2]))
     elif type(p[2]) is int:
         buffer_returns.append('int')
     elif type(p[2]) is bool:
@@ -529,22 +530,22 @@ def p_if(p):
     global parse_text 
     parse_text = parse_text + "21 "
     if type(p[3]) is int:
-        print('Syntax error IF. {} is not a bool expression'.format(p[3]))
+        print('Semantic error IF at line {}. {} is not a bool expression'.format(lineas(),p[3]))
     elif type(p[3]) is str:
         if var_is_cadena(p[3]):
-            print('Syntax error IF. {} is not a bool expression'.format(p[3]))
+            print('Semantic error IF at line {}. {} is not a bool expression'.format(lineas(),p[3]))
         elif var_is_func(p[3]):
             id_func = get_id_function(p[3])
             fun = func_exist(id_func)
             if fun!=None:
                 if fun['tipo'] != 'bool':
-                    print('Syntax error IF. Function doesnt return a bool')
+                    print('Semantic error IF at line {}. Function doesnt return a bool'.format(lineas()))
             else:
-                print('Syntax error IF. Function doesnt exist')
+                print('Semantic error IF at line {}. Function doesnt exist'.format(lineas()))
         elif not var_is_global_bool(p[3]):
-            print('Syntax error IF. {} is not a bool expression'.format(p[3]))
+            print('Semantic error IF at line {}. {} is not a bool expression'.format(lineas(),p[3]))
     elif p[3] is None:
-        print('Syntax error IF. {} is not a bool expression'.format(p[3]))
+        print('Semantic error IF at line {}. {} is not a bool expression'.format(lineas(),p[3]))
 #####################
 # Llamada a funcion #
 #####################
@@ -556,10 +557,10 @@ def p_s_function(p):
     print(buffer_params_llamada)
     fun = func_exist(p[1])
     if fun == None:
-        print('Syntax error ID(). Function {} does not exist'.format(p[1]))
+        print('Semantic error ID() at line {}. Function {} does not exist'.format(lineas(),p[1]))
     else:
         if buffer_params_llamada != get_tipos_params(fun['params']):
-            print('Syntax error ID(). Params are not right')
+            print('Semantic error ID() at line {}. Params are not right'.format(lineas()))
     delete_buffer_llamada()
 
 def p_l_eq(p):
@@ -583,11 +584,11 @@ def p_l_eq(p):
                 tipo = fun['tipo']
                 buffer_params_llamada.append(tipo)
             else:
-                print('Syntax error CALLING FUNCTION')
+                print('Semantic error CALLING FUNCTION at line {}. The function {} you are trying to call is not define'.format(lineas,p[1]))
         else:
-            print('Syntax error CALLING FUNCTION')  
+            print('Semantic error CALLING FUNCTION at line {}.'.format(lineas()))  
     else:
-        print('Syntax error CALLING FUNCTION')
+        print('Semantic error CALLING FUNCTION at line {}.'.format(lineas()))
 def p_l_empty(p):
     'L : empty'
     global parse_text 
@@ -614,10 +615,10 @@ def p_q_eq(p):
                 tipo = fun['tipo']
                 buffer_params_llamada.append(tipo)
             else:
-                print('Syntax error CALLING FUNCTION')
+                print('Semantic error CALLING FUNCTION at line {}.'.format(lineas()))  
         
         else:
-            print('Syntax error CALLING FUNCTION')
+            print('Semantic error CALLING FUNCTION at line {}.'.format(lineas()))  
             
 def p_q_empty(p):
     'Q : empty'
@@ -634,22 +635,22 @@ def p_do_while(p):
     global parse_text 
     parse_text = parse_text + "27 "
     if type(p[7]) is int:
-        print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[7]))
+        print('Semantic error DO/WHILE at line {}. {} is not a bool expression'.format(lineas(),p[7]))
     elif type(p[7]) is str:
         if var_is_cadena(p[7]):
-            print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[7]))
+            print('Semantic error DO/WHILE at line {}. {} is not a bool expression'.format(lineas(),p[7]))
         elif var_is_func(p[7]):
             id_func = get_id_function(p[7])
             fun = func_exist(id_func)
             if fun != None:
                 if fun['tipo'] != 'bool':
-                    print('Syntax error DO/WHILE. Function doesnt return a bool')
+                    print('Semantic error DO/WHILE at line {}. Function doesnt return a bool'.format(lineas()))
             else:
-                print('Syntax error DO/WHILE. Function doesnt exist')
+                print('Semantic error DO/WHILE at line {}. Function doesnt exist'.format(lineas()))
         elif not var_is_global_bool(p[7]):
-            print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[7]))
+            print('Semantic error DO/WHILE at line {}. {} is not a bool expression'.format(lineas(),p[7]))
     elif p[7] is None:
-        print('Syntax error DO/WHILE. {} is not a bool expression'.format(p[7]))
+        print('Semantic error DO/WHILE at line {}. {} is not a bool expression'.format(lineas(),p[7]))
 
 def p_c_b_c(p):
     'C : B C'
@@ -672,7 +673,7 @@ def p_define_var(p):
     if not var_already_exist(p[3]):
         vars_globales.append([p[3],p[2]])
     else:
-        print('The variable already exist')
+        print('Semnatic error defining new variable at line {}. The variable already exist'.format(lineas()))
     
 
 def p_b_s(p):
@@ -688,37 +689,37 @@ def p_asig(p):
     parse_text = parse_text + "32 "
     if var_is_global_int(p[1]) or var_is_local_int(p[1]): 
         if type(p[3]) is bool:
-            print('Syntax error ASIG')
+            print('Semantic error ASIG at line {}. Types dont match'.format(lineas()))
         elif type(p[3]) is str:
             if var_is_cadena(p[3]):
-               print('Syntax error ASIG') 
+               print('Semantic error ASIG at line {}. Types dont match'.format(lineas())) 
             elif var_is_func(p[3]):
                 id_func = get_id_function(p[3])
                 fun = func_exist(id_func)
                 if fun != None:
                     if fun['tipo'] != 'int':
-                        print('Syntax error ASIG')
+                        print('Semantic error ASIG at line {}. Types dont match'.format(lineas()))
                 else:
-                    print('Syntax error ASIG')
+                    print('Semantic error ASIG at line {}. The function doesnt exist'.format(lineas()))
             elif not(var_is_global_int(p[3]) or var_is_local_int(p[3])):
-                print('Syntax error ASIG')
+                print('Semantic error ASIG at line {}. The var doesnt exist'.format(lineas()))
 
     elif var_is_global_bool(p[1]) or var_is_local_bool(p[1]): 
         if type(p[3]) is int:
-            print('Syntax error ASIG')
+            print('Semantic error ASIG at line {}. Types dont match'.format(lineas()))
         elif type(p[3]) is str:
             if var_is_cadena(p[3]):
-                print('Syntax error ASIG')
+                print('Semantic error ASIG at line {}. Types dont match'.format(lineas()))
             elif var_is_func(p[3]):
                 id_func = get_id_function(p[3])
                 fun = func_exist(id_func)
                 if fun != None:
                     if fun['tipo'] != 'bool':
-                        print('Syntax error ASIG')
+                        print('Semantic error ASIG at line {}. Types dont match'.format(lineas()))
                 else:
-                    print('Syntax error ASIG')
+                    print('Semantic error ASIG at line {}. The function doesnt exist'.format(lineas()))
             elif not(var_is_global_bool(p[3]) or var_is_local_bool(p[3])):
-                print('Syntax error ASIG')
+                print('Semantic error ASIG at line {}. The var doesnt exist'.format(lineas()))
     
     elif var_is_global_string(p[1]) or var_is_local_str(p[1]):
         if type(p[3]) is str:
@@ -727,20 +728,20 @@ def p_asig(p):
                 fun = func_exist(id_func)
                 if fun != None:
                     if fun['tipo'] != 'string':
-                        print('Syntax error ASIG')
+                        print('Semantic error ASIG at line {}. Types dont match'.format(lineas()))
                 else:
-                    print('Syntax error ASIG')
+                    print('Semantic error ASIG at line {}. The function doesnt exist'.format(lineas()))
             elif not var_is_cadena(p[3]):
                 if not (var_is_global_string(p[3]) or var_is_local_str(p[3])):
-                    print('Syntax error ASIG')
+                    print('Semantic error ASIG at line {}. The var doesnt exist'.format(lineas()))
 
         elif type(p[3]) is bool:
-            print('Syntax error ASIG')
+            print('Semantic error ASIG at line {}. Types dont match'.format(lineas()))
         elif type(p[3]) is int:
-            print('Syntax error ASIG')
+            print('Semantic error ASIG at line {}. Types dont match'.format(lineas()))
      
     else:
-        print('Variable {} not define'.format(p[1]))
+        print('Semantic error ASIG at line {}. Variable {} not define'.format(lineas(),p[1]))
 
 
 #########
@@ -781,14 +782,14 @@ def p_print(p):
             fun = func_exist(id_func)
             if fun != None:
                 if fun['tipo'] == None:
-                    print('Syntax error PRINT. Function has no return value')
+                    print('Semantic error PRINT at line {}. Function has no return value'.format(lineas()))
             else:
-                print('Syntax error PRINT. Function doesnt exist') 
+                print('Semantic error PRINT at line {}. Function doesnt exist'.format(lineas())) 
         elif not var_is_cadena(p[3]):    
             if not var_already_exist(p[3]):
-                print('Syntax error PRINT. Variable {} is not define'.format(p[3]))  
+                print('Semantic error PRINT at line {}. Variable {} is not define'.format(lineas(),p[3]))  
     elif p[3] is None:
-        print('Syntax error PRINT.')
+        print('Semantic error PRINT at line {}. Nothing was found to print'.format(lineas()))
 
 #########
 # Prompt #
@@ -799,7 +800,7 @@ def p_prompt(p):
     global parse_text 
     parse_text = parse_text + "37 "
     if not var_already_exist(p[3]):
-            print('Syntax error PRINT. Variable {} is not define'.format(p[3]))   
+            print('Semantic error PRINT at line {}. Variable {} is not define'.format(lineas(),p[3]))   
 
 ##############
 # Operadores #
@@ -810,9 +811,9 @@ def p_id_mm(p):
     global parse_text 
     parse_text = parse_text + "38 "
     if not var_already_exist(p[2]):
-        print('Syntax error MMINUS')
+        print('Semantic error MMINUS at line {}. Variable {} is not define'.format(lineas(),p[2]))
     elif not (var_is_global_int(p[2]) or var_is_local_int(p[2])):
-        print('Syntax error MMINUS')
+        print('Semantic error MMINUS at line {}. Variable {} is not an Integer'.format(lineas(),p[2]))
 
 def p_e_notr(p):
     'E : NEG R'
@@ -822,9 +823,9 @@ def p_e_notr(p):
         p[0] = not p[2]
     elif type(p[2]) is str and not var_is_cadena(p[2]):
         if not var_is_global_bool(p[2]):
-            print('Syntax error NOT')   
+            print('Semantic error NOT at line {}. Variable {} is not a boolean.'.format(lineas(),p[2]))   
     else:
-        print('Syntax error NOT')
+        print('Semantic error NOT at line {}. Variable {} is not a boolean'.format(lineas(),p[2]))
 
 def p_e_r(p):
     'E : R'
@@ -845,33 +846,33 @@ def p_erre_expression_minusthan(p):
             fun = func_exist(id_func)
             if fun != None:
                 if fun['tipo'] != 'int':
-                    print('Syntax error SUM')
+                    print('Semantic error LESSTHAN at line {}. Function {} does not return an Integer'.format(lineas(),p[3]))
             else:
-                print('Syntax error SUM')
+                print('Semantic error LESSTHAN at line {}. Function {} is not define.'.format(lineas(),p[3]))
         elif var_is_global_int(p[3]) or var_is_local_int(p[3]):
             p[0] = False
         else:
-            print('Syntax error LESSTHAN')
+            print('Semantic error LESSTHAN at line {}. {} is not an Integer'.format(lineas(),p[3]))
     elif type(p[1]) is str and type(p[3]) is int:
         if var_is_func(p[1]):
             id_func = get_id_function(p[1])
             fun = func_exist(id_func)
             if fun != None:
                 if fun['tipo'] != 'int':
-                    print('Syntax error SUM')
+                    print('Semantic error LESSTHAN at line {}. Function {} does not return an Integer'.format(lineas(),p[1]))
             else:
-                print('Syntax error SUM')
+                print('Semantic error LESSTHAN at line {}. Function {} is not define'.format(lineas(),p[1]))
         elif var_is_global_int(p[1]) or var_is_local_int(p[1]):
             p[0] = False
         else:
-            print('Syntax error LESSTHAN')
+            print('Semantic error LESSTHAN at line {}. {} is not an Integer'.format(lineas(), p[1]))
     elif type(p[1]) is str and type(p[3]) is str:
         if (var_is_global_int(p[1]) or var_is_local_int(p[1])) and (var_is_global_int(p[3]) or var_is_local_int(p[3])):
             p[0] = False
         else:
-            print('Syntax error LESSTHAN')
+            print('Semantic error LESSTHAN at line {}.'.format(lineas()))
     else:
-        print('Syntax error LESSTHAN')
+        print('Semantic error LESSTHAN at line {}.'.format(lineas()))
 
 def p_erre_expression(p):
     'R : U'
@@ -895,16 +896,16 @@ def p_expression_plus(p):
             fun = func_exist(id_func)
             if fun != None:
                 if fun['tipo'] != 'int':
-                    print('Syntax error SUM')
+                    print('Semantic error SUM at line {}. Function {} does not return an Integer'.format(lineas(),p[3]))
             else:
-                print('Syntax error SUM')
+                print('Semantic error SUM at line {}. Function {} is not define'.format(lineas(),p[3]))
         elif var_already_exist(p[3]):
             if var_is_global_int(p[3]) or var_is_local_int(p[3]):
                 p[0] = 0
             else:
-                print('Variable {} is not an integer'.format(p[3]))
+                print('Semantic error SUM at line {}. Variable {} is not an integer'.format(lineas(),p[3]))
         else:
-            print('Variable {} not define'.format(p[3]))
+            print('Semantic error SUM at line {}. Variable {} not define'.format(lineas(),p[3]))
 
     #Si el primero es variable y el segundo id
     elif type(p[1]) is str and type(p[3]) is int:
@@ -913,18 +914,18 @@ def p_expression_plus(p):
             fun = func_exist(id_func)
             if fun != None:
                 if fun['tipo'] != 'int':
-                    print('Syntax error SUM')
+                    print('Semantic error SUM at line {}. Function {} does not return an Integer'.format(lineas(),p[1]))
                 else:
                     p[0] = 0
             else:
-                print('Syntax error SUM')
+                print('Semantic error SUM at line {}. Function {} is not define.'.format(lineas(),p[1]))
         elif var_already_exist(p[1]):
             if var_is_global_int(p[1]) or var_is_local_int(p[1]):
                 p[0] = 0
             else:
-                print('Variable {} is not an integer'.format(p[1]))
+                print('Semantic error SUM at line {}. Variable {} is not an integer'.format(lineas(),p[1]))
         else:
-            print('Variable {} not define'.format(p[1]))
+            print('Semantic error SUM at line {}. Variable {} is not an integer'.format(lineas(),p[1]))
     #Si los dos son ids
     elif type(p[1]) is str and type(p[3]) is str:
         if var_already_exist(p[1]):
@@ -933,15 +934,15 @@ def p_expression_plus(p):
                     if var_is_global_int(p[3]) or var_is_local_int(p[3]):
                         p[0] = 0
                     else:    
-                        print('Variable {} is not an integer'.format(p[3]))
+                        print('Semantic error SUM at line {}. Variable {} is not an integer'.format(lineas(),p[3]))
                 else:
-                    print('Variable {} is not an integer'.format(p[1]))
+                    print('Semantic error SUM at line {}. Variable {} is not an integer'.format(lineas(),p[1]))
             else:
-                print('Variable {} not define'.format(p[3]))
+                print('Semantic error SUM at line {}. Variable {} not define'.format(lineas(),p[3]))
         else:
-            print('Variable {} not define'.format(p[1]))
+            print('Sematnic error SUM at line {}. Variable {} not define'.format(lineas(),p[1]))
     else:
-        print('Variables {} and {} are not integers'.format(p[1],p[3]))              
+        print('Semantic error SUM at line {}. Variables {} and {} are not integers'.format(lineas(),p[1],p[3]))              
 
 def p_expression_term(p):
     'U : V'
@@ -980,10 +981,10 @@ def p_v_func(p):
     parse_text = parse_text + "49 "
     fun = func_exist(p[1])
     if fun == None:
-        print('Syntax error ID(). Function {} does not exist'.format(p[1]))
+        print('Semantic error ID() at line {}. Function {} does not exist'.format(lineas(),p[1]))
     else:
         if buffer_params_llamada != get_tipos_params(fun['params']):
-            print('Syntax error ID(). Params are not right')
+            print('Semantic error ID() at line {}. Params are not right'.format(lineas()))
     delete_buffer_llamada()
 
     if fun !=None:
@@ -1015,7 +1016,7 @@ def p_empty(p):
 
 def p_error(p):
     if p:
-        print("Syntax error at '%s'" % p.value)
+        print("Syntax error in {} at line {}".format(p.value,lineas()))
     else:
         print("Syntax error at EOF")
 
@@ -1023,6 +1024,12 @@ def p_error(p):
 ###############
 ### Lectura ###
 ###############
+def lineas():
+    contador = 0
+    f = open("code.txt","r")
+    for line in f:
+        contador = contador + 1 
+    return contador
 
 codeRead = open("code.txt","r")
 fl =codeRead.read()
@@ -1046,9 +1053,11 @@ while True:
 ############
 ### Yacc ###
 ############
+
 yacc.yacc()
 
 yacc.parse(fl)
+
 
 
 """
