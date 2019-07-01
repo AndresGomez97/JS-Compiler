@@ -1,8 +1,1 @@
-var bool b;
-function int fun1(){
-    return 23;
-}
-function int fun2(){
-    return 23;
-}
-b = fun1()<;
+

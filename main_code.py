@@ -98,7 +98,7 @@ def t_error(t):
 t_ignore_TAB = r'\t' #TABULADOR
 t_ignore_Line = r'\n'    
 t_ignore_RT = r'\r'  #RETORNO DE CARRO
-t_ignore_COMENTARIO = r'/\*.*?\*/'    #COMENTARIOS(/*comentario*/)
+t_ignore_COMENTARIO = r'\/\*(\*(?!\/)|[^*])*\*\/'    #COMENTARIOS(/*comentario*/) #FALLA CUANDO HAY ESPACIOS O SALTOS DE LINEA
 
 
 
