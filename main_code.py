@@ -24,8 +24,6 @@ tokens = [
     'PUNTO',
     'LLLAVE',
     'RLLAVE',
-    'LCORCH',
-    'RCORCH'
 ]
 
 #Diccionario de PRs
@@ -61,8 +59,6 @@ t_COMA = r'\,'
 t_PUNTO = r'\.'
 t_LLLAVE = r'\{'
 t_RLLAVE = r'\}'
-t_LCORCH = r'\['
-t_RCORCH = r'\]'
 
 #Regular expression rules(NOT SIMPLE)
 
@@ -158,6 +154,26 @@ def t_mayor(t):
 
 def t_dosp(t):
     r'\:'
+    print('Lex error at {}'.format(t.lexer.lineno))
+    exit(1)
+
+def t_distinto(t):
+    r'\!='
+    print('Lex error at {}'.format(t.lexer.lineno))
+    exit(1)
+
+def t_igual(t):
+    r'\=='
+    print('Lex error at {}'.format(t.lexer.lineno))
+    exit(1)
+
+def t_rcorch(t):
+    r'\]'
+    print('Lex error at {}'.format(t.lexer.lineno))
+    exit(1)
+
+def t_lcorch(t):
+    r'\['
     print('Lex error at {}'.format(t.lexer.lineno))
     exit(1)
 
