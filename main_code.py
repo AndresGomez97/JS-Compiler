@@ -76,29 +76,107 @@ def t_ENTERO(t):
     t.value = int(t.value)
     if t.value <= 32767 and t.value >= -32767:
         return t
-    print("Lex error: Entero mayor que 32767 o menor que -32767 no son contemplados")
-    t.lexer.skip(1)
+    print("Lex error: Entero mayor que 32767 o menor que -32767 no son contemplados en linea {}".format(t.lexer.lineno))
+    exit(1)
 
 def t_ID(t):
     r'[a-zA-Z][a-zA-Z0-9_]*'
     t.value = str(t.value)               
     t.type = reserved.get(t.value,'ID') #Busca si es una palabra reservada antes de generar token tipo ID, si no lo es genera token tipo ID
     return t
-    
+
+
 def parser(t):
     s = "<{},{}>".format(t.type, t.value)
     return s 
 
 #T_ERROR
+def t_almohadilla(t):
+    r'\#'
+    print('Lex error at {}'.format(t.lexer.lineno))
+    exit(1)
+
+def t_arroba(t):
+    r'\@'
+    print('Lex error at {}'.format(t.lexer.lineno))
+    exit(1)
+
+def t_menos(t):
+    r'\-'
+    print('Lex error at {}'.format(t.lexer.lineno))
+    exit(1)
+
+def t_por(t):
+    r'\*'
+    print('Lex error at {}'.format(t.lexer.lineno))
+    exit(1)
+
+def t_up(t):
+    r'\^'
+    print('Lex error at {}'.format(t.lexer.lineno))
+    exit(1)
+
+def t_cadenaMal(t):
+    r'\"[a-zA-Z0-9_ ]*\"'
+    print('Lex error at {}'.format(t.lexer.lineno))
+    exit(1)
+
+def t_dividir(t):
+    r'\/'
+    print('Lex error at {}'.format(t.lexer.lineno))
+    exit(1)
+
+def t_ampersan(t):
+    r'\&'
+    print('Lex error at {}'.format(t.lexer.lineno))
+    exit(1)
+
+def t_porc(t):
+    r'\%'
+    print('Lex error at {}'.format(t.lexer.lineno))
+    exit(1)
+
+def t_exc1(t):
+    r'\?'
+    print('Lex error at {}'.format(t.lexer.lineno))
+    exit(1)
+
+def t_exc2(t):
+    r'\¿'
+    print('Lex error at {}'.format(t.lexer.lineno))
+    exit(1)
+
+def t_dollar(t):
+    r'\$'
+    print('Lex error at {}'.format(t.lexer.lineno))
+    exit(1)
+
+def t_mayor(t):
+    r'\>'
+    print('Lex error at {}'.format(t.lexer.lineno))
+    exit(1)
+
+def t_dosp(t):
+    r'\:'
+    print('Lex error at {}'.format(t.lexer.lineno))
+    exit(1)
+
 def t_error(t):
+    #print("Error en el lexico.")
+    #print("Caracter no reconocido ({}) en la linea: {}".format(t.value[0], t.lexer.lineno))
     t.lexer.skip(1)
+    
+
+#t_NEWLINE
+def t_newline(t):
+     r'\n+'
+     t.lexer.lineno += len(t.value)
 
 #T_IGNORE
-
 t_ignore_TAB = r'\t' #TABULADOR
 t_ignore_Line = r'\n'    
 t_ignore_RT = r'\r'  #RETORNO DE CARRO
-t_ignore_COMENTARIO = r'\/\*(\*(?!\/)|[^*])*\*\/'    #COMENTARIOS(/*comentario*/) #FALLA CUANDO HAY ESPACIOS O SALTOS DE LINEA
+t_ignore_COMENTARIO = r'\/\*(\*(?!\/)|[^*])*\*\/'    #COMENTARIOS(/*comentario*/)
 
 
 
@@ -1057,8 +1135,6 @@ while True:
 yacc.yacc()
 
 yacc.parse(fl)
-
-
 
 """
 while True:

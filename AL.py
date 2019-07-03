@@ -82,7 +82,7 @@ def t_ENTERO(t):
     if t.value <= 32767 and t.value >= -32767:
         return t
     print("ERROR 40: Entero mayor que 32767 o menor que -32767 no son contemplados")
-    t.lexer.skip(1)
+    exit(1)
 
 
 
@@ -101,20 +101,26 @@ def parser(t):
 
 t_ignore_TAB = r'\t' #TABULADOR
 t_ignore_RT = r'\r'  #RETORNO DE CARRO
-t_ignore_Line = r'\n'#SALTO DE LINEA     
+#t_ignore_Line = r'\n'#SALTO DE LINEA     
 t_ignore_COMENTARIO = r'/\*.*?\*/'    #COMENTARIOS(/*comentario*/)
 
 #T_ERROR
 def t_error(t):
+    print("Error en el lexico.")
+    print("Caracter no reconocido ({}) en la linea: {}".format(t.value[0], t.lexer.lineno))
     t.lexer.skip(1)
+    #exit(1)
+
+def t_newline(t):
+    r'\n+'
+    t.lexer.lineno += len(t.value)
     
     ################
     #  EJECUCION   #
     ################
 lexer = lex.lex()
+lexer.input('var int a; a = 23; %')
 f = open("tokens.txt","w+")
-
-
 
 # Tokenize
 while True:
