@@ -1,11 +1,2 @@
-var bool b;
-b = 23<24;
-if(24<20){
-    var int a;
-    a = 234;
-}
-var int id;
-id = 3;
-id = 2;
-var string s;
-s = 'hola';
+var string a;
+a = '';

@@ -21,7 +21,6 @@ tokens = [
     'LPAREN',
     'RPAREN',
     'PYC',
-    'PUNTO',
     'LLLAVE',
     'RLLAVE',
 ]
@@ -56,7 +55,6 @@ t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_PYC = r'\;'
 t_COMA = r'\,'
-t_PUNTO = r'\.'
 t_LLLAVE = r'\{'
 t_RLLAVE = r'\}'
 
@@ -72,7 +70,7 @@ def t_ENTERO(t):
     t.value = int(t.value)
     if t.value <= 32767 and t.value >= -32767:
         return t
-    print("Lex error: Entero mayor que 32767 o menor que -32767 no son contemplados en linea {}".format(t.lexer.lineno))
+    print("Lex error at line {} : Integers greater than 32767 or smaller than -32767 are not accepted.".format(t.lexer.lineno))
     exit(1)
 
 def t_ID(t):
