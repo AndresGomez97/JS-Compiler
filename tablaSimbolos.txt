@@ -1,0 +1,32 @@
+#1:
+*'t'
++tipo:'int'
++despl:4
+*'x'
++tipo:'bool'
++despl:1
+TABLA de la FUNCIÓN functionName #2:
+*'param1'
++tipo:'int'
++despl:4
+*'param2'
++tipo:'bool'
++despl:1
+*'var1'
++tipo:'bool'
++despl:1
+*'var2'
++tipo:'bool'
++despl:1
+-------------------------------------------
+TABLA de la FUNCIÓN functionName2 #2:
+*'param1'
++tipo:'int'
++despl:4
+*'param2'
++tipo:'int'
++despl:4
+*'var1'
++tipo:'bool'
++despl:1
+-------------------------------------------

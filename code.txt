@@ -1,2 +1,12 @@
-var string a;
-a = '';
+function functionName (int param1, bool param2){
+var bool var1;
+var bool var2;
+}
+function  functionName2 (int param1, int param2){
+var bool var1;
+var string param1;
+}
+var int t;
+t = functionName(23,13<18);
+var bool x;
+if(23<34){x = 24<12;}

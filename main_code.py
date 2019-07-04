@@ -223,6 +223,14 @@ buffer_params_llamada = []
 # Funciones auxiliares #
 ########################
 
+def sizeType(tipo):
+    if tipo == "bool":
+        return 1
+    elif tipo == "int":
+        return 4
+    else:    
+        return 23
+
 def get_id_function(string):
     flag = 0
     i = 0
@@ -364,6 +372,22 @@ def get_tipos_params(params):
     for p in params:
         res.append(p[1])
     return res
+
+def tablaDeSimbolos():
+    tablaSimbolos = open("tablaSimbolos.txt","w+")
+    tablaSimbolos.write("#1:\n")
+    numeroTabla = 2
+    for n in vars_globales:
+        tablaSimbolos.write("*'{}'\n+tipo:'{}'\n+despl:{}\n".format(n[0],n[1],sizeType(n[1])))
+    for n in funciones:
+        tablaSimbolos.write("TABLA de la FUNCIÓN {} #2:\n".format(n["id"]))
+        for h in reversed(n["params"]):
+            tablaSimbolos.write("*'{}'\n+tipo:'{}'\n+despl:{}\n".format(h[0],h[1],sizeType(h[1])))
+        for j in n["vars"]:
+            tablaSimbolos.write("*'{}'\n+tipo:'{}'\n+despl:{}\n".format(j[0],j[1],sizeType(j[1])))
+        tablaSimbolos.write('-------------------------------------------\n')
+
+
 #########
 # START #
 #########
@@ -448,7 +472,6 @@ def p_f_function(p):
     #Si existe
     else:
         print('Semantic error FUNCTION at line {}. ID {} already exists'.format(lineas(),p[3]))
-    
     #print(buffer_params)
     #print(buffer_vars_locales)
     #Limpiamos buffer
@@ -473,7 +496,7 @@ def p_h_empty(p):
 ##### PARAMETROS #####
 def p_a_params(p):
     'A : T ID K'
-    global parse_text 
+    global parse_text
     parse_text = parse_text + "8 "
     buffer_params.append([p[2],p[1]])
 
@@ -487,7 +510,6 @@ def p_k_params(p):
     global parse_text 
     parse_text = parse_text + "10 "
     buffer_params.append([p[3],p[2]])
-    
 
 def p_k_empty(p):
     'K : empty'
@@ -508,10 +530,11 @@ def p_w_empty(p):
 
 def p_define_var_func(p):
     'D : VAR T ID PYC'
-    global parse_text 
+    global parse_text
     parse_text = parse_text + "14 "
     if not var_already_exist(p[3]):
         buffer_vars_locales.append([p[3],p[2]])
+
     else:
         print('Semantic error at line {}. The variable already exist'.format(lineas()))
 
@@ -1149,6 +1172,8 @@ while True:
 yacc.yacc()
 
 yacc.parse(fl)
+
+tablaDeSimbolos()
 
 """
 while True:
