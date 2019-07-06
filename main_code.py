@@ -376,15 +376,31 @@ def get_tipos_params(params):
 def tablaDeSimbolos():
     tablaSimbolos = open("tablaSimbolos.txt","w+")
     tablaSimbolos.write("#1:\n")
-    numeroTabla = 2
     for n in vars_globales:
-        tablaSimbolos.write("*'{}'\n+tipo:'{}'\n+despl:{}\n".format(n[0],n[1],sizeType(n[1])))
+        tablaSimbolos.write("   *'{}'\n     +tipo:'{}'\n     +despl:{}\n".format(n[0],n[1],sizeType(n[1])))
     for n in funciones:
-        tablaSimbolos.write("TABLA de la FUNCIÓN {} #2:\n".format(n["id"]))
+        tablaSimbolos.write("\nTABLA de la FUNCIÓN {} #2:\n".format(n["id"]))
+        numParams = len(n["params"])
+        
+        tablaSimbolos.write('+ numParam: {}\n'.format(numParams))
+        tipoRetorno = n["tipo"]
+        
+        numVars = len(n["vars"])
+
+        if tipoRetorno == None:
+            tipoRetorno = "ninguno"
+        tablaSimbolos.write('+ tipoRetorno: {}\n'.format(tipoRetorno))
+        param = 1
+        
         for h in reversed(n["params"]):
-            tablaSimbolos.write("*'{}'\n+tipo:'{}'\n+despl:{}\n".format(h[0],h[1],sizeType(h[1])))
+            tablaSimbolos.write("   * EtiquetaParam{}'{}'\n     +tipoParam{}:'{}'\n     +ModoParam{}:'1'\n     +despl:{}\n".format(param,h[0],param,h[1],param,sizeType(h[1])))
+            param = param + 1
+
+        if numVars != 0:
+            tablaSimbolos.write("VARIABLES LOCALES   \n")    
         for j in n["vars"]:
-            tablaSimbolos.write("*'{}'\n+tipo:'{}'\n+despl:{}\n".format(j[0],j[1],sizeType(j[1])))
+            
+            tablaSimbolos.write("   *'{}'\n     +tipo:'{}'\n     +despl:{}\n".format(j[0],j[1],sizeType(j[1])))
         tablaSimbolos.write('-------------------------------------------\n')
 
 

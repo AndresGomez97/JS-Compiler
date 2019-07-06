@@ -1,12 +1,15 @@
-function functionName (int param1, bool param2){
-var bool var1;
-var bool var2;
+var int a;
+a = 2;
+
+var bool s;
+function int fun1(int param1, string param2){
+    var bool u;
+    return 2;
+
 }
-function  functionName2 (int param1, int param2){
-var bool var1;
-var string param1;
+
+function fun2(bool r){
+    var int p;
+    var string y;
+    var bool as_23;
 }
-var int t;
-t = functionName(23,13<18);
-var bool x;
-if(23<34){x = 24<12;}

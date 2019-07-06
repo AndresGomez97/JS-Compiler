@@ -1,32 +1,43 @@
 #1:
-*'t'
-+tipo:'int'
-+despl:4
-*'x'
-+tipo:'bool'
-+despl:1
-TABLA de la FUNCIÓN functionName #2:
-*'param1'
-+tipo:'int'
-+despl:4
-*'param2'
-+tipo:'bool'
-+despl:1
-*'var1'
-+tipo:'bool'
-+despl:1
-*'var2'
-+tipo:'bool'
-+despl:1
+   *'a'
+     +tipo:'int'
+     +despl:4
+   *'s'
+     +tipo:'bool'
+     +despl:1
+
+TABLA de la FUNCIÓN fun1 #2:
++ numParam: 2
++ tipoRetorno: int
+   * EtiquetaParam1'param1'
+     +tipoParam1:'int'
+     +ModoParam1:'1'
+     +despl:4
+   * EtiquetaParam2'param2'
+     +tipoParam2:'string'
+     +ModoParam2:'1'
+     +despl:23
+VARIABLES LOCALES   
+   *'u'
+     +tipo:'bool'
+     +despl:1
 -------------------------------------------
-TABLA de la FUNCIÓN functionName2 #2:
-*'param1'
-+tipo:'int'
-+despl:4
-*'param2'
-+tipo:'int'
-+despl:4
-*'var1'
-+tipo:'bool'
-+despl:1
+
+TABLA de la FUNCIÓN fun2 #2:
++ numParam: 1
++ tipoRetorno: ninguno
+   * EtiquetaParam1'r'
+     +tipoParam1:'bool'
+     +ModoParam1:'1'
+     +despl:1
+VARIABLES LOCALES   
+   *'p'
+     +tipo:'int'
+     +despl:4
+   *'y'
+     +tipo:'string'
+     +despl:23
+   *'as_23'
+     +tipo:'bool'
+     +despl:1
 -------------------------------------------
