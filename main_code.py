@@ -1207,34 +1207,48 @@ def lineas():
         contador = contador + 1 
     return contador
 
-codeRead = open("code.txt","r")
-fl =codeRead.read()
+try:
+    
+    codeRead = open("code.txt","r")
+    fl =codeRead.read()
+    f = open("tokens.txt","w+")
+    lexer.input(fl)
 
-########################
-### Generamos Tokens ###
-########################
+    
+    ########################
+    ### Generamos Tokens ###
+    ########################
 
-f = open("tokens.txt","w+")
-lexer.input(fl)
+    while True:
+        tok = lexer.token()
+        if not tok: 
+            break      # No more input
+        f.write(parser(tok)+"\n")
 
-# Tokenize
-while True:
-    tok = lexer.token()
-    if not tok: 
-        break      # No more input
-    f.write(parser(tok)+"\n")
+    ############
+    ### Yacc ###
+    ############
+
+    yacc.yacc()
+
+    yacc.parse(fl)
+
+    tablaDeSimbolos()
+
+    #################
+    # Fichero parse #
+    #################
+
+    f = open("./VASt/Parse.txt","w+")
+    f.write('A '+parse_text+'1')
+
+except FileNotFoundError:
+    print('File code.txt does not exist, you must create it at the same dir as the main_code executable')
 
 
 
-############
-### Yacc ###
-############
 
-yacc.yacc()
 
-yacc.parse(fl)
-
-tablaDeSimbolos()
 
 """
 while True:
@@ -1248,9 +1262,3 @@ while True:
  """   
 
 
-#################
-# Fichero parse #
-#################
-
-f = open("./VASt/Parse.txt","w+")
-f.write('A '+parse_text+'1')
