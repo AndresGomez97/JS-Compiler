@@ -1,15 +1,17 @@
-var int a;
-a = 2;
 
-var bool s;
-function int fun1(int param1, string param2){
-    var bool u;
+
+function int a(int param1,int param2){
     return 2;
-
 }
 
-function fun2(bool r){
-    var int p;
-    var string y;
-    var bool as_23;
+function int b(){
+    return 3;
 }
+
+function c(bool param,int param2){
+    if(param){
+        --param2;
+    }
+}
+
+c(2<3,b());

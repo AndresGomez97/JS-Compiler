@@ -71,7 +71,7 @@ def t_ENTERO(t):
     if t.value <= 32767 and t.value >= -32767:
         return t
     print("Lex error at line {} : Integers greater than 32767 or smaller than -32767 are not accepted.".format(t.lexer.lineno))
-    exit(1)
+    sys.exit(1)
 
 def t_ID(t):
     r'[a-zA-Z][a-zA-Z0-9_]*'
@@ -88,92 +88,91 @@ def parser(t):
 def t_almohadilla(t):
     r'\#'
     print('Lex error at {}'.format(t.lexer.lineno))
-    exit(1)
+    sys.exit(1)
 
 def t_arroba(t):
     r'\@'
     print('Lex error at {}'.format(t.lexer.lineno))
-    exit(1)
+    sys.exit(1)
 
-def t_menos(t):
-    r'\-'
-    print('Lex error at {}'.format(t.lexer.lineno))
-    exit(1)
+
+def t_comentario(t):
+    r'\/\*(\*(?!\/)|[^*])*\*\/'
 
 def t_por(t):
     r'\*'
     print('Lex error at {}'.format(t.lexer.lineno))
-    exit(1)
+    sys.exit(1)
 
 def t_up(t):
     r'\^'
     print('Lex error at {}'.format(t.lexer.lineno))
-    exit(1)
+    sys.exit(1)
 
 def t_cadenaMal(t):
     r'\"[a-zA-Z0-9_ ]*\"'
     print('Lex error at {}'.format(t.lexer.lineno))
-    exit(1)
+    sys.exit(1)
 
 def t_dividir(t):
     r'\/'
     print('Lex error at {}'.format(t.lexer.lineno))
-    exit(1)
-
+    sys.exit(1)
+    
 def t_ampersan(t):
     r'\&'
     print('Lex error at {}'.format(t.lexer.lineno))
-    exit(1)
+    sys.exit(1)
 
 def t_porc(t):
     r'\%'
     print('Lex error at {}'.format(t.lexer.lineno))
-    exit(1)
+    sys.exit(1)
 
 def t_exc1(t):
     r'\?'
     print('Lex error at {}'.format(t.lexer.lineno))
-    exit(1)
+    sys.exit(1)
 
 def t_exc2(t):
     r'\¿'
     print('Lex error at {}'.format(t.lexer.lineno))
-    exit(1)
+    sys.exit(1)
 
 def t_dollar(t):
     r'\$'
     print('Lex error at {}'.format(t.lexer.lineno))
-    exit(1)
+    sys.exit(1)
 
 def t_mayor(t):
     r'\>'
     print('Lex error at {}'.format(t.lexer.lineno))
-    exit(1)
+    sys.exit(1)
 
 def t_dosp(t):
     r'\:'
     print('Lex error at {}'.format(t.lexer.lineno))
-    exit(1)
+    sys.exit(1)
 
 def t_distinto(t):
     r'\!='
     print('Lex error at {}'.format(t.lexer.lineno))
-    exit(1)
+    sys.exit(1)
 
 def t_igual(t):
     r'\=='
     print('Lex error at {}'.format(t.lexer.lineno))
-    exit(1)
+    sys.exit(1)
 
 def t_rcorch(t):
     r'\]'
     print('Lex error at {}'.format(t.lexer.lineno))
-    exit(1)
+    sys.exit(1)
 
 def t_lcorch(t):
     r'\['
     print('Lex error at {}'.format(t.lexer.lineno))
-    exit(1)
+    sys.exit(1)
 
 def t_error(t):
     #print("Error en el lexico.")
@@ -243,6 +242,12 @@ def get_id_function(string):
         i = i+1
     return res
 
+def get_function(string):
+    global funciones
+    for n in funciones:
+        if n['id'] == string:
+            return n
+        
 def get_global_or_local_var(x):
     res = None
     for n in vars_globales:
@@ -271,6 +276,12 @@ def func_exist(x):
         if f['id'] == x:
             return f
     return None
+
+def var_already_global(x):
+    for n in vars_globales:
+        if n[0] == x:
+            return True
+    return False
 
 def duplicated_param(x,params):
     for n in params:
@@ -336,6 +347,7 @@ def var_is_local_str(x):
         if n[0] == x and n[1] == 'string':
             return True    
     return False
+
 
 def var_is_cadena(var):
     num = 0
@@ -440,6 +452,7 @@ def p_f_function(p):
     encontrado = 0
     duplicados = 0
     returns_ok = 0
+    dup_global_var = 0
 
     duplicado = ''
     
@@ -453,8 +466,14 @@ def p_f_function(p):
         #Volcamos datos de variables locales
         for n in buffer_vars_locales:
             loc_vars.append([n[0],n[1]])
+        
+        #Comprobamos que ningun param tenga el mismo id que una variable global
+        for n in buffer_params:
+            if var_already_global(n[0]):
+                duplicado = n[0]
+                dup_global_var = 1
 
-        #Check de que no haya params duplicados
+        #Check de que no haya params duplicado
         for n in buffer_params:
             if duplicated_param(n[0],check):
                 duplicado = n[0]
@@ -477,10 +496,13 @@ def p_f_function(p):
 
         #Si las dos cosas están bien
         if duplicados == 0:
-            if returns_ok == 0:
-                funciones.append({'id':p[3],'tipo': p[2],'params':check,'vars':loc_vars})
+            if dup_global_var == 0:
+                if returns_ok == 0:
+                    funciones.append({'id':p[3],'tipo': p[2],'params':check,'vars':loc_vars})
+                else:
+                    print('Semantic error FUNCTION at line {}. Returns dont match with the specified type'.format(lineas()))
             else:
-                print('Semantic error FUNCTION at line {}. Returns dont match with the specified type'.format(lineas()))
+                print('Semantic error FUNCTION at line {}. ID {} is already used as global variable'.format(lineas(),duplicado))        
         #Si hay duplicados
         else:
             print('Semantic error FUNCTION at line {}. ID {} is already used as param'.format(lineas(),duplicado))
@@ -550,7 +572,6 @@ def p_define_var_func(p):
     parse_text = parse_text + "14 "
     if not var_already_exist(p[3]):
         buffer_vars_locales.append([p[3],p[2]])
-
     else:
         print('Semantic error at line {}. The variable already exist'.format(lineas()))
 
@@ -573,7 +594,7 @@ def p_d_do_while(p):
                 print('Semantic error DO/WHILE at line {}. Function doesnt exist'.format(lineas()))
         elif not (var_is_global_bool(p[7]) or var_is_local_bool(p[7])):
             print('Semantic error DO/WHILE at line {}. {} is not a bool expression'.format(lineas(),p[7]))
-    elif p[3] is None:
+    elif p[7] is None:
         print('Semantic error DO/WHILE at line {}. {} is not a bool expression'.format(lineas(),p[7]))
 
 def p_d_if(p):
@@ -593,7 +614,7 @@ def p_d_if(p):
                     print('Semantic error IF at line {}. Function doestn return a bool'.format(lineas()))
             else:
                 print('Semantic error IF. Function doesnt exist')
-        elif not(var_is_global_bool(p[3]) or var_is_local_bool(p[3])):
+        elif not(var_is_global_bool(p[3]) or not var_is_local_bool(p[3])):
             print('Semantic error IF at line {}. {} is not a bool expression'.format(lineas(),p[3]))
     elif p[3] is None:
         print('Semantic error IF at line {}. {} is not a bool expression'.format(lineas(),p[3]))
@@ -612,22 +633,23 @@ def p_return(p):
     global parse_text 
     parse_text = parse_text + "18 "
     if type(p[2]) is str:
-        if var_is_cadena(p[2]): 
+        if var_is_func(p[2]):
+            buffer_returns.append(get_function(get_id_function(p[2])['tipo']))
+        elif var_is_cadena(p[2]): 
             buffer_returns.append('string')
-        elif not var_is_cadena(p[2]):    
-            if var_already_exist(p[2]):
-                if var_is_global_int(p[2]):
-                    buffer_returns.append('int')
-                elif var_is_global_bool(p[2]):
-                    buffer_returns.append('bool')
-                elif var_is_global_string(p[2]):
-                    buffer_returns.append('string')
-                elif var_is_local_int(p[2]):
-                    buffer_returns.append('int')
-                elif var_is_local_bool(p[2]):
-                    buffer_returns.append('bool')
-                elif var_is_local_str(p[2]):
-                    buffer_returns.append('string')
+        elif not var_is_cadena(p[2]): 
+            if var_is_global_int(p[2]):
+                buffer_returns.append('int')
+            elif var_is_global_bool(p[2]):
+                buffer_returns.append('bool')
+            elif var_is_global_string(p[2]):
+                buffer_returns.append('string')
+            elif var_is_local_int(p[2]):
+                buffer_returns.append('int')
+            elif var_is_local_bool(p[2]):
+                buffer_returns.append('bool')
+            elif var_is_local_str(p[2]):
+                buffer_returns.append('string')
             else:
                 print('Semantic error RETURN at line {}. Variable {} is not define'.format(lineas(),p[2]))
     elif type(p[2]) is int:
@@ -685,7 +707,6 @@ def p_s_function(p):
     'S : ID LPAREN L RPAREN PYC'
     global parse_text 
     parse_text = parse_text + "22 "
-    print(buffer_params_llamada)
     fun = func_exist(p[1])
     if fun == None:
         print('Semantic error ID() at line {}. Function {} does not exist'.format(lineas(),p[1]))
@@ -941,22 +962,39 @@ def p_id_mm(p):
     'S : MMENOS ID PYC'
     global parse_text 
     parse_text = parse_text + "38 "
-    if not var_already_exist(p[2]):
-        print('Semantic error MMINUS at line {}. Variable {} is not define'.format(lineas(),p[2]))
-    elif not (var_is_global_int(p[2]) or var_is_local_int(p[2])):
+    if type(p[2]) is str and not var_is_cadena(p[2]):
+        if not (var_is_global_int(p[2]) or var_is_local_int(p[2])):
+            print('Semantic error MMINUS at line {}. Variable {} is not an Integer.'.format(lineas(),p[2]))      
+
+    elif type(p[2]) is bool:
         print('Semantic error MMINUS at line {}. Variable {} is not an Integer'.format(lineas(),p[2]))
+    elif type(p[2]) is str and var_is_cadena(p[2]):
+        print('Semantic error MMINUS at line {}. Variable {} is not an Integer'.format(lineas(),p[2]))
+    else:
+        p[0] = 0
 
 def p_e_notr(p):
     'E : NEG R'
     global parse_text 
     parse_text = parse_text + "39 "
-    if type(p[2]) is bool:
-        p[0] = not p[2]
-    elif type(p[2]) is str and not var_is_cadena(p[2]):
-        if not var_is_global_bool(p[2]):
-            print('Semantic error NOT at line {}. Variable {} is not a boolean.'.format(lineas(),p[2]))   
-    else:
+        
+    if type(p[2]) is str and not var_is_cadena(p[2]):
+        if var_already_exist(p[2]):
+            if not var_is_global_bool(p[2]):
+                print('Semantic error NOT at line {}. Variable {} is not a boolean.'.format(lineas(),p[2]))
+            elif not var_is_local_bool(p[2]):
+                print('Semantic error NOT at line {}. Variable {} is not a boolean.'.format(lineas(),p[2]))
+        elif var_is_func(p[2]):
+            if get_function(get_id_function(p[2]))['tipo'] != 'bool':
+                print('Semantic error NOT at line {}. Function {} does not return a boolean.'.format(lineas(),p[2]))
+        
+
+    elif type(p[2]) is int:
         print('Semantic error NOT at line {}. Variable {} is not a boolean'.format(lineas(),p[2]))
+    elif type(p[2]) is str and var_is_cadena(p[2]):
+        print('Semantic error NOT at line {}. {} is not a boolean'.format(lineas(),p[2]))
+    else:
+        p[0] = False
 
 def p_e_r(p):
     'E : R'
@@ -964,7 +1002,7 @@ def p_e_r(p):
     parse_text = parse_text + "40 "
     p[0]=p[1]
 
-######## RETOCAR #########
+
 def p_erre_expression_minusthan(p):
     'R : U MENORQUE U'
     global parse_text 
@@ -1090,7 +1128,14 @@ def p_term_id(p):
     'V : ID'
     global parse_text 
     parse_text = parse_text + "46 "
-    p[0] = p[1]
+    if var_is_global_bool(p[1]) or var_is_local_bool(p[1]):
+        p[0] = False
+    elif var_is_global_int(p[1]) or var_is_local_int(p[1]):
+        p[0] = 0
+    elif var_is_global_string(p[1]) or var_is_local_str(p[1]):
+        p[0] = '\'\''
+    else:
+        print('Semantic error at line {}. Variable {} is not define'.format(lineas(),p[1]))
 
 def p_term_string(p):
     'V : CADENA'

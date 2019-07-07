@@ -1,12 +1,6 @@
 #1:
-   *'a'
-     +tipo:'int'
-     +despl:4
-   *'s'
-     +tipo:'bool'
-     +despl:1
 
-TABLA de la FUNCIÓN fun1 #2:
+TABLA de la FUNCIÓN a #2:
 + numParam: 2
 + tipoRetorno: int
    * EtiquetaParam1'param1'
@@ -14,30 +8,25 @@ TABLA de la FUNCIÓN fun1 #2:
      +ModoParam1:'1'
      +despl:4
    * EtiquetaParam2'param2'
-     +tipoParam2:'string'
+     +tipoParam2:'int'
      +ModoParam2:'1'
-     +despl:23
-VARIABLES LOCALES   
-   *'u'
-     +tipo:'bool'
-     +despl:1
+     +despl:4
 -------------------------------------------
 
-TABLA de la FUNCIÓN fun2 #2:
-+ numParam: 1
+TABLA de la FUNCIÓN b #2:
++ numParam: 0
++ tipoRetorno: int
+-------------------------------------------
+
+TABLA de la FUNCIÓN c #2:
++ numParam: 2
 + tipoRetorno: ninguno
-   * EtiquetaParam1'r'
+   * EtiquetaParam1'param'
      +tipoParam1:'bool'
      +ModoParam1:'1'
      +despl:1
-VARIABLES LOCALES   
-   *'p'
-     +tipo:'int'
+   * EtiquetaParam2'param2'
+     +tipoParam2:'int'
+     +ModoParam2:'1'
      +despl:4
-   *'y'
-     +tipo:'string'
-     +despl:23
-   *'as_23'
-     +tipo:'bool'
-     +despl:1
 -------------------------------------------
