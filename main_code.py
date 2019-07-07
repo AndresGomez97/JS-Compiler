@@ -266,7 +266,7 @@ def var_is_func(cadena):
     for n in cadena:
         if n == ')' or n == '(':
             cont = cont + 1
-    if cont == 2:
+    if cont >= 2:
         return True
     else:
         return False
@@ -515,7 +515,7 @@ def p_f_function(p):
     #Limpiamos buffer
     delete_buffer()
 
-    #print(funciones)   
+    print(funciones)   
 
 ##### TIPO A DEVOLVER #####
 def p_h_tipo(p):
@@ -843,8 +843,11 @@ def p_asig(p):
         if type(p[3]) is bool:
             print('Semantic error ASIG at line {}. Types dont match'.format(lineas()))
         elif type(p[3]) is str:
+            print('c')
             if var_is_cadena(p[3]):
-               print('Semantic error ASIG at line {}. Types dont match'.format(lineas())) 
+                print('Semantic error ASIG at line {}. Types dont match'.format(lineas()))
+            elif not(var_is_global_int(p[3]) or var_is_local_int(p[3])):
+                print('Semantic error ASIG at line {}. The var doesnt exist'.format(lineas())) 
             elif var_is_func(p[3]):
                 id_func = get_id_function(p[3])
                 fun = func_exist(id_func)
@@ -853,8 +856,8 @@ def p_asig(p):
                         print('Semantic error ASIG at line {}. Types dont match'.format(lineas()))
                 else:
                     print('Semantic error ASIG at line {}. The function doesnt exist'.format(lineas()))
-            elif not(var_is_global_int(p[3]) or var_is_local_int(p[3])):
-                print('Semantic error ASIG at line {}. The var doesnt exist'.format(lineas()))
+        elif p[3] == None:
+            print('Semantic error ASIG at line {}. Types dont match'.format(lineas()))
 
     elif var_is_global_bool(p[1]) or var_is_local_bool(p[1]): 
         if type(p[3]) is int:
@@ -872,7 +875,9 @@ def p_asig(p):
                     print('Semantic error ASIG at line {}. The function doesnt exist'.format(lineas()))
             elif not(var_is_global_bool(p[3]) or var_is_local_bool(p[3])):
                 print('Semantic error ASIG at line {}. The var doesnt exist'.format(lineas()))
-    
+        elif p[3] == None:
+            print('Semantic error ASIG at line {}. Types dont match'.format(lineas()))
+
     elif var_is_global_string(p[1]) or var_is_local_str(p[1]):
         if type(p[3]) is str:
             if var_is_func(p[3]):
@@ -891,7 +896,8 @@ def p_asig(p):
             print('Semantic error ASIG at line {}. Types dont match'.format(lineas()))
         elif type(p[3]) is int:
             print('Semantic error ASIG at line {}. Types dont match'.format(lineas()))
-     
+        elif p[3] == None:
+            print('Semantic error ASIG at line {}. Types dont match'.format(lineas()))
     else:
         print('Semantic error ASIG at line {}. Variable {} not define'.format(lineas(),p[1]))
 

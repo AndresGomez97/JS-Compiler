@@ -1,1 +1,14 @@
 #1:
+   *'a'
+     +tipo:'int'
+     +despl:4
+
+TABLA de la FUNCIÓN a #2:
++ numParam: 0
++ tipoRetorno: int
+-------------------------------------------
+
+TABLA de la FUNCIÓN b #2:
++ numParam: 0
++ tipoRetorno: ninguno
+-------------------------------------------
